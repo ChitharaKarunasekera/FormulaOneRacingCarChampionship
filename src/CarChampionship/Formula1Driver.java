@@ -1,10 +1,6 @@
 package CarChampionship;
 
 public class Formula1Driver {
-    //Basic Information
-    private String name;
-    private String location;
-    private String team;
     //Driver's statistics
     private int firstPositionCount;
     private int secondPositionCount;
@@ -12,19 +8,16 @@ public class Formula1Driver {
     private int points;
     private int racesCount;
 
+    //default constructor
+    public Formula1Driver(){
+        this.firstPositionCount = 0;
+        this.secondPositionCount = 0;
+        this.thirdPositionCount = 0;
+        this.points = 0;
+        this.racesCount = 0;
+    }
+
     //Getter Methods
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getTeam() {
-        return team;
-    }
-
     public int getFirstPositionCount() {
         return firstPositionCount;
     }
@@ -47,18 +40,6 @@ public class Formula1Driver {
 
 
     //Setter Methods
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setTeam(String team) {
-        this.team = team;
-    }
-
     public void setFirstPositionCount(int firstPositionCount) {
         this.firstPositionCount = firstPositionCount;
     }
@@ -81,9 +62,43 @@ public class Formula1Driver {
 
 
     public void calculateTotPoints(){
+
     }
 
-    public void assigningPoints(){
+    //Method to increase the count of points according to driver's position
+    public void assigningPoints(int position){
+        switch (position){
+            case 1:
+                points += 25;
+                break;
+            case 2:
+                points += 18;
+                break;
+            case 3:
+                points += 15;
+                break;
+            case 4:
+                points += 12;
+                break;
+            case 5:
+                points += 10;
+                break;
+            case 6:
+                points += 8;
+                break;
+            case 7:
+                points += 6;
+                break;
+            case 8:
+                points += 4;
+                break;
+            case 9:
+                points += 2;
+                break;
+            case 10:
+                points += 1;
+                break;
+        }
 
     }
 }
