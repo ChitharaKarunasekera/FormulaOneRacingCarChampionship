@@ -1,6 +1,6 @@
 package CarChampionship;
 
-public class Formula1Driver {
+public class Formula1Driver extends Driver {
     //Driver's statistics
     private int firstPositionCount;
     private int secondPositionCount;
@@ -9,7 +9,8 @@ public class Formula1Driver {
     private int racesCount;
 
     //default constructor
-    public Formula1Driver(){
+    public Formula1Driver(String name, String location, String team) {
+        super(name, location, team);//call constructor of Driver class and assign basic information
         this.firstPositionCount = 0;
         this.secondPositionCount = 0;
         this.thirdPositionCount = 0;
@@ -34,7 +35,7 @@ public class Formula1Driver {
         return points;
     }
 
-    public int getRacesCount(){
+    public int getRacesCount() {
         return racesCount;
     }
 
@@ -56,49 +57,58 @@ public class Formula1Driver {
         this.points = points;
     }
 
-    public void setRacesCount(int count){
+    public void setRacesCount(int count) {
         this.racesCount = count;
     }
 
 
-    public void calculateTotPoints(){
-
-    }
-
     //Method to increase the count of points according to driver's position
-    public void assigningPoints(int position){
-        switch (position){
+    public void assigningPoints(int position) {
+        switch (position) {
             case 1:
-                points += 25;
+                this.points += 25;
+                countPositions(position);
                 break;
             case 2:
-                points += 18;
+                this.points += 18;
+                countPositions(position);
                 break;
             case 3:
-                points += 15;
+                this.points += 15;
+                countPositions(position);
                 break;
             case 4:
-                points += 12;
+                this.points += 12;
                 break;
             case 5:
-                points += 10;
+                this.points += 10;
                 break;
             case 6:
-                points += 8;
+                this.points += 8;
                 break;
             case 7:
-                points += 6;
+                this.points += 6;
                 break;
             case 8:
-                points += 4;
+                this.points += 4;
                 break;
             case 9:
-                points += 2;
+                this.points += 2;
                 break;
             case 10:
-                points += 1;
+                this.points += 1;
                 break;
         }
+    }
 
+    //Increase first, second or third position count by one
+    public void countPositions(int position) {
+        if (position == 1) {
+            this.firstPositionCount += 1;
+        } else if (position == 2) {
+            this.secondPositionCount += 1;
+        } else if (position == 3) {
+            this.thirdPositionCount += 1;
+        }
     }
 }
