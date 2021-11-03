@@ -1,6 +1,6 @@
 package CarChampionship;
 
-public abstract class Formula1Driver {
+public class Formula1Driver {
     //Basic Information
     private String name;
     private String location;
@@ -84,6 +84,6 @@ public abstract class Formula1Driver {
     }
 
     public void assigningPoints(){
-        
+
     }
 }
