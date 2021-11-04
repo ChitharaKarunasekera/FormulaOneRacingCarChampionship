@@ -16,6 +16,7 @@ public class Main {
             System.out.println("\n==========Menu==========\n" +
                     "A - Add new driver\n" +
                     "D - Delete Driver\n" +
+                    "C - Change team \n" +
                     "Q - Quit");
 
             System.out.print("\nSelect you choice : ");
@@ -25,7 +26,6 @@ public class Main {
                 System.out.println("\nYou can add a driver!");
 
                 championship.addNewDriver();//call the method to add a driver to the championship
-                System.out.println("\nDriver was added to the championship competition!\n");
 
 //                System.out.println("Name: " + championship.drivers.get(0).getName());
 //                System.out.println("Location: " + championship.drivers.get(0).getLocation());
@@ -34,6 +34,10 @@ public class Main {
             else if (choice.equalsIgnoreCase("D")){
                 System.out.println("\nYou can delete a driver");
                 championship.deleteDriver();
+            }
+            else if (choice.equalsIgnoreCase("C")){
+                System.out.println("\nYou can delete a driver");
+                championship.changeTeam();
             }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
