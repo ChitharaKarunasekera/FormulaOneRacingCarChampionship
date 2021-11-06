@@ -2,7 +2,6 @@ package CarChampionship;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class Formula1ChampionshipManager implements ChampionshipManager {
     Scanner input = new Scanner(System.in);
@@ -101,7 +100,29 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     @Override
     public void displayStatistics() {
+        String team;
+        int index;
 
+        System.out.print("Enter team of driver: ");
+        team = input.next();
+
+        if (getDriverIndex(team) != -1){
+            index = getDriverIndex(team);
+
+            System.out.println("\nStatistics of Driver.\n" +
+                    "_________________________");
+            System.out.println("Team Name : " + drivers.get(index).getTeam());
+            System.out.println("Driver's Name : " + drivers.get(index).getName());
+            System.out.println("Driver's Location : " + drivers.get(index).getLocation());
+            System.out.println("Count of 1st positions won : " + drivers.get(index).getFirstPositionCount());
+            System.out.println("Count of 2nd positions won : " + drivers.get(index).getSecondPositionCount());
+            System.out.println("Count of 3rd positions won : " + drivers.get(index).getThirdPositionCount());
+            System.out.println("Total points : " + drivers.get(index).getPoints());
+            System.out.println("Total number of races completed : " + drivers.get(index).getRacesCount());
+        }
+        else {
+            System.out.println("Sorry, Team does not exist!");
+        }
     }
 
     @Override
@@ -131,6 +152,19 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
         return false;//team name not found
+    }
+
+    //get the index of a driver
+    public int getDriverIndex(String team){
+        int index;
+
+        for (Formula1Driver driver : drivers) {
+            if (team.equalsIgnoreCase(driver.getTeam())) {
+                index = drivers.indexOf(driver);
+                return index;
+            }
+        }
+        return -1;
     }
 
 }

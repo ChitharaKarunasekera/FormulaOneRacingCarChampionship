@@ -17,6 +17,7 @@ public class Main {
                     "A - Add new driver\n" +
                     "D - Delete Driver\n" +
                     "C - Change team \n" +
+                    "V - View drive's statistics\n" +
                     "Q - Quit");
 
             System.out.print("\nSelect you choice : ");
@@ -32,12 +33,15 @@ public class Main {
 //                System.out.println("Team: " + championship.drivers.get(0).getTeam());
             }
             else if (choice.equalsIgnoreCase("D")){
-                System.out.println("\nYou can delete a driver");
+                System.out.println("\nYou can delete a driver.");
                 championship.deleteDriver();
             }
             else if (choice.equalsIgnoreCase("C")){
-                System.out.println("\nYou can delete a driver");
+                System.out.println("\nYou can delete a driver.");
                 championship.changeTeam();
+            }else if (choice.equalsIgnoreCase("V")){
+                System.out.println("\nYou can view driver's statistics.");
+                championship.displayStatistics();
             }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
@@ -48,6 +52,9 @@ public class Main {
                     System.out.println("System terminated.");
                     break;
                 }
+            }
+            else {
+                System.out.println("Option not found!");
             }
         }
 //        Driver d1 = new Formula1Driver("Chithara", "Nugegoda", "TaemChithzz");
