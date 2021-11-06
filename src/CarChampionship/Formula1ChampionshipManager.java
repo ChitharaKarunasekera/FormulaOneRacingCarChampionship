@@ -106,7 +106,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.print("Enter team of driver: ");
         team = input.next();
 
-        if (getDriverIndex(team) != -1){
+        if (getDriverIndex(team) != -1) {
             index = getDriverIndex(team);
 
             System.out.println("\nStatistics of Driver.\n" +
@@ -119,15 +119,42 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             System.out.println("Count of 3rd positions won : " + drivers.get(index).getThirdPositionCount());
             System.out.println("Total points : " + drivers.get(index).getPoints());
             System.out.println("Total number of races completed : " + drivers.get(index).getRacesCount());
-        }
-        else {
+        } else {
             System.out.println("Sorry, Team does not exist!");
         }
     }
 
     @Override
     public void displayAllDrivers() {
+//        System.out.println(
+//                "|  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n" +
+//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |\n" +
+//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |"
+//        );
 
+        System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
+
+        int[] pointsArray = new int[drivers.size()];
+
+        for (int i=0; i<drivers.size(); i++){
+            pointsArray[i] = drivers.get(i).getPoints();
+        }
+
+
+
+        for (Formula1Driver driver : drivers){
+
+            //******************Have to display in accessing order*****************************
+            System.out.println("|\t" + driver.getName() +
+                    "\t|\t"  + driver.getTeam() +
+                    "\t|\t"  + driver.getFirstPositionCount() +
+                    "\t|\t" + driver.getSecondPositionCount()  +
+                    "\t|\t" + driver.getThirdPositionCount() +
+                    "\t|\t" + driver.getPoints() +
+                    "\t|\t" + driver.getRacesCount() + 	"\t|"
+            );
+            System.out.println("");
+        }
     }
 
     @Override
@@ -155,7 +182,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     }
 
     //get the index of a driver
-    public int getDriverIndex(String team){
+    public int getDriverIndex(String team) {
         int index;
 
         for (Formula1Driver driver : drivers) {

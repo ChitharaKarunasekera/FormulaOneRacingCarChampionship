@@ -18,6 +18,7 @@ public class Main {
                     "D - Delete Driver\n" +
                     "C - Change team \n" +
                     "V - View drive's statistics\n" +
+                    "T - Display the Formula 1 Driver Table\n" +
                     "Q - Quit");
 
             System.out.print("\nSelect you choice : ");
@@ -42,6 +43,10 @@ public class Main {
             }else if (choice.equalsIgnoreCase("V")){
                 System.out.println("\nYou can view driver's statistics.");
                 championship.displayStatistics();
+            }
+            else if (choice.equalsIgnoreCase("T")){
+                System.out.println("\nFormula 1 Driver Table.");
+                championship.displayAllDrivers();
             }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
