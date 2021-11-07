@@ -1,5 +1,6 @@
 package CarChampionship;
 
+import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -106,7 +107,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.print("Enter team of driver: ");
         team = input.next();
 
-        if (getDriverIndex(team) != -1){
+        if (getDriverIndex(team) != -1) {
             index = getDriverIndex(team);
 
             System.out.println("\nStatistics of Driver.\n" +
@@ -119,15 +120,77 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             System.out.println("Count of 3rd positions won : " + drivers.get(index).getThirdPositionCount());
             System.out.println("Total points : " + drivers.get(index).getPoints());
             System.out.println("Total number of races completed : " + drivers.get(index).getRacesCount());
-        }
-        else {
+        } else {
             System.out.println("Sorry, Team does not exist!");
         }
     }
 
     @Override
     public void displayAllDrivers() {
+//        System.out.println(
+//                "|  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n" +
+//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |\n" +
+//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |"
+//        );
 
+        System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
+
+        //Arranging ArrayList in descending order according to driver points --> with Insertion Sort Algorithm
+        for (int step=1; step<drivers.size(); step++){
+            Formula1Driver key = drivers.get(step);//points of driver at index step.
+            int j = step-1;//index track of leftmost driver before key driver
+
+            //until key is less than the one before it. Compare the points of key driver and one in left to it.
+            while (j>=0 && key.getPoints() > drivers.get(j).getPoints()){
+                drivers.set(j+1,drivers.get(j));//make driver in index step to driver in index j
+                j--;//decrees j by one
+            }
+
+            drivers.set(j+1, key);//make key driver after the driver with next smaller points.
+        }
+
+        //simple swap if the points are equal. If equal numbers appear, they will be to gather as the array is already sorted.
+        for (int i=0; i<drivers.size()-1; i++){
+            for (int j=0; j<drivers.size()-i-1; j++){
+                if (drivers.get(j).getPoints() == drivers.get(j+1).getPoints()){
+                    //place the driver with most 1st positions before if equal points exist.
+                    if (drivers.get(i).getFirstPositionCount() < drivers.get(i+1).getFirstPositionCount()){
+                        Formula1Driver temp = drivers.get(i);
+                        drivers.set(i, drivers.get(i+1));
+                        drivers.set(i+1,temp);
+                    }
+                }
+            }
+        }
+
+        //Display all drivers in table
+        for (Formula1Driver driver : drivers){
+
+            System.out.println("|\t" + driver.getName() +
+                    "\t|\t"  + driver.getTeam() +
+                    "\t|\t"  + driver.getFirstPositionCount() +
+                    "\t|\t" + driver.getSecondPositionCount()  +
+                    "\t|\t" + driver.getThirdPositionCount() +
+                    "\t|\t" + driver.getPoints() +
+                    "\t|\t" + driver.getRacesCount() + 	"\t|"
+            );
+            System.out.println("");
+        }
+
+//        for (int i=1; i<drivers.size()-1; i++) {
+//            for (int j=2; j<drivers.size()-i-1; j++){
+//                if (drivers.get(i).getPoints() == drivers.get(i).getPoints()){
+//                    if (drivers.get(i).getFirstPositionCount() < drivers.get(i).getFirstPositionCount()){
+//                        Formula1Driver temp = drivers.get(i);//temp = i
+//                        drivers.set(i, drivers.get(j));//drivers[i] = drivers[j]
+//                        drivers.set(j,temp);//drivers[j] = temp
+//                    }
+//                }
+//            }
+//            for (Formula1Driver driver : drivers) {
+//                driver.getPoints().
+//            }
+//        }
     }
 
     @Override
@@ -155,7 +218,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     }
 
     //get the index of a driver
-    public int getDriverIndex(String team){
+    public int getDriverIndex(String team) {
         int index;
 
         for (Formula1Driver driver : drivers) {
