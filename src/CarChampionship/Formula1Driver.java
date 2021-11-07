@@ -1,5 +1,7 @@
 package CarChampionship;
 
+import java.util.Random;
+
 public class Formula1Driver extends Driver {
     //Driver's statistics
     private int firstPositionCount;
@@ -8,13 +10,15 @@ public class Formula1Driver extends Driver {
     private int points;
     private int racesCount;
 
+    Random rand = new Random();//to generate a random number
+
     //default constructor
     public Formula1Driver(String name, String location, String team) {
         super(name, location, team);//call constructor of Driver class and assign basic information
-        this.firstPositionCount = 0;
+        this.firstPositionCount = rand.nextInt(5);;
         this.secondPositionCount = 0;
         this.thirdPositionCount = 0;
-        this.points = 0;
+        this.points = rand.nextInt(3);//generates a random number between 0 - 10
         this.racesCount = 0;
     }
 
