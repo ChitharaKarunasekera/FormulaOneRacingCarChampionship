@@ -1,5 +1,7 @@
 package CarChampionship;
 
+import java.util.Collections;
+import java.util.Comparator;
 import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -149,19 +151,25 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             drivers.set(j+1, key);//make key driver after the driver with next smaller points.
         }
 
-        //simple swap if the points are equal. If equal numbers appear, they will be to gather as the array is already sorted.
-        for (int i=0; i<drivers.size()-1; i++){
-            for (int j=0; j<drivers.size()-i-1; j++){
-                if (drivers.get(j).getPoints() == drivers.get(j+1).getPoints()){
-                    //place the driver with most 1st positions before if equal points exist.
-                    if (drivers.get(i).getFirstPositionCount() < drivers.get(i+1).getFirstPositionCount()){
-                        Formula1Driver temp = drivers.get(i);
-                        drivers.set(i, drivers.get(i+1));
-                        drivers.set(i+1,temp);
-                    }
-                }
-            }
-        }
+        //Sort the drivers in Descending order of their points
+        //Collections.sort(drivers);
+//
+//        //simple swap if the points are equal. If equal numbers appear, they will be to gather as the array is already sorted.
+//        for (int i=0; i<drivers.size()-1; i++){
+//            for (int j=0; j<drivers.size()-i-1; j++){
+//                if (drivers.get(j).getPoints() == drivers.get(j+1).getPoints()){
+//                    //place the driver with most 1st positions before if equal points exist.
+//                    if (drivers.get(i).getFirstPositionCount() < drivers.get(i+1).getFirstPositionCount()){
+//                        Formula1Driver temp = drivers.get(i);
+//                        drivers.set(i, drivers.get(i+1));
+//                        drivers.set(i+1,temp);
+//                    }
+//                }
+//            }
+//        }
+
+
+
 
         //Display all drivers in table
         for (Formula1Driver driver : drivers){
@@ -176,7 +184,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             );
             System.out.println("");
         }
-
+//******************************************************************************************************************
+//-------------------------------------------------Unnecessary------------------------------------------------------
 //        for (int i=1; i<drivers.size()-1; i++) {
 //            for (int j=2; j<drivers.size()-i-1; j++){
 //                if (drivers.get(i).getPoints() == drivers.get(i).getPoints()){
@@ -191,6 +200,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 //                driver.getPoints().
 //            }
 //        }
+// ******************************************************************************************************************
     }
 
     @Override
@@ -229,5 +239,4 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
         return -1;
     }
-
 }
