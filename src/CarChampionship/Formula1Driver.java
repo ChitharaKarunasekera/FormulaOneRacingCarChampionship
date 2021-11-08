@@ -1,8 +1,9 @@
 package CarChampionship;
 
+import java.util.Collections;
 import java.util.Random;
 
-public class Formula1Driver extends Driver {
+public class Formula1Driver extends Driver{
     //Driver's statistics
     private int firstPositionCount;
     private int secondPositionCount;

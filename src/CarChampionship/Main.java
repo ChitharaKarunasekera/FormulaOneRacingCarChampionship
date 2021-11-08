@@ -1,5 +1,7 @@
 package CarChampionship;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +10,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         ChampionshipManager championship = new Formula1ChampionshipManager();//The championship race
+        //Comparator<Formula1Driver> comparator = new Formula1ChampionshipManager();
 
         String choice;
         String comfirm;
