@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Formula1ChampionshipManager implements ChampionshipManager {
     Scanner input = new Scanner(System.in);
@@ -145,20 +148,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             System.out.format(leftAlignFormat, driver.getName(), driver.getTeam(), driver.getFirstPositionCount(), driver.getSecondPositionCount(), driver.getThirdPositionCount(), driver.getPoints(), driver.getRacesCount());
         }
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
-
-//        //Display all drivers in table
-//        for (Formula1Driver driver : drivers){
-//
-//            System.out.println("|\t" + driver.getName() +
-//                    "\t|\t"  + driver.getTeam() +
-//                    "\t|\t"  + driver.getFirstPositionCount() +
-//                    "\t|\t" + driver.getSecondPositionCount()  +
-//                    "\t|\t" + driver.getThirdPositionCount() +
-//                    "\t|\t" + driver.getPoints() +
-//                    "\t|\t" + driver.getRacesCount() + 	"\t|"
-//            );
-//            System.out.println("");
-//        }
     }
 
     @Override
@@ -171,19 +160,65 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
 
         for(Formula1Driver driver: drivers){
-            driver.setCurrentPositions();//each driver gets a random position.
+            driver.setCurrentPositions(drivers.size());//each driver gets a random position based on number of drivers registered to championship.
             driver.assigningPoints(driver.getCurrentPositions());//driver's points will be updated according to position
         }
     }
 
     @Override
     public void saveToFile() {
+        //Creating file if not existing
+        try{
+            File dataFile = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+            if (dataFile.createNewFile()) {
+                System.out.println("File created: " + dataFile.getName());
+            }
+        }catch(IOException e){
+            System.out.println("An error occurred. Could not create file!");
+            e.printStackTrace();
+        }
 
+        //Writing data to file.
+        try{
+
+            FileWriter writer = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+
+            for (Formula1Driver driver : drivers) {
+                writer.write(driver.getName() +
+                        " "  + driver.getTeam() +
+                        " "  + driver.getFirstPositionCount() +
+                        " " + driver.getSecondPositionCount()  +
+                        " " + driver.getThirdPositionCount() +
+                        " " + driver.getPoints() +
+                        " " + driver.getRacesCount()
+                );
+                writer.write("\n");
+            }
+
+            writer.close();
+            System.out.println("\nSuccessfully uploaded data to file.");
+        }catch(IOException e){
+            System.out.println("An error occurred. Could not upload data to file!");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void readFromFile() {
-
+        //Load data from file
+        try{
+            File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+            Scanner reader = new Scanner(data);
+            while(reader.hasNextLine())
+            {
+                String line = reader.nextLine();
+                //System.out.println(line);
+            }
+            reader.close();
+        }catch(IOException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public boolean isTeamExisting(String team) {

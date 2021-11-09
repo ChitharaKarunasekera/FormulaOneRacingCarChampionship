@@ -1,0 +1,4 @@
+Formula 1 championship table.
+a a 3 2 2 141 7
+c c 1 4 2 127 7
+b b 2 2 2 116 6

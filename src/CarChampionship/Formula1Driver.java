@@ -69,8 +69,8 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = count;
     }
 
-    public void setCurrentPositions(){
-        this.currentPosition = rand.nextInt(3)+1;//*******Try to get drivers.size()************
+    public void setCurrentPositions(int countOfDrivers){
+        this.currentPosition = rand.nextInt(countOfDrivers)+1;
     }
 
 

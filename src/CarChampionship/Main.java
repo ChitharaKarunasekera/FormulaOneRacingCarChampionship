@@ -49,13 +49,17 @@ public class Main {
             else if (choice.equalsIgnoreCase("S")){
                 championship.raceCompleted();
             }
+            else if (choice.equalsIgnoreCase("U")){
+                championship.saveToFile();
+            }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
                 System.out.print("Are you sure you want to terminate the system (Y/N)?");
                 confirm = input.next();
                 //quit program if user is sure
                 if (confirm.equalsIgnoreCase("Y")){
-                    System.out.println("System terminated.");
+                    championship.saveToFile();
+                    System.out.println("System terminated. Your data was automatically saved.");
                     break;
                 }
             }
