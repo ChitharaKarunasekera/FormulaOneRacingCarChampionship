@@ -1,7 +1,4 @@
 package CarChampionship;
-
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +10,7 @@ public class Main {
         //Comparator<Formula1Driver> comparator = new Formula1ChampionshipManager();
 
         String choice;
-        String comfirm;
+        String confirm;
 
         while (true) {
             System.out.println("\n==========Menu==========\n" +
@@ -22,6 +19,9 @@ public class Main {
                     "C - Change team \n" +
                     "V - View drive's statistics\n" +
                     "T - Display the Formula 1 Driver Table\n" +
+                    "S - Complete Race and Show Statistics\n" +
+                    "U - Upload data to file\n" +
+                    "L - Load data from file\n" +
                     "Q - Quit");
 
             System.out.print("\nSelect you choice : ");
@@ -29,12 +29,7 @@ public class Main {
 
             if (choice.equalsIgnoreCase("A")) {
                 System.out.println("\nYou can add a driver!");
-
                 championship.addNewDriver();//call the method to add a driver to the championship
-
-//                System.out.println("Name: " + championship.drivers.get(0).getName());
-//                System.out.println("Location: " + championship.drivers.get(0).getLocation());
-//                System.out.println("Team: " + championship.drivers.get(0).getTeam());
             }
             else if (choice.equalsIgnoreCase("D")){
                 System.out.println("\nYou can delete a driver.");
@@ -51,12 +46,15 @@ public class Main {
                 System.out.println("\nFormula 1 Driver Table.");
                 championship.displayAllDrivers();
             }
+            else if (choice.equalsIgnoreCase("S")){
+                championship.raceCompleted();
+            }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
                 System.out.print("Are you sure you want to terminate the system (Y/N)?");
-                comfirm = input.next();
+                confirm = input.next();
                 //quit program if user is sure
-                if (comfirm.equalsIgnoreCase("Y")){
+                if (confirm.equalsIgnoreCase("Y")){
                     System.out.println("System terminated.");
                     break;
                 }
@@ -65,15 +63,6 @@ public class Main {
                 System.out.println("Option not found!");
             }
         }
-//        Driver d1 = new Formula1Driver("Chithara", "Nugegoda", "TaemChithzz");
-//
-//        System.out.println("Name of d1: " + d1.getName());
-//        System.out.println("Location : " + d1.getLocation());
-//        System.out.println("Team : " + d1.getTeam());
-//        d1.assigningPoints(11);
-//        d1.assigningPoints(2);
-//        System.out.println("Points: " + d1.getPoints());
-//        System.out.println("First Poss Count: " + d1.getFirstPositionCount());
     }
 
 }
