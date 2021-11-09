@@ -7,7 +7,7 @@ public interface ChampionshipManager {
     void changeTeam();
     void displayStatistics();
     void displayAllDrivers();
-    void raceStatistics();
+    void raceCompleted();
     void saveToFile();
     void readFromFile();
 }
