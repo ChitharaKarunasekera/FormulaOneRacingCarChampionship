@@ -12,6 +12,9 @@ public class Main {
         String choice;
         String confirm;
 
+        championship.readFromFile();
+        System.out.println("Loaded previous data!");
+
         while (true) {
             System.out.println("\n==========Menu==========\n" +
                     "A - Add new driver\n" +
@@ -49,13 +52,22 @@ public class Main {
             else if (choice.equalsIgnoreCase("S")){
                 championship.raceCompleted();
             }
+            else if (choice.equalsIgnoreCase("U")){
+                championship.saveToFile();
+            }
+            //******************************Does Load data have to be an Option??**************************************
+            else if (choice.equalsIgnoreCase("L")){
+                System.out.println("Load");
+                championship.readFromFile();
+            }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
                 System.out.print("Are you sure you want to terminate the system (Y/N)?");
                 confirm = input.next();
                 //quit program if user is sure
                 if (confirm.equalsIgnoreCase("Y")){
-                    System.out.println("System terminated.");
+                    championship.saveToFile();
+                    System.out.println("System terminated. Your data was automatically saved.");
                     break;
                 }
             }
