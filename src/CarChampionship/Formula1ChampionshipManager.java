@@ -41,6 +41,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println("\nDriver was added to the championship competition!\n");
     }
 
+    //Overloaded driver method to restore drivers from saved data
+    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount) {
+        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount));//create new Formula1Driver object and add to array list
+    }
+
     @Override
     public void deleteDriver() {
         String team;
@@ -141,6 +146,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         String leftAlignFormat = "| %-11s | %-12s | %-13d | %-13d | %-13d | %-12d | %-9d |%n";
 
+        System.out.format("+-------------------------------------------------------------------------------------------------------+%n");
+        System.out.format("|                                      Formula 1 Driver Table                                           |%n");
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
         System.out.format("| Driver Name | Team Name    | 1st Positions | 2nd Positions | 3rd Positions | Total Points | Completed |%n");
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
@@ -185,6 +192,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
             for (Formula1Driver driver : drivers) {
                 writer.write(driver.getName() +
+                        " "  + driver.getLocation() +
                         " "  + driver.getTeam() +
                         " "  + driver.getFirstPositionCount() +
                         " " + driver.getSecondPositionCount()  +
@@ -194,7 +202,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                 );
                 writer.write("\n");
             }
-
             writer.close();
             System.out.println("\nSuccessfully uploaded data to file.");
         }catch(IOException e){
@@ -212,11 +219,23 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             while(reader.hasNextLine())
             {
                 String line = reader.nextLine();
-                //System.out.println(line);
+                String[] driverData = line.trim().split("\\s+");//split each set of characters till a space is found
+
+                String name = driverData[0];
+                String location = driverData[1];
+                String team = driverData[2];
+                int firstPositionCount = Integer.parseInt(driverData[3]);
+                int secondPositionCount = Integer.parseInt(driverData[4]);
+                int thirdPositionCount = Integer.parseInt(driverData[5]);
+                int points = Integer.parseInt(driverData[6]);
+                int racesCount = Integer.parseInt(driverData[7]);
+
+                addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount);//pass all the info saved in each line to overloaded constructor
+
             }
             reader.close();
         }catch(IOException e){
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred. Could not load precious data!");
             e.printStackTrace();
         }
     }

@@ -22,6 +22,15 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = 0;
     }
 
+    public Formula1Driver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount) {
+        super(name, location, team);//call constructor of Driver class and assign basic information
+        this.firstPositionCount = firstPositionCount;
+        this.secondPositionCount = secondPositionCount;
+        this.thirdPositionCount = thirdPositionCount;
+        this.points = points;
+        this.racesCount = racesCount;
+    }
+
     //Getter Methods
     public int getFirstPositionCount() {
         return firstPositionCount;
