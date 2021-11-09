@@ -129,47 +129,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     @Override
     public void displayAllDrivers() {
-//        System.out.println(
-//                "|  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n" +
-//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |\n" +
-//                        "|   Chithzz   |         0       |         0       |         0       |        0       |          0        |"
-//        );
 
         System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
 
-        //Arranging ArrayList in descending order according to driver points --> with Insertion Sort Algorithm
-        for (int step=1; step<drivers.size(); step++){
-            Formula1Driver key = drivers.get(step);//points of driver at index step.
-            int j = step-1;//index track of leftmost driver before key driver
-
-            //until key is less than the one before it. Compare the points of key driver and one in left to it.
-            while (j>=0 && key.getPoints() > drivers.get(j).getPoints()){
-                drivers.set(j+1,drivers.get(j));//make driver in index step to driver in index j
-                j--;//decrees j by one
-            }
-
-            drivers.set(j+1, key);//make key driver after the driver with next smaller points.
-        }
-
         //Sort the drivers in Descending order of their points
-        //Collections.sort(drivers);
-//
-//        //simple swap if the points are equal. If equal numbers appear, they will be to gather as the array is already sorted.
-//        for (int i=0; i<drivers.size()-1; i++){
-//            for (int j=0; j<drivers.size()-i-1; j++){
-//                if (drivers.get(j).getPoints() == drivers.get(j+1).getPoints()){
-//                    //place the driver with most 1st positions before if equal points exist.
-//                    if (drivers.get(i).getFirstPositionCount() < drivers.get(i+1).getFirstPositionCount()){
-//                        Formula1Driver temp = drivers.get(i);
-//                        drivers.set(i, drivers.get(i+1));
-//                        drivers.set(i+1,temp);
-//                    }
-//                }
-//            }
-//        }
-
-
-
+        Collections.sort(drivers);
 
         //Display all drivers in table
         for (Formula1Driver driver : drivers){
@@ -184,6 +148,35 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             );
             System.out.println("");
         }
+
+//        //Arranging ArrayList in descending order according to driver points --> with Insertion Sort Algorithm
+//        for (int step=1; step<drivers.size(); step++){
+//            Formula1Driver key = drivers.get(step);//points of driver at index step.
+//            int j = step-1;//index track of leftmost driver before key driver
+//
+//            //until key is less than the one before it. Compare the points of key driver and one in left to it.
+//            while (j>=0 && key.getPoints() > drivers.get(j).getPoints()){
+//                drivers.set(j+1,drivers.get(j));//make driver in index step to driver in index j
+//                j--;//decrees j by one
+//            }
+//            drivers.set(j+1, key);//make key driver after the driver with next smaller points.
+//        }
+
+//        //simple swap if the points are equal. If equal numbers appear, they will be to gather as the array is already sorted.
+//        for (int i=0; i<drivers.size()-1; i++){
+//            for (int j=0; j<drivers.size()-i-1; j++){
+//                if (drivers.get(j).getPoints() == drivers.get(j+1).getPoints()){
+//                    //place the driver with most 1st positions before if equal points exist.
+//                    if (drivers.get(j).getFirstPositionCount() < drivers.get(j+1).getFirstPositionCount()){
+//                        Formula1Driver temp = drivers.get(j);
+//                        drivers.set(j, drivers.get(j+1));
+//                        drivers.set(j+1,temp);
+//                    }
+//                }
+//            }
+//        }
+
+
 //******************************************************************************************************************
 //-------------------------------------------------Unnecessary------------------------------------------------------
 //        for (int i=1; i<drivers.size()-1; i++) {

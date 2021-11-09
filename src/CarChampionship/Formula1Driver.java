@@ -3,7 +3,7 @@ package CarChampionship;
 import java.util.Collections;
 import java.util.Random;
 
-public class Formula1Driver extends Driver{
+public class Formula1Driver extends Driver implements Comparable<Formula1Driver>{
     //Driver's statistics
     private int firstPositionCount;
     private int secondPositionCount;
@@ -114,6 +114,34 @@ public class Formula1Driver extends Driver{
             this.secondPositionCount += 1;
         } else if (position == 3) {
             this.thirdPositionCount += 1;
+        }
+    }
+
+    //implementation of compareTo() method of Comparable interface. This method is to sort drivers in descending order according to points
+    public int compareTo(Formula1Driver o)
+    {
+        //if this drivers points are greater than the other drivers points return -1
+        if (this.points > o.points){
+            return -1;
+        }
+        //if this drivers points are less than the other drivers points return 1
+        else if (this.points < o.points){
+            return 1;
+        }
+        //if this drivers points and the other drivers points are equal check,
+        else{
+            //if this drivers has won more 1st places than the other, then return -1
+            if (this.getFirstPositionCount() > o.getFirstPositionCount()){
+                return -1;
+            }
+            //if other drivers has won more 1st places than the this driver, then return 1
+            else if (this.getFirstPositionCount() < o.getFirstPositionCount()){
+                return 1;
+            }
+            //if 1st position count of both drivers are equal return 0
+            else {
+                return 0;
+            }
         }
     }
 }
