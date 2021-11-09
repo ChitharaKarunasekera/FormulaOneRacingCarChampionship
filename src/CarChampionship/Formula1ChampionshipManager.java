@@ -131,24 +131,34 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     @Override
     public void displayAllDrivers() {
 
-        System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
+        //System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
 
         //Sort the drivers in Descending order of their points
         Collections.sort(drivers);
 
-        //Display all drivers in table
-        for (Formula1Driver driver : drivers){
+        String leftAlignFormat = "| %-11s | %-12s | %-13d | %-13d | %-13d | %-12d | %-9d |%n";
 
-            System.out.println("|\t" + driver.getName() +
-                    "\t|\t"  + driver.getTeam() +
-                    "\t|\t"  + driver.getFirstPositionCount() +
-                    "\t|\t" + driver.getSecondPositionCount()  +
-                    "\t|\t" + driver.getThirdPositionCount() +
-                    "\t|\t" + driver.getPoints() +
-                    "\t|\t" + driver.getRacesCount() + 	"\t|"
-            );
-            System.out.println("");
+        System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
+        System.out.format("| Driver Name | Team Name    | 1st Positions | 2nd Positions | 3rd Positions | Total Points | Completed |%n");
+        System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
+        for (Formula1Driver driver : drivers) {
+            System.out.format(leftAlignFormat, driver.getName(), driver.getTeam(), driver.getFirstPositionCount(), driver.getSecondPositionCount(), driver.getThirdPositionCount(), driver.getPoints(), driver.getRacesCount());
         }
+        System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
+
+//        //Display all drivers in table
+//        for (Formula1Driver driver : drivers){
+//
+//            System.out.println("|\t" + driver.getName() +
+//                    "\t|\t"  + driver.getTeam() +
+//                    "\t|\t"  + driver.getFirstPositionCount() +
+//                    "\t|\t" + driver.getSecondPositionCount()  +
+//                    "\t|\t" + driver.getThirdPositionCount() +
+//                    "\t|\t" + driver.getPoints() +
+//                    "\t|\t" + driver.getRacesCount() + 	"\t|"
+//            );
+//            System.out.println("");
+//        }
     }
 
     @Override
