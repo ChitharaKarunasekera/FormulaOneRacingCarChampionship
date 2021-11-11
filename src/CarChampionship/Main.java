@@ -1,19 +1,25 @@
 package CarChampionship;
+import java.awt.*;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        //GUI
+        MyFrame frame = new MyFrame();
+
         Scanner input = new Scanner(System.in);
 
         ChampionshipManager championship = new Formula1ChampionshipManager();//The championship race
-        //Comparator<Formula1Driver> comparator = new Formula1ChampionshipManager();
 
         String choice;
         String confirm;
 
         championship.readFromFile();
         System.out.println("Loaded previous data!");
+
+
+
 
         while (true) {
             System.out.println("\n==========Menu==========\n" +
