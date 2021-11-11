@@ -27,7 +27,7 @@ public class Main {
                     "D - Delete Driver\n" +
                     "C - Change team \n" +
                     "V - View drive's statistics\n" +
-                    "T - Display the Formula 1 Driver Table\n" +
+                    "T - Display the Formula 1 Driver CarChampionship.Table\n" +
                     "S - Complete Race and Show Statistics\n" +
                     "U - Upload data to file\n" +
                     "L - Load data from file\n" +
@@ -52,7 +52,7 @@ public class Main {
                 championship.displayStatistics();
             }
             else if (choice.equalsIgnoreCase("T")){
-                System.out.println("\nFormula 1 Driver Table.");
+                System.out.println("\nFormula 1 Driver CarChampionship.Table.");
                 championship.displayAllDrivers();
             }
             else if (choice.equalsIgnoreCase("S")){
