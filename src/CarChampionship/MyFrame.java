@@ -3,7 +3,7 @@ package CarChampionship;
 import javax.swing.*;
 import java.awt.*;
 
-public class MyFrame{
+public class MyFrame {
     Tab myTable = new Tab();
 
     public MyFrame(){
