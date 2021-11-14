@@ -1,4 +1,5 @@
 package CarChampionship;
+import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        ChampionshipManager championship = new Formula1ChampionshipManager();//The championship race
+        ChampionshipManager championship = new Formula1ChampionshipManager();//Instance of formula 1 championship race
 
         String choice;
         String confirm;
