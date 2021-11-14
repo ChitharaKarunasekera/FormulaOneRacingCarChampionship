@@ -10,4 +10,5 @@ public interface ChampionshipManager {
     void raceCompleted();
     void saveToFile();
     void readFromFile();
+
 }

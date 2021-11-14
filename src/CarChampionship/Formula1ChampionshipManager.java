@@ -147,7 +147,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         String leftAlignFormat = "| %-11s | %-12s | %-13d | %-13d | %-13d | %-12d | %-9d |%n";
 
         System.out.format("+-------------------------------------------------------------------------------------------------------+%n");
-        System.out.format("|                                      Formula 1 Driver Table                                           |%n");
+        System.out.format("|                                      Formula 1 Driver CarChampionship.Table                                           |%n");
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
         System.out.format("| Driver Name | Team Name    | 1st Positions | 2nd Positions | 3rd Positions | Total Points | Completed |%n");
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
