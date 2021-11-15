@@ -39,21 +39,4 @@ public abstract class Driver {
     public void setTeam(String team) {
         this.team = team;
     }
-
-
-    //getters of Formula1Driver
-    abstract public int getFirstPositionCount();
-    abstract public int getSecondPositionCount();
-    abstract public int getThirdPositionCount();
-    abstract public int getPoints();
-    abstract public int getRacesCount();
-
-    abstract public void setFirstPositionCount(int firstPositionCount);
-    abstract public void setSecondPositionCount(int secondPositionCount);
-    abstract public void setThirdPositionCount(int thirdPositionCount);
-    abstract public void setPoints(int points);
-    abstract public void setRacesCount(int count);
-
-    abstract public void assigningPoints(int position);
-    //abstract public void countPositions(int position);
 }

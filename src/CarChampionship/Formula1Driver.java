@@ -78,6 +78,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = count;
     }
 
+    //Once a race is completed, the driver will be awarded a random position according to the count of drivers participated
     public void setCurrentPositions(int countOfDrivers){
         this.currentPosition = rand.nextInt(countOfDrivers)+1;
     }
