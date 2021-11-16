@@ -20,7 +20,7 @@ public class MyFrame extends JFrame{
 
         JPanel menuPanel = new JPanel();
         menuPanel.setBackground(Color.red);
-        menuPanel.setBounds(0,0,250,800);
+        menuPanel.setBounds(0,0,250,700);
         menuPanel.setVisible(true);
 
         button = new JButton();
