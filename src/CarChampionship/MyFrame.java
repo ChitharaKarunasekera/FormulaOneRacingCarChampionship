@@ -3,10 +3,35 @@ package CarChampionship;
 import javax.swing.*;
 import java.awt.*;
 
-public class MyFrame {
-    Tab myTable = new Tab();
+public class MyFrame extends JFrame{
+    JButton button;
+    JLabel label;
 
     public MyFrame(){
+        this.setTitle("Formula 1 Car Racing Championship");//title of frame
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);// Frame cannot be re-sized
+        this.setSize(800, 700);
+        this.setVisible(true);// make frame visible
+
+        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
+        this.setIconImage(image.getImage());//change icon of frame
+        this.getContentPane().setBackground(new Color(63, 63, 63));//background color of frame
+
+        JPanel menuPanel = new JPanel();
+        menuPanel.setBackground(Color.red);
+        menuPanel.setBounds(0,0,250,800);
+        menuPanel.setVisible(true);
+
+        button = new JButton();
+        button.setBounds(10,100,100,30);//dimensions of button
+        button.setText("I'm a button");
+        button.setVisible(true);
+
+
+        this.add(menuPanel);
+        menuPanel.add(button);
+
 //        //default frame
 //        setLayout(new FlowLayout());
 //
@@ -36,19 +61,8 @@ public class MyFrame {
 //
 //        JScrollPane scrollPane = new JScrollPane(driverTable);
 //        add(scrollPane);//table is inside scroll pane
-
-        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
-
-        myTable = new Tab();
-
-        myTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myTable.setSize(650, 200);
-        myTable.setVisible(true);// make frame visible
-        myTable.setTitle("Formula 1 Car Racing Championship");//title of frame
-        myTable.setResizable(false);// Frame cannot be re-sized
-
-        myTable.setIconImage(image.getImage());//change icon of frame
-        myTable.getContentPane().setBackground(new Color(63, 63, 63));//background color of frame
     }
+
+
 
 }
