@@ -1,13 +1,11 @@
 package CarChampionship;
-import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         //GUI
-        MyFrame frame = new MyFrame();
+        MenuFrame frame = new MenuFrame();
 
         Scanner input = new Scanner(System.in);
 
