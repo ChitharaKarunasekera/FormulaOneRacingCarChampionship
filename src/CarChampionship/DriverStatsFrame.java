@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DriverStatsFrame implements ActionListener {
+public class DriverStatsFrame extends MenuFrame implements ActionListener {
     JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel label = new JLabel("Statistics of Drivers");
     JButton backBtn = new JButton("Back to Main Menu");

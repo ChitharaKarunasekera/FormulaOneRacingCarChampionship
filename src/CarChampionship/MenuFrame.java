@@ -23,9 +23,10 @@ public class MenuFrame implements ActionListener{
     public MenuFrame() {
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setSize(550, 500);
-        menuFrame.setLayout(new BorderLayout(10, 10));//add margin between components
+        menuFrame.setLayout(new BorderLayout(10, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
+        menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
 
 
         JPanel northPanel = new JPanel();
@@ -34,11 +35,11 @@ public class MenuFrame implements ActionListener{
         JPanel southPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        northPanel.setBackground(Color.red);
-        westPanel.setBackground(Color.green);
-        eastPanel.setBackground(Color.yellow);
-        southPanel.setBackground(Color.magenta);
-        centerPanel.setBackground(Color.blue);
+        northPanel.setBackground(new Color(109, 109, 109));
+        westPanel.setBackground(new Color(109, 109, 109));
+        eastPanel.setBackground(new Color(109, 109, 109));
+        southPanel.setBackground(new Color(109, 109, 109));
+        centerPanel.setBackground(new Color(79, 79, 79));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(100, 100));
@@ -74,7 +75,7 @@ public class MenuFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
             menuFrame.dispose();
-            DriverStatsFrame myWindow = new DriverStatsFrame();
+            DriverStatsFrame tableWindow = new DriverStatsFrame();
         }
     }
 
