@@ -11,9 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Formula1ChampionshipManager implements ChampionshipManager {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
-    ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
+    private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
 
     @Override
     public void addNewDriver() {
@@ -261,5 +261,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
         return -1;
+    }
+
+    public ArrayList<Formula1Driver> getDrivers() {
+        return drivers;
     }
 }
