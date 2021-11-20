@@ -4,17 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class DriverStatsFrame extends MenuFrame implements ActionListener {
+public class DriverStatsFrame implements ActionListener {
     JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel label = new JLabel("Statistics of Drivers");
     JButton backBtn = new JButton("Back to Main Menu");
     JTable table;
 
-    public DriverStatsFrame(){
+    ArrayList<Formula1Driver> driverList = new ArrayList<>();
+
+    public DriverStatsFrame(ArrayList<Formula1Driver> drivers){
+        this.driverList = drivers;
+
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tableFrame.setSize(900, 700);
-        tableFrame.setLayout(new BorderLayout(10, 10));//add margin between components
+        tableFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         tableFrame.setIconImage(image.getImage());//change icon of frame
 
@@ -24,11 +29,11 @@ public class DriverStatsFrame extends MenuFrame implements ActionListener {
         JPanel southPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        northPanel.setBackground(Color.red);
-        westPanel.setBackground(Color.green);
-        eastPanel.setBackground(Color.yellow);
-        southPanel.setBackground(Color.magenta);
-        centerPanel.setBackground(Color.blue);
+        northPanel.setBackground(new Color(72, 72, 73));
+        westPanel.setBackground(new Color(72, 72, 73));
+        eastPanel.setBackground(new Color(72, 72, 73));
+        southPanel.setBackground(new Color(72, 72, 73));
+        centerPanel.setBackground(new Color(62, 62, 62));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(50, 100));
@@ -45,23 +50,38 @@ public class DriverStatsFrame extends MenuFrame implements ActionListener {
         //adding label as topic in top panel
         label.setBounds(0,0,800,50);
         label.setFont(new Font("Century Gothic",Font.PLAIN, 25));
+        label.setForeground(new Color(166, 166, 166));
         northPanel.add(label);
 
         //adding back button in button panel
         backBtn.setBounds(0,25,400,50);
         backBtn.setFont(new Font("Century Gothic",Font.PLAIN, 18));
         backBtn.setFocusable(false);//remove broader around text
+        backBtn.setForeground(new Color(62, 62, 62));
+        backBtn.setBackground(new Color(166, 166, 166));
         backBtn.addActionListener(this);
         southPanel.add(backBtn, BorderLayout.CENTER);
 
         //Table
         String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed"};
-        Object[][] data = {
-                {"Bill", "Hazel", "Male", "Male", "Male", "Male", "Male"},
-                {"Mary", "Black", "Female", "Male", "Male", "Male", "Male"},
-                {"Rick", "Red", "Male", "Male", "Male", "Male", "Male"},
-                {"Janice", "Yellow", "Female", "Male", "Male", "Male", "Male"},
-        };
+//        Object[][] data = {
+//                {"Bill", "Hazel", "Male", "Male", "Male", "Male", "Male"},
+//                {"Mary", "Black", "Female", "Male", "Male", "Male", "Male"},
+//                {"Rick", "Red", "Male", "Male", "Male", "Male", "Male"},
+//                {"Janice", "Yellow", "Female", "Male", "Male", "Male", "Male"},
+//        };
+        Object[][] data = new Object[drivers.size()][7];
+
+        for (Formula1Driver driver: drivers){
+            int i=0;
+            data[i][0] = driver.getName();
+            data[i][1] = driver.getTeam();
+            data[i][2] = driver.getFirstPositionCount();
+            data[i][3] = driver.getSecondPositionCount();
+            data[i][4] = driver.getThirdPositionCount();
+            data[i][5] = driver.getPoints();
+            data[i][6] = driver.getRacesCount();
+        }
 
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(750, 100));//width and height of table

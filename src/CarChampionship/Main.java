@@ -1,15 +1,13 @@
 package CarChampionship;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        //GUI
-        MenuFrame frame = new MenuFrame();
-
         Scanner input = new Scanner(System.in);
 
-        ChampionshipManager championship = new Formula1ChampionshipManager();//Instance of formula 1 championship race
+        Formula1ChampionshipManager championship = new Formula1ChampionshipManager();//Instance of formula 1 championship race
 
         String choice;
         String confirm;
@@ -17,7 +15,8 @@ public class Main {
         championship.readFromFile();
         System.out.println("Loaded previous data!");
 
-
+        //GUI
+        MenuFrame frame = new MenuFrame();
 
 
         while (true) {
@@ -80,6 +79,8 @@ public class Main {
                 System.out.println("Option not found!");
             }
         }
+
+
     }
 
 }
