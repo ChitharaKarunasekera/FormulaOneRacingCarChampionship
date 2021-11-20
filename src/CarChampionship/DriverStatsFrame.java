@@ -95,7 +95,7 @@ public class DriverStatsFrame implements ActionListener {
         }
 
         table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(750, 100));//width and height of table
+        table.setPreferredScrollableViewportSize(new Dimension(780, 100));//width and height of table
         table.isEditing();
 
         //scroll pane

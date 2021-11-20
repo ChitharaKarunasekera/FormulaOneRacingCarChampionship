@@ -11,8 +11,8 @@ public class MenuFrame implements ActionListener{
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
 
-    JButton option1 = new JButton("Option one");
-    JButton option2 = new JButton("Option two");
+    JButton option1 = new JButton("Driver statistics in descending order of points.");
+    JButton option2 = new JButton("Driver statistics in ascending order of points.");
     JButton option3 = new JButton("Option three");
     JButton option4 = new JButton("Option four");
     JButton option5 = new JButton("Option five");
@@ -25,7 +25,7 @@ public class MenuFrame implements ActionListener{
     public MenuFrame(ArrayList<Formula1Driver> drivers) {
         this.driverList = drivers;
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(650, 600);
+        menuFrame.setSize(750, 600);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
@@ -114,6 +114,10 @@ public class MenuFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
+            menuFrame.dispose();
+            DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
+        }
+        else if (e.getSource() == option2){
             menuFrame.dispose();
             DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
         }
