@@ -22,7 +22,8 @@ public class MenuFrame implements ActionListener{
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
     ArrayList<Formula1Driver> driverList = new ArrayList<>();
 
-    public MenuFrame() {
+    public MenuFrame(ArrayList<Formula1Driver> drivers) {
+        this.driverList = drivers;
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setSize(650, 600);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
@@ -102,13 +103,13 @@ public class MenuFrame implements ActionListener{
         menuFrame.setVisible(true);
     }
 
-    public void setDriverData(ArrayList<Formula1Driver> driverArray){
-        this.driverList = driverArray;
-    }
-
-    public ArrayList<Formula1Driver> getDriverData(){
-        return driverList;
-    }
+//    public void setDriverData(ArrayList<Formula1Driver> driverArray){
+//        this.driverList = driverArray;
+//    }
+//
+//    public ArrayList<Formula1Driver> getDriverData(){
+//        return driverList;
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

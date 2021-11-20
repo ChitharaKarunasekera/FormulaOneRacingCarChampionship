@@ -8,16 +8,14 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         Formula1ChampionshipManager championship = new Formula1ChampionshipManager();//Instance of formula 1 championship race
+        //GUI
+        MenuFrame frame = new MenuFrame(championship.getDrivers());
 
         String choice;
         String confirm;
 
         championship.readFromFile();
         System.out.println("Loaded previous data!");
-
-        //GUI
-        MenuFrame frame = new MenuFrame();
-
 
         while (true) {
             System.out.println("\n==========Menu==========\n" +
