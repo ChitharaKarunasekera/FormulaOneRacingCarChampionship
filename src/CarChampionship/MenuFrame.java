@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.OpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MenuFrame implements ActionListener{
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
@@ -13,7 +14,7 @@ public class MenuFrame implements ActionListener{
 
     JButton option1 = new JButton("Driver statistics in descending order of points.");
     JButton option2 = new JButton("Driver statistics in ascending order of points.");
-    JButton option3 = new JButton("Option three");
+    JButton option3 = new JButton("Drivers based on largest number of 1st positions.");
     JButton option4 = new JButton("Option four");
     JButton option5 = new JButton("Option five");
     JButton option6 = new JButton("Option six");
@@ -25,7 +26,7 @@ public class MenuFrame implements ActionListener{
     public MenuFrame(ArrayList<Formula1Driver> drivers) {
         this.driverList = drivers;
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(750, 600);
+        menuFrame.setSize(900, 600);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
@@ -103,24 +104,35 @@ public class MenuFrame implements ActionListener{
         menuFrame.setVisible(true);
     }
 
-//    public void setDriverData(ArrayList<Formula1Driver> driverArray){
-//        this.driverList = driverArray;
-//    }
-//
-//    public ArrayList<Formula1Driver> getDriverData(){
-//        return driverList;
-//    }
+    public void setDriverData(ArrayList<Formula1Driver> driverArray){
+        this.driverList = driverArray;
+    }
+
+    public ArrayList<Formula1Driver> getDriverData(){
+        return driverList;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
             menuFrame.dispose();
+            Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
         }
         else if (e.getSource() == option2){
             menuFrame.dispose();
+            Collections.reverse(driverList);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
+        }
+        //****************************** option 3 to be added *****************************
+        else if (e.getSource() == option4){
+            menuFrame.dispose();
+            Collections.reverse(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
         }
     }
+
+
+
 
 }

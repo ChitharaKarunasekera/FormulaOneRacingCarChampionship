@@ -12,8 +12,8 @@ public class Main {
         String choice;
         String confirm;
 
-        championship.readFromFile();
-        System.out.println("Loaded previous data!");
+//        championship.readFromFile();
+//        System.out.println("Loaded previous data!");
 
         //GUI
         MenuFrame frame = new MenuFrame(championship.getDrivers());

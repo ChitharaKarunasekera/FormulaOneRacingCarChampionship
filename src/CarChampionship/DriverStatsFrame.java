@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DriverStatsFrame implements ActionListener {
     JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
@@ -95,7 +96,7 @@ public class DriverStatsFrame implements ActionListener {
         }
 
         table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(780, 100));//width and height of table
+        table.setPreferredScrollableViewportSize(new Dimension(770, 480));//width and height of table
         table.isEditing();
 
         //scroll pane
