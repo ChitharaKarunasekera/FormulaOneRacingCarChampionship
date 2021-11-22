@@ -112,6 +112,7 @@ public class MenuFrame implements ActionListener{
         return driverList;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
@@ -126,9 +127,10 @@ public class MenuFrame implements ActionListener{
         }
         //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4){
-            menuFrame.dispose();
-            Collections.reverse(driverList);
-            DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
+            //HOW TO ACCESS COMPLETE RACE METHOD
+        }
+        else if (e.getSource() == option4){
+            //HOW TO ACCESS COMPLETE RACE METHOD
         }
     }
 
