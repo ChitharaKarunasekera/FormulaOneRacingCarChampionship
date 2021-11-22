@@ -11,9 +11,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Formula1ChampionshipManager implements ChampionshipManager {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
+    private boolean loadStatus = false;
 
-    ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
+    private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
 
     public void addNewDriver() {
         String name;
@@ -212,31 +213,37 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     @Override
     public void readFromFile() {
-        //Load data from file
-        try{
-            File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-            Scanner reader = new Scanner(data);
-            while(reader.hasNextLine())
-            {
-                String line = reader.nextLine();
-                String[] driverData = line.trim().split("\\s+");//split each set of characters till a space is found
+        if (!loadStatus) {
+            //Load data from file
+            try {
+                File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+                Scanner reader = new Scanner(data);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    String[] driverData = line.trim().split("\\s+");//split each set of characters till a space is found
 
-                String name = driverData[0];
-                String location = driverData[1];
-                String team = driverData[2];
-                int firstPositionCount = Integer.parseInt(driverData[3]);
-                int secondPositionCount = Integer.parseInt(driverData[4]);
-                int thirdPositionCount = Integer.parseInt(driverData[5]);
-                int points = Integer.parseInt(driverData[6]);
-                int racesCount = Integer.parseInt(driverData[7]);
+                    String name = driverData[0];
+                    String location = driverData[1];
+                    String team = driverData[2];
+                    int firstPositionCount = Integer.parseInt(driverData[3]);
+                    int secondPositionCount = Integer.parseInt(driverData[4]);
+                    int thirdPositionCount = Integer.parseInt(driverData[5]);
+                    int points = Integer.parseInt(driverData[6]);
+                    int racesCount = Integer.parseInt(driverData[7]);
 
-                addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount);//pass all the info saved in each line to overloaded constructor
+                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount);//pass all the info saved in each line to overloaded constructor
 
+                }
+                reader.close();
+                loadStatus = true;
+                System.out.println("Successfully loaded data!");
+            } catch (IOException e) {
+                System.out.println("An error occurred. Could not load precious data!");
+                e.printStackTrace();
             }
-            reader.close();
-        }catch(IOException e){
-            System.out.println("An error occurred. Could not load precious data!");
-            e.printStackTrace();
+        }
+        else {
+            System.out.println("Data already loaded!");
         }
     }
 
