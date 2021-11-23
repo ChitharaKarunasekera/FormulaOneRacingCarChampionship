@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Loaded previous data!");
 
         //GUI
-        MenuFrame frame = new MenuFrame(championship.getDrivers());
+        MenuFrame frame = new MenuFrame(championship);
 
         while (true) {
             System.out.println("\n==========Menu==========\n" +
