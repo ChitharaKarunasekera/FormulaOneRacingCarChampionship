@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MenuFrame implements ActionListener{
+    Formula1ChampionshipManager championship;
+
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
 
@@ -21,10 +23,10 @@ public class MenuFrame implements ActionListener{
     JButton option7 = new JButton("Option seven");
 
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
-    ArrayList<Formula1Driver> driverList = new ArrayList<>();
 
-    public MenuFrame(ArrayList<Formula1Driver> drivers) {
-        this.driverList = drivers;
+    public MenuFrame(Formula1ChampionshipManager championship) {
+        this.championship = championship;
+
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setSize(900, 600);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
@@ -104,26 +106,20 @@ public class MenuFrame implements ActionListener{
         menuFrame.setVisible(true);
     }
 
-    public void setDriverData(ArrayList<Formula1Driver> driverArray){
-        this.driverList = driverArray;
-    }
-
-    public ArrayList<Formula1Driver> getDriverData(){
-        return driverList;
-    }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
             menuFrame.dispose();
-            Collections.sort(driverList);
-            DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
+            Collections.sort(championship.getDrivers());
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
+
         }
         else if (e.getSource() == option2){
             menuFrame.dispose();
-            Collections.reverse(driverList);
-            DriverStatsFrame tableWindow = new DriverStatsFrame(driverList);
+            Collections.reverse(championship.getDrivers());
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
         }
         //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4){
