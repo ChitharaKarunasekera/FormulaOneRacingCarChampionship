@@ -1,11 +1,13 @@
 package CarChampionship;
 
+import java.time.LocalDateTime;
+
 public class Race {
-    private int raceNumber;
-    private String dateTime;
+    private int raceNumber = 0;
+    private LocalDateTime dateTime;
     private int noOfDrivers;
 
-    public Race(int raceNumber, String dateTime, int noOfDrivers){
+    public Race(LocalDateTime dateTime, int noOfDrivers){
         this.raceNumber = raceNumber;
         this.dateTime = dateTime;
         this.noOfDrivers = noOfDrivers;
@@ -16,7 +18,7 @@ public class Race {
         return raceNumber;
     }
 
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
@@ -29,7 +31,7 @@ public class Race {
         this.raceNumber = raceNumber;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

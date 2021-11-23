@@ -14,9 +14,11 @@ public class DriverStatsFrame implements ActionListener {
     JTable table;
 
     Formula1ChampionshipManager championship;
+    ArrayList<Formula1Driver> driverList;
 
-    public DriverStatsFrame(Formula1ChampionshipManager championship){
+    public DriverStatsFrame(Formula1ChampionshipManager championship, ArrayList<Formula1Driver> driverList){
         this.championship = championship;
+        this.driverList = driverList;
 
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tableFrame.setSize(900, 700);
@@ -64,14 +66,14 @@ public class DriverStatsFrame implements ActionListener {
         southPanel.add(backBtn, BorderLayout.CENTER);
 
         //Table
-        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed"};
+        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Current Position"};
 //        Object[][] data = {
 //                {"Bill", "Hazel", "Male", "Male", "Male", "Male", "Male"},
 //                {"Mary", "Black", "Female", "Male", "Male", "Male", "Male"},
 //                {"Rick", "Red", "Male", "Male", "Male", "Male", "Male"},
 //                {"Janice", "Yellow", "Female", "Male", "Male", "Male", "Male"},
 //        };
-        Object[][] data = new Object[championship.getDrivers().size()][7];
+        Object[][] data = new Object[championship.getDrivers().size()][8];
 
 //        for (Formula1Driver driver: drivers){
 //            int i=0;
@@ -85,14 +87,15 @@ public class DriverStatsFrame implements ActionListener {
 //            ++i;
 //        }
 
-        for (int i=0; i<championship.getDrivers().size(); i++){
-            data[i][0] = championship.getDrivers().get(i).getName();
-            data[i][1] = championship.getDrivers().get(i).getTeam();
-            data[i][2] = championship.getDrivers().get(i).getFirstPositionCount();
-            data[i][3] = championship.getDrivers().get(i).getSecondPositionCount();
-            data[i][4] = championship.getDrivers().get(i).getThirdPositionCount();
-            data[i][5] = championship.getDrivers().get(i).getPoints();
-            data[i][6] = championship.getDrivers().get(i).getRacesCount();
+        for (int i=0; i<driverList.size(); i++){
+            data[i][0] = driverList.get(i).getName();
+            data[i][1] = driverList.get(i).getTeam();
+            data[i][2] = driverList.get(i).getFirstPositionCount();
+            data[i][3] = driverList.get(i).getSecondPositionCount();
+            data[i][4] = driverList.get(i).getThirdPositionCount();
+            data[i][5] = driverList.get(i).getPoints();
+            data[i][6] = driverList.get(i).getRacesCount();
+            data[i][7] = driverList.get(i).getCurrentPositions();
         }
 
         table = new JTable(data, columnNames);
