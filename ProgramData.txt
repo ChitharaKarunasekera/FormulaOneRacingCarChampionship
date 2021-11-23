@@ -1,35 +1,7 @@
-a a a 3 3 2 171 9
-c c c 5 5 3 174 9
-a a q 0 0 0 24 2
-b b b 3 2 3 156 8
-a a q 0 0 0 24 2
-p p p 0 0 0 0 0
-c c c 5 5 3 174 9
-b b b 3 2 3 156 8
-b b b 3 2 3 156 8
-c c c 5 5 3 174 9
-c c c 5 5 3 174 9
-b b b 3 2 3 156 8
-a a q 0 0 0 24 2
-c c c 5 5 3 174 9
-b b b 3 2 3 156 8
-p p p 0 0 0 0 0
-p p p 0 0 0 0 0
-a a q 0 0 0 24 2
-b b b 3 2 3 156 8
-p p p 0 0 0 0 0
-a a q 0 0 0 24 2
-b b b 3 2 3 156 8
-c c c 5 5 3 174 9
-c c c 5 5 3 174 9
-b b b 3 2 3 156 8
-a a q 0 0 0 24 2
-c c c 5 5 3 174 9
-b b b 3 2 3 156 8
-p p p 0 0 0 0 0
-p p p 0 0 0 0 0
-a a q 0 0 0 24 2
-b b b 3 2 3 156 8
-p p p 0 0 0 0 0
-a a q 0 0 0 24 2
-b b b 3 2 3 156 8
+Chithara Nugegoda Chithzz 0 0 0 1 3 2
+Tom Colombo Tomzz 1 0 0 2 3 4
+Jack Jaffna Jackzz 2 0 0 2 3 8
+Sam Kandy Samzz 0 1 0 4 3 1
+Max Trinco Maxzz 0 1 1 5 3 4
+Rose Kotte Rozzz 0 0 0 6 3 5
+Chanara Bandaragama Chanuzz 1 0 1 7 3 6

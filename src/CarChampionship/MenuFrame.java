@@ -10,6 +10,7 @@ import java.util.Collections;
 
 public class MenuFrame implements ActionListener{
     Formula1ChampionshipManager championship;
+    ArrayList<Formula1Driver> driverList;
 
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
@@ -26,6 +27,7 @@ public class MenuFrame implements ActionListener{
 
     public MenuFrame(Formula1ChampionshipManager championship) {
         this.championship = championship;
+        this.driverList = championship.getDrivers();
 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setSize(900, 600);
@@ -112,22 +114,24 @@ public class MenuFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
             menuFrame.dispose();
-            Collections.sort(championship.getDrivers());
-            DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
+            Collections.sort(driverList);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
 
         }
-        else if (e.getSource() == option2){
+        //********************************Every even press, gives the correct answer************************************
+        if (e.getSource() == option2){
             menuFrame.dispose();
-            Collections.reverse(championship.getDrivers());
-            DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
+            Collections.reverse(driverList);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
         }
-        //****************************** option 3 to be added *****************************
+//        //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4){
             //HOW TO ACCESS COMPLETE RACE METHOD
+            championship.raceCompleted();
         }
-        else if (e.getSource() == option4){
-            //HOW TO ACCESS COMPLETE RACE METHOD
-        }
+//        else if (e.getSource() == option5){
+//            //HOW TO ACCESS COMPLETE RACE METHOD
+//        }
     }
 
 

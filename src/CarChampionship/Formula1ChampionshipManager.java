@@ -15,6 +15,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     private boolean loadStatus = false;
 
     private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
+    private ArrayList<Race> races = new ArrayList<>();//All races held in championship
+
+    private static int totalDrivers = 0;
 
     @Override
     public void addNewDriver() {
@@ -39,13 +42,16 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
 
+        ++totalDrivers;//increase driver count by one
+
         drivers.add(new Formula1Driver(name, location, team));//create new Formula1Driver object and add to array list
         System.out.println("\nDriver was added to the championship competition!\n");
     }
 
     //Overloaded driver method to restore drivers from saved data
-    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount) {
-        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount));//create new Formula1Driver object and add to array list
+    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount, int currentPositions) {
+        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions));//create new Formula1Driver object and add to array list
+        ++totalDrivers;//increase driver count by one
     }
 
     @Override
@@ -166,7 +172,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         System.out.println("\nRace Completed!\n");
         System.out.println("Date and time of Completion : " + formatter.format(now));
+        System.out.println(totalDrivers + " Drivers participated in race.");
 
+        races.add(new Race(now, drivers.size()));//add a race to array and pass current time and total drivers participated
 
         for(Formula1Driver driver: drivers){
             driver.setCurrentPositions(drivers.size());//each driver gets a random position based on number of drivers registered to championship.
@@ -200,7 +208,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                         " " + driver.getSecondPositionCount()  +
                         " " + driver.getThirdPositionCount() +
                         " " + driver.getPoints() +
-                        " " + driver.getRacesCount()
+                        " " + driver.getRacesCount() +
+                        " " + driver.getCurrentPositions()
                 );
                 writer.write("\n");
             }
@@ -231,8 +240,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                     int thirdPositionCount = Integer.parseInt(driverData[5]);
                     int points = Integer.parseInt(driverData[6]);
                     int racesCount = Integer.parseInt(driverData[7]);
+                    int currentPositions = Integer.parseInt(driverData[8]);
 
-                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount);//pass all the info saved in each line to overloaded constructor
+                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions);//pass all the info saved in each line to overloaded constructor
 
                 }
                 reader.close();
