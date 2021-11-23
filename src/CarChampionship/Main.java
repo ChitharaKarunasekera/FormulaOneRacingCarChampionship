@@ -12,8 +12,8 @@ public class Main {
         String choice;
         String confirm;
 
-//        championship.readFromFile();
-//        System.out.println("Loaded previous data!");
+        championship.readFromFile();
+        System.out.println("Loaded previous data!");
 
         //GUI
         MenuFrame frame = new MenuFrame(championship.getDrivers());
@@ -58,7 +58,6 @@ public class Main {
             else if (choice.equalsIgnoreCase("U")){
                 championship.saveToFile();
             }
-            //******************************Does Load data have to be an Option??**************************************
             else if (choice.equalsIgnoreCase("L")){
                 System.out.println("Load");
                 championship.readFromFile();
