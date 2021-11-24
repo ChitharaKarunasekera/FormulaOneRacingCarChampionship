@@ -1,6 +1,5 @@
 package CarChampionship;
 
-import javax.xml.crypto.Data;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -177,7 +176,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         races.add(new Race(now, drivers.size()));//add a race to array and pass current time and total drivers participated
 
         for(Formula1Driver driver: drivers){
-            driver.setCurrentPositions(drivers.size());//each driver gets a random position based on number of drivers registered to championship.
+            driver.setCurrentPosition(drivers.size());//each driver gets a random position based on number of drivers registered to championship.
             driver.assigningPoints(driver.getCurrentPositions());//driver's points will be updated according to position
         }
     }
@@ -258,6 +257,13 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     }
 
+//    //set a starting position for the driver
+//    public void setStartingPositions(ArrayList<Formula1Driver> drivers){
+//        for (Formula1Driver driver: drivers){
+//            driver.setStartingPosition();
+//        }
+//    }
+
     public boolean isTeamExisting(String team) {
         for (Formula1Driver driver : drivers) {
             if (team.equalsIgnoreCase(driver.getTeam())) {
@@ -265,6 +271,21 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
         return false;//team name not found
+    }
+
+    public boolean isPositionGiven(int position) {
+        for (Formula1Driver driver : drivers) {
+            if (position == driver.getStartingPosition()) {
+                return true;//return true if position was given
+            }
+        }
+        return false;//position was not given
+    }
+
+    public void clearDriverPos(){
+        for (Formula1Driver driver: drivers){
+            driver.setStartingPosition(0);
+        }
     }
 
     //get the index of a driver
@@ -282,5 +303,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     public ArrayList<Formula1Driver> getDrivers() {
         return drivers;
+    }
+
+    public ArrayList<Race> getRaces() {
+        return races;
     }
 }

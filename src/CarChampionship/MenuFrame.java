@@ -7,19 +7,22 @@ import java.awt.event.ActionListener;
 import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class MenuFrame implements ActionListener{
+    Random rand = new Random();//to generate a random number
+
     Formula1ChampionshipManager championship;
     ArrayList<Formula1Driver> driverList;
 
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
 
-    JButton option1 = new JButton("Driver statistics in descending order of points.");
-    JButton option2 = new JButton("Driver statistics in ascending order of points.");
-    JButton option3 = new JButton("Drivers based on largest number of 1st positions.");
-    JButton option4 = new JButton("Option four");
-    JButton option5 = new JButton("Option five");
+    JButton option1 = new JButton("Driver statistics in descending order of points");
+    JButton option2 = new JButton("Driver statistics in ascending order of points");
+    JButton option3 = new JButton("Drivers based on largest number of 1st positions");
+    JButton option4 = new JButton("Complete race");
+    JButton option5 = new JButton("Complete race with race statistics");
     JButton option6 = new JButton("Option six");
     JButton option7 = new JButton("Option seven");
 
@@ -118,20 +121,36 @@ public class MenuFrame implements ActionListener{
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
 
         }
-        //********************************Every even press, gives the correct answer************************************
         if (e.getSource() == option2){
             menuFrame.dispose();
             Collections.reverse(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
+            Collections.sort(driverList);
         }
 //        //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4){
-            //HOW TO ACCESS COMPLETE RACE METHOD
             championship.raceCompleted();
+            Collections.sort(driverList);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
+            //********************* can be no 1st position, or can be a 6th pos without a 5th ********************
         }
-//        else if (e.getSource() == option5){
-//            //HOW TO ACCESS COMPLETE RACE METHOD
-//        }
+        else if (e.getSource() == option5){
+            championship.clearDriverPos();
+            for (Formula1Driver driver: driverList){
+                int position = rand.nextInt(driverList.size()) + 1;
+                //driver.setStartingPosition(driverList.size());//set a random start position for driver
+                while (championship.isPositionGiven(position)){
+                    //driver.setStartingPosition(driverList.size());//if the position was already assigned, then set a new position
+                    position = rand.nextInt(driverList.size()) + 1;
+                    System.out.println(driver.getStartingPosition());
+                }
+                driver.setStartingPosition(position);
+                System.out.println("Driver Pos: " + driver.getStartingPosition());
+            }
+            championship.raceCompleted();
+            Collections.sort(driverList);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
+        }
     }
 
 

@@ -5,20 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DriverStatsFrame implements ActionListener {
     JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
-    JLabel label = new JLabel("Statistics of Drivers");
+    JLabel tblTitle = new JLabel("Statistics of Drivers");
     JButton backBtn = new JButton("Back to Main Menu");
     JTable table;
 
     Formula1ChampionshipManager championship;
     ArrayList<Formula1Driver> driverList;
+    ArrayList<Race> races;
 
     public DriverStatsFrame(Formula1ChampionshipManager championship, ArrayList<Formula1Driver> driverList){
         this.championship = championship;
         this.driverList = driverList;
+        this.races = championship.getRaces();
 
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tableFrame.setSize(900, 700);
@@ -51,10 +52,10 @@ public class DriverStatsFrame implements ActionListener {
         tableFrame.add(centerPanel, BorderLayout.CENTER);
 
         //adding label as topic in top panel
-        label.setBounds(0,0,800,50);
-        label.setFont(new Font("Century Gothic",Font.PLAIN, 25));
-        label.setForeground(new Color(166, 166, 166));
-        northPanel.add(label);
+        tblTitle.setBounds(0,0,800,50);
+        tblTitle.setFont(new Font("Century Gothic",Font.PLAIN, 25));
+        tblTitle.setForeground(new Color(166, 166, 166));
+        northPanel.add(tblTitle);
 
         //adding back button in button panel
         backBtn.setBounds(0,25,400,50);
@@ -66,14 +67,14 @@ public class DriverStatsFrame implements ActionListener {
         southPanel.add(backBtn, BorderLayout.CENTER);
 
         //Table
-        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Current Position"};
+        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Starting Position", "Current Position"};
 //        Object[][] data = {
 //                {"Bill", "Hazel", "Male", "Male", "Male", "Male", "Male"},
 //                {"Mary", "Black", "Female", "Male", "Male", "Male", "Male"},
 //                {"Rick", "Red", "Male", "Male", "Male", "Male", "Male"},
 //                {"Janice", "Yellow", "Female", "Male", "Male", "Male", "Male"},
 //        };
-        Object[][] data = new Object[championship.getDrivers().size()][8];
+        Object[][] data = new Object[championship.getDrivers().size()][9];
 
 //        for (Formula1Driver driver: drivers){
 //            int i=0;
@@ -95,16 +96,25 @@ public class DriverStatsFrame implements ActionListener {
             data[i][4] = driverList.get(i).getThirdPositionCount();
             data[i][5] = driverList.get(i).getPoints();
             data[i][6] = driverList.get(i).getRacesCount();
-            data[i][7] = driverList.get(i).getCurrentPositions();
+            data[i][7] = driverList.get(i).getStartingPosition();
+            data[i][8] = driverList.get(i).getCurrentPositions();
         }
 
         table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(770, 480));//width and height of table
+        table.setPreferredScrollableViewportSize(new Dimension(770, 400));//width and height of table
         table.isEditing();
 
         //scroll pane
         JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
         centerPanel.add(scrollPane);//table is inside scroll pane
+
+        //adding label as topic in top panel
+        //JLabel raceNo = new JLabel("Race ID : " + Race.raceNumber + "\n" + "Date and Time : " + races.get(races.size()-1).getDateTime());
+        JLabel raceNo = new JLabel("<html><p>Race ID : " + Race.raceNumber + "</p> <p>" + "Date and Time : " + races.get(races.size()-1).getDateTime() + "</p><html>");
+        raceNo.setBounds(0,0,800,50);
+        raceNo.setFont(new Font("Century Gothic",Font.PLAIN, 20));
+        raceNo.setForeground(new Color(166, 166, 166));
+        centerPanel.add(raceNo);
 
         tableFrame.setVisible(true);
     }

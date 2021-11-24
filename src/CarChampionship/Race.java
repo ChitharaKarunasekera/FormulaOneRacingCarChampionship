@@ -1,14 +1,15 @@
 package CarChampionship;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Race {
-    private int raceNumber = 0;
+    static int raceNumber= 0;
     private LocalDateTime dateTime;
     private int noOfDrivers;
 
     public Race(LocalDateTime dateTime, int noOfDrivers){
-        this.raceNumber = raceNumber;
+        ++raceNumber;
         this.dateTime = dateTime;
         this.noOfDrivers = noOfDrivers;
     }
@@ -18,19 +19,17 @@ public class Race {
         return raceNumber;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        return formatter.format(dateTime);
     }
 
     public int getNoOfDrivers() {
         return noOfDrivers;
     }
 
-    //Setters
-    public void setRaceNumber(int raceNumber) {
-        this.raceNumber = raceNumber;
-    }
 
+    //setters
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
