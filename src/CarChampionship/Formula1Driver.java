@@ -1,4 +1,5 @@
 package CarChampionship;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Formula1Driver extends Driver implements Comparable<Formula1Driver>{
@@ -9,6 +10,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     private int points;
     private int racesCount;
     private int currentPosition;
+    private int startingPosition;
 
     Random rand = new Random();//to generate a random number
 
@@ -80,10 +82,22 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     }
 
     //Once a race is completed, the driver will be awarded a random position according to the count of drivers participated
-    public void setCurrentPositions(int countOfDrivers){
+    public void setCurrentPosition(int countOfDrivers){
         this.currentPosition = rand.nextInt(countOfDrivers)+1;
     }
 
+//    public void setStartingPosition(int startingPosition) {
+//        this.startingPosition = startingPosition;
+//    }
+
+    //set a starting position for the driver
+    public void setStartingPosition(int startingPosition){
+        this.startingPosition = startingPosition;
+    }
+
+    public int getStartingPosition(){
+        return this.startingPosition;
+    }
 
     //Method to increase the count of points according to driver's position
     public void assigningPoints(int position) {
