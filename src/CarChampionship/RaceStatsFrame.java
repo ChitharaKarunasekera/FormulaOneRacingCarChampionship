@@ -48,7 +48,7 @@ public class RaceStatsFrame {
 
         //Table
         String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Starting Position", "Current Position"};
-        Object[][] data = new Object[championship.getDrivers().size()][9];
+        Object[][] data = new Object[1][9];
 
 //        for (int i=0; i<driverList.size(); i++){
 //            data[i][0] = driverList.get(i).getName();
