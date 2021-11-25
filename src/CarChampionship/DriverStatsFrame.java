@@ -68,25 +68,9 @@ public class DriverStatsFrame implements ActionListener {
 
         //Table
         String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Starting Position", "Current Position"};
-//        Object[][] data = {
-//                {"Bill", "Hazel", "Male", "Male", "Male", "Male", "Male"},
-//                {"Mary", "Black", "Female", "Male", "Male", "Male", "Male"},
-//                {"Rick", "Red", "Male", "Male", "Male", "Male", "Male"},
-//                {"Janice", "Yellow", "Female", "Male", "Male", "Male", "Male"},
-//        };
+
         Object[][] data = new Object[championship.getDrivers().size()][9];
 
-//        for (Formula1Driver driver: drivers){
-//            int i=0;
-//            data[i][0] = driver.getName();
-//            data[i][1] = driver.getTeam();
-//            data[i][2] = driver.getFirstPositionCount();
-//            data[i][3] = driver.getSecondPositionCount();
-//            data[i][4] = driver.getThirdPositionCount();
-//            data[i][5] = driver.getPoints();
-//            data[i][6] = driver.getRacesCount();
-//            ++i;
-//        }
 
         for (int i=0; i<driverList.size(); i++){
             data[i][0] = driverList.get(i).getName();
@@ -109,8 +93,7 @@ public class DriverStatsFrame implements ActionListener {
         centerPanel.add(scrollPane);//table is inside scroll pane
 
         //adding label as topic in top panel
-        //JLabel raceNo = new JLabel("Race ID : " + Race.raceNumber + "\n" + "Date and Time : " + races.get(races.size()-1).getDateTime());
-        JLabel raceNo = new JLabel("<html><p>Race ID : " + Race.raceNumber + "</p> <p>" + "Date and Time : " + races.get(races.size()-1).getDateTime() + "</p><html>");
+        JLabel raceNo = new JLabel("<html><p>Race Number : " + Race.raceNumber + "</p> <p>" + "Date and Time : " + races.get(races.size()-1).getDateTime() + "</p><html>");
         raceNo.setBounds(0,0,800,50);
         raceNo.setFont(new Font("Century Gothic",Font.PLAIN, 20));
         raceNo.setForeground(new Color(166, 166, 166));
