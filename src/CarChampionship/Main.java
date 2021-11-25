@@ -1,5 +1,4 @@
 package CarChampionship;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -25,7 +24,7 @@ public class Main {
                     "C - Change team \n" +
                     "V - View drive's statistics\n" +
                     "T - Display the Formula 1 Driver CarChampionship.Table\n" +
-                    "S - Complete Race and Show Statistics\n" +
+                    "R - Complete Race and Show Statistics\n" +
                     "U - Upload data to file\n" +
                     "L - Load data from file\n" +
                     "Q - Quit");
@@ -52,7 +51,7 @@ public class Main {
                 System.out.println("\nFormula 1 Driver CarChampionship.Table.");
                 championship.displayAllDrivers();
             }
-            else if (choice.equalsIgnoreCase("S")){
+            else if (choice.equalsIgnoreCase("R")){
                 championship.raceCompleted();
             }
             else if (choice.equalsIgnoreCase("U")){
