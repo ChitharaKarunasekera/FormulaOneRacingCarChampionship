@@ -11,6 +11,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     private int racesCount;
     private int currentPosition;
     private int startingPosition;
+    private int raceParticipated;
 
     Random rand = new Random();//to generate a random number
 
@@ -59,6 +60,8 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         return currentPosition;
     }
 
+    public int getRaceParticipated() { return raceParticipated; }
+
 
     //Setter Methods
     public void setFirstPositionCount(int firstPositionCount) {
@@ -81,9 +84,11 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = count;
     }
 
+    public void setRaceParticipated(int raceParticipated) { this.raceParticipated = raceParticipated; }
+
     //Once a race is completed, the driver will be awarded a random position according to the count of drivers participated
-    public void setCurrentPosition(int countOfDrivers){
-        this.currentPosition = rand.nextInt(countOfDrivers)+1;
+    public void setCurrentPosition(int currentPosition){
+        this.currentPosition = currentPosition;
     }
 
 //    public void setStartingPosition(int startingPosition) {
