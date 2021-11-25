@@ -92,12 +92,12 @@ public class DriverStatsFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
         centerPanel.add(scrollPane);//table is inside scroll pane
 
-        //adding label as topic in top panel
-        JLabel raceNo = new JLabel("<html><p>Race Number : " + Race.raceNumber + "</p> <p>" + "Date and Time : " + races.get(races.size()-1).getDateTime() + "</p><html>");
-        raceNo.setBounds(0,0,800,50);
-        raceNo.setFont(new Font("Century Gothic",Font.PLAIN, 20));
-        raceNo.setForeground(new Color(166, 166, 166));
-        centerPanel.add(raceNo);
+//        //adding label as topic in top panel
+//        JLabel raceNo = new JLabel("<html><p>Race Number : " + Race.raceNumber + "</p> <p>" + "Date and Time : " + races.get(races.size()-1).getDateTime() + "</p><html>");
+//        raceNo.setBounds(0,0,800,50);
+//        raceNo.setFont(new Font("Century Gothic",Font.PLAIN, 20));
+//        raceNo.setForeground(new Color(166, 166, 166));
+//        centerPanel.add(raceNo);
 
         tableFrame.setVisible(true);
     }
