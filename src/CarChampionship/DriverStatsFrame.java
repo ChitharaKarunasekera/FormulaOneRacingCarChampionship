@@ -80,7 +80,12 @@ public class DriverStatsFrame implements ActionListener {
             data[i][4] = driverList.get(i).getThirdPositionCount();
             data[i][5] = driverList.get(i).getPoints();
             data[i][6] = driverList.get(i).getRacesCount();
-            data[i][7] = driverList.get(i).getStartingPosition();
+            if (driverList.get(i).getStartingPosition() == 0){
+                data[i][7] = "N/A";
+            }
+            else {
+                data[i][7] = driverList.get(i).getStartingPosition();
+            }
             data[i][8] = driverList.get(i).getCurrentPositions();
         }
 
