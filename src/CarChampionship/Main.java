@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Formula1ChampionshipManager championship = new Formula1ChampionshipManager();//Instance of formula 1 championship race
+        Formula1ChampionshipManager championship = new Formula1ChampionshipManager();//New formula 1 championship race
 
         String choice;
         String confirm;
