@@ -115,26 +115,29 @@ public class MenuFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == option1){
-            menuFrame.dispose();
-            Collections.sort(driverList);
-            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
+            menuFrame.dispose();//dispose current frame
+            Collections.sort(driverList);//sort drivers in ascending order of points
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);//open new driver table frame
 
         }
         if (e.getSource() == option2){
             menuFrame.dispose();
-            Collections.reverse(driverList);
+            Collections.reverse(driverList);//sort drivers in descending order of points
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
-            Collections.sort(driverList);
+            Collections.sort(driverList);//arrange array back in ascending order of points
         }
 //        //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4){
-            championship.raceCompleted();
+            championship.clearDriverPos();//clear driver start positions if given
+            championship.generateRace();//auto generate a race and assign random positions for drivers
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
             //********************* can be no 1st position, or can be a 6th pos without a 5th ********************
         }
         else if (e.getSource() == option5){
-            championship.clearDriverPos();
+            championship.clearDriverPos();//clear current start positions
+
+            //generate random start positions for each driver without position repetition
             for (Formula1Driver driver: driverList){
                 int position = rand.nextInt(driverList.size()) + 1;
                 //driver.setStartingPosition(driverList.size());//set a random start position for driver
@@ -146,7 +149,8 @@ public class MenuFrame implements ActionListener{
                 driver.setStartingPosition(position);
                 System.out.println("Driver Pos: " + driver.getStartingPosition());
             }
-            championship.raceCompleted();
+
+            championship.generateRace();
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship, driverList);
         }

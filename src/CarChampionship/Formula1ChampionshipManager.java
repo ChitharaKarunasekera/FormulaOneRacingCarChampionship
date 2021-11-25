@@ -2,6 +2,7 @@ package CarChampionship;
 
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -204,26 +205,30 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             System.out.println("\nRace inserted successfully!");
             System.out.println("Date and time: " + formatter);
             System.out.println("Number of drivers participated: " + driverCount);
+            System.out.println("Race number: " + Race.raceNumber);
         }
         else {
             System.out.println("No drivers have participated. Race was not inserted!");
         }
     }
 
-    public void raceCompleted() {
+    public void generateRace() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
+        Random rand = new Random();
+
+        for(Formula1Driver driver: drivers){
+            //************************************* may have 6th pos without a 5th *************************************
+            int position = rand.nextInt(drivers.size()) + 1;
+            driver.setCurrentPosition(position);//each driver gets a random position based on number of drivers registered to championship.
+            driver.assigningPoints(driver.getCurrentPositions());//driver's points will be updated according to position
+        }
 
         System.out.println("\nRace Completed!\n");
         System.out.println("Date and time of Completion : " + formatter.format(now));
         System.out.println(totalDrivers + " Drivers participated in race.");
 
         races.add(new Race(now, drivers.size()));//add a race to array and pass current time and total drivers participated
-
-        for(Formula1Driver driver: drivers){
-            driver.setCurrentPosition(drivers.size());//each driver gets a random position based on number of drivers registered to championship.
-            driver.assigningPoints(driver.getCurrentPositions());//driver's points will be updated according to position
-        }
     }
 
     @Override
