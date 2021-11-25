@@ -165,6 +165,51 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     }
 
     @Override
+    public void insertRace() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        String choice;
+        String team;
+        int position;
+        int driverCount = 0;
+
+        //Collect driver statistics
+        while (true) {
+            System.out.print("\nEnter driver's statistics (Y/N)?");
+            choice = input.next();
+
+            if (choice.equalsIgnoreCase("Y")) {
+                System.out.print("Enter team name: ");
+                team = input.next();
+
+                //Get and assign points to driver if team exists, and assign points accordingly
+                if (isTeamExisting(team)) {
+                    System.out.print("Enter position won: ");
+                    position = input.nextInt();
+                    drivers.get(getDriverIndex(team)).setCurrentPosition(position);
+                    drivers.get(getDriverIndex(team)).assigningPoints(position);
+                    //drivers.get(get)
+                    ++ driverCount;
+                } else {
+                    System.out.println("Sorry, team not found!");//inform user that team was not found
+                }
+            } else {
+                break;
+            }
+        }
+
+        if (driverCount > 0){
+            races.add(new Race(now, driverCount));
+            System.out.println("\nRace inserted successfully!");
+            System.out.println("Date and time: " + formatter);
+            System.out.println("Number of drivers participated: " + driverCount);
+        }
+        else {
+            System.out.println("No drivers have participated. Race was not inserted!");
+        }
+    }
+
     public void raceCompleted() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();

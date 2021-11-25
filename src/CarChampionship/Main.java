@@ -52,7 +52,7 @@ public class Main {
                 championship.displayAllDrivers();
             }
             else if (choice.equalsIgnoreCase("R")){
-                championship.raceCompleted();
+                championship.insertRace();
             }
             else if (choice.equalsIgnoreCase("U")){
                 championship.saveToFile();
