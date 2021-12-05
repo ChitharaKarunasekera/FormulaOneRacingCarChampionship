@@ -201,11 +201,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
 
         if (driverCount > 0){
-            races.add(new Race(now, driverCount));
+            races.add(new Race(now, driverCount, drivers));
             System.out.println("\nRace inserted successfully!");
             System.out.println("Date and time: " + formatter);
             System.out.println("Number of drivers participated: " + driverCount);
-            System.out.println("Race number: " + Race.raceNumber);
+            System.out.println("Race number: " + Race.noOfRaces);
         }
         else {
             System.out.println("No drivers have participated. Race was not inserted!");
@@ -228,29 +228,35 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println("Date and time of Completion : " + formatter.format(now));
         System.out.println(totalDrivers + " Drivers participated in race.");
 
-        races.add(new Race(now, drivers.size()));//add a race to array and pass current time and total drivers participated
+        races.add(new Race(now, drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
     }
 
     @Override
     public void saveToFile() {
         //Creating file if not existing
         try{
-            File dataFile = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-            if (dataFile.createNewFile()) {
-                System.out.println("File created: " + dataFile.getName());
+            File dataFileDrivers = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+            File dataFileRaces = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
+
+            if (dataFileDrivers.createNewFile()) {
+                System.out.println("File created: " + dataFileDrivers.getName());
+            }
+            if (dataFileRaces.createNewFile()) {
+                System.out.println("File created: " + dataFileRaces.getName());
             }
         }catch(IOException e){
-            System.out.println("An error occurred. Could not create file!");
+            System.out.println("An error occurred. Could not create files!");
             e.printStackTrace();
         }
 
         //Writing data to file.
         try{
+            FileWriter writerDriver = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
+            FileWriter writerRace = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
 
-            FileWriter writer = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-
+            //Store Driver Data
             for (Formula1Driver driver : drivers) {
-                writer.write(driver.getName() +
+                writerDriver.write(driver.getName() +
                         " "  + driver.getLocation() +
                         " "  + driver.getTeam() +
                         " "  + driver.getFirstPositionCount() +
@@ -260,10 +266,23 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                         " " + driver.getRacesCount() +
                         " " + driver.getCurrentPositions()
                 );
-                writer.write("\n");
+                writerDriver.write("\n");
             }
-            writer.close();
+            writerDriver.close();
             System.out.println("\nSuccessfully uploaded data to file.");
+
+            //Store Race Data
+            for (Race race : races) {
+                writerRace.write(race.getDateTime() +
+                        " "  + race.getNoOfDrivers()
+                );
+
+                writerRace.write("\n");
+            }
+            writerRace.write(Race.noOfRaces);
+            writerDriver.close();
+            System.out.println("\nSuccessfully uploaded data to file.");
+
         }catch(IOException e){
             System.out.println("An error occurred. Could not upload data to file!");
             e.printStackTrace();
@@ -301,6 +320,36 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                 System.out.println("An error occurred. Could not load precious data!");
                 e.printStackTrace();
             }
+
+//            try {
+//                File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
+//                Scanner reader = new Scanner(data);
+//                while (reader.hasNextLine()) {
+//                    String line = reader.nextLine();
+//                    String[] raceData = line.trim().split("\\s+");//split each set of characters till a space is found
+//
+//                    String dateTime = raceData[0];
+//                    String location = driverData[1];
+//                    String team = driverData[2];
+//                    int firstPositionCount = Integer.parseInt(driverData[3]);
+//                    int secondPositionCount = Integer.parseInt(driverData[4]);
+//                    int thirdPositionCount = Integer.parseInt(driverData[5]);
+//                    int points = Integer.parseInt(driverData[6]);
+//                    int racesCount = Integer.parseInt(driverData[7]);
+//                    int currentPositions = Integer.parseInt(driverData[8]);
+//
+//
+//                    races.add(new Race())
+//                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions);//pass all the info saved in each line to overloaded constructor
+//
+//                }
+//                reader.close();
+//                loadStatus = true;
+//                System.out.println("Successfully loaded data!");
+//            } catch (IOException e) {
+//                System.out.println("An error occurred. Could not load precious data!");
+//                e.printStackTrace();
+//            }
         }
         else {
             System.out.println("Data already loaded!");

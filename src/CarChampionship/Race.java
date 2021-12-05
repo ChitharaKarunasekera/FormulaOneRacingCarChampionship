@@ -2,21 +2,23 @@ package CarChampionship;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Race { //implements Comparable<Race>
-    static int raceNumber= 0;
+    static int noOfRaces = 0;
     private LocalDateTime dateTime;
     private int noOfDrivers;
+    private ArrayList<Formula1Driver> driverList;
 
-    public Race(LocalDateTime dateTime, int noOfDrivers){
-        ++raceNumber;
+    public Race(LocalDateTime dateTime, int noOfDrivers, ArrayList<Formula1Driver> driverList){
+        ++noOfRaces;
         this.dateTime = dateTime;
         this.noOfDrivers = noOfDrivers;
     }
 
     //Getters
-    public int getRaceNumber() {
-        return raceNumber;
+    public int getNofRaces() {
+        return noOfRaces;
     }
 
     public String getDateTime() {
@@ -37,6 +39,7 @@ public class Race { //implements Comparable<Race>
     public void setNoOfDrivers(int noOfDrivers) {
         this.noOfDrivers = noOfDrivers;
     }
+
 
 
 //    @Override

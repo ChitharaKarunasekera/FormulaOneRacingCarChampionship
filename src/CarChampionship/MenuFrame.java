@@ -21,9 +21,9 @@ public class MenuFrame implements ActionListener {
     JButton option1 = new JButton("Driver statistics in descending order of points");
     JButton option2 = new JButton("Driver statistics in ascending order of points");
     JButton option3 = new JButton("Drivers based on largest number of 1st positions");
-    JButton option4 = new JButton("Complete race");
-    JButton option5 = new JButton("Complete race with race statistics");
-    JButton option6 = new JButton("Completed Races");
+    JButton option4 = new JButton("Generate race");
+    JButton option5 = new JButton("Generate race with race statistics");
+    JButton option6 = new JButton("Completed races");
     JButton option7 = new JButton("Option seven");
 
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
@@ -38,6 +38,7 @@ public class MenuFrame implements ActionListener {
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
+        menuFrame.setLocationRelativeTo(null);//open frame in center of screen
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
 
 
@@ -129,6 +130,7 @@ public class MenuFrame implements ActionListener {
         }
 //        //****************************** option 3 to be added *****************************
         else if (e.getSource() == option4) {
+            menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear driver start positions if given
             championship.generateRace();//auto generate a race and assign random positions for drivers
             Collections.sort(driverList);

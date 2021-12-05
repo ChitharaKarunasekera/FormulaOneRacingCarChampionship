@@ -1,28 +1,34 @@
 package CarChampionship;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class RacesFrame implements ActionListener {
+    int number = 1;
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Completed Races");
     JButton backBtn = new JButton("Back to Main Menu");
+
     Formula1ChampionshipManager championship;
     ArrayList<Race> racesList;
+
+    //Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
 
     public RacesFrame(Formula1ChampionshipManager championship){
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(900, 600);
+        menuFrame.setSize(500, 700);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
+        menuFrame.setLocationRelativeTo(null);//open frame in center of screen
 
 
         JPanel northPanel = new JPanel();
@@ -38,8 +44,8 @@ public class RacesFrame implements ActionListener {
         centerPanel.setBackground(new Color(72, 72, 73));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
-        westPanel.setPreferredSize(new Dimension(100, 100));
-        eastPanel.setPreferredSize(new Dimension(100, 100));
+        westPanel.setPreferredSize(new Dimension(50, 100));
+        eastPanel.setPreferredSize(new Dimension(50, 100));
         southPanel.setPreferredSize(new Dimension(100, 50));
         centerPanel.setPreferredSize(new Dimension(100, 100));
 
@@ -60,8 +66,8 @@ public class RacesFrame implements ActionListener {
 
         centerNorth.setPreferredSize(new Dimension(25, 25));
         centerSouth.setPreferredSize(new Dimension(25, 25));
-        centerWest.setPreferredSize(new Dimension(200, 25));
-        centerEast.setPreferredSize(new Dimension(200, 25));
+        centerWest.setPreferredSize(new Dimension(35, 25));
+        centerEast.setPreferredSize(new Dimension(35, 25));
         centerCenter.setPreferredSize(new Dimension(25, 25));
 
         centerPanel.add(centerNorth, BorderLayout.NORTH);
@@ -85,12 +91,13 @@ public class RacesFrame implements ActionListener {
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         for (Race thisRace: racesList){
-            JLabel label = new JLabel(thisRace.getRaceNumber() + " on " + thisRace.getDateTime());
+            JLabel label = new JLabel(" Race " + number + " on " + thisRace.getDateTime());
 
-            //label.setFocusable(false);//remove broader around text
             label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-            label.setForeground(new Color(6, 6, 6));
+            label.setForeground(new Color(166, 166, 166));
             centerCenter.add(label);
+            //label.setBorder(border);// set the border of this component
+            ++number;
         }
 
 
