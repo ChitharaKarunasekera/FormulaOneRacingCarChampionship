@@ -16,9 +16,9 @@ public class DriverStatsFrame implements ActionListener {
     ArrayList<Formula1Driver> driverList;
     ArrayList<Race> races;
 
-    public DriverStatsFrame(Formula1ChampionshipManager championship, ArrayList<Formula1Driver> driverList){
+    public DriverStatsFrame(Formula1ChampionshipManager championship){
         this.championship = championship;
-        this.driverList = driverList;
+        this.driverList = championship.getDrivers();//driver list from championship manager class
         this.races = championship.getRaces();
 
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
