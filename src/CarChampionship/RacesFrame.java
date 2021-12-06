@@ -91,7 +91,7 @@ public class RacesFrame implements ActionListener {
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         for (Race thisRace: racesList){
-            JLabel label = new JLabel(" Race " + number + " on " + thisRace.getDateTime());
+            JLabel label = new JLabel(" Race " + thisRace.getRaceId() + " on " + thisRace.getDateTime());
 
             label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
             label.setForeground(new Color(166, 166, 166));

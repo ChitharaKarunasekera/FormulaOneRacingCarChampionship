@@ -1,9 +1,5 @@
 package CarChampionship;
 
-import CarChampionship.Formula1ChampionshipManager;
-import CarChampionship.MenuFrame;
-import CarChampionship.Race;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,18 +11,24 @@ public class SearchRaceFrame implements ActionListener {
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Completed Races");
     JButton backBtn = new JButton("Back to Main Menu");
+    JTextField driverField = new JTextField();//adding text field
+    JButton searchBtn = new JButton("Search");
 
     Formula1ChampionshipManager championship;
     ArrayList<Race> racesList;
+    ArrayList<Formula1Driver> driverList;
+
+    String driverName;
 
     //Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
 
-    public SearchRaceFrame(Formula1ChampionshipManager championship){
+    public SearchRaceFrame(Formula1ChampionshipManager championship) {
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
+        this.driverList = championship.getDrivers();//drivers list from championship
 
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(500, 700);
+        menuFrame.setSize(700, 700);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
@@ -73,6 +75,25 @@ public class SearchRaceFrame implements ActionListener {
         centerEast.setPreferredSize(new Dimension(35, 25));
         centerCenter.setPreferredSize(new Dimension(25, 25));
 
+        //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
+        JPanel centerSubNorth = new JPanel();
+        centerSubNorth.setBackground(new Color(62, 62, 62));
+        centerSubNorth.setPreferredSize(new Dimension(100, 100));
+        centerCenter.add(centerSubNorth, BorderLayout.NORTH);
+
+
+        centerSubNorth.add(driverField);
+
+        searchBtn.setBounds(0, 25, 100, 20);
+        searchBtn.setFont(new Font("Century Gothic", Font.PLAIN, 18));
+        searchBtn.setFocusable(false);//remove broader around text
+        searchBtn.setForeground(new Color(62, 62, 62));
+        searchBtn.setBackground(new Color(166, 166, 166));
+        searchBtn.addActionListener(this);
+        centerSubNorth.add(searchBtn);
+
+        //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
+
         centerPanel.add(centerNorth, BorderLayout.NORTH);
         centerPanel.add(centerSouth, BorderLayout.SOUTH);
         centerPanel.add(centerWest, BorderLayout.WEST);
@@ -93,20 +114,16 @@ public class SearchRaceFrame implements ActionListener {
 
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
-        for (Race thisRace: racesList){
-            JLabel label = new JLabel(" Race " + number + " on " + thisRace.getDateTime());
-
-            label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-            label.setForeground(new Color(166, 166, 166));
-            centerCenter.add(label);
-            //label.setBorder(border);// set the border of this component
-            ++number;
-        }
-
+        driverField.setPreferredSize(new Dimension(200, 40));
+        driverField.setFont(new Font("Century Gothic", Font.PLAIN, 18));
+        driverField.setForeground(new Color(166, 166, 166));
+        driverField.setBackground(new Color(62, 62, 62));
+        driverField.setCaretColor(new Color(166, 166, 166));
+        centerSubNorth.add(driverField);
 
         //adding back button in button panel
-        backBtn.setBounds(0,25,400,50);
-        backBtn.setFont(new Font("Century Gothic",Font.PLAIN, 18));
+        backBtn.setBounds(0, 25, 400, 50);
+        backBtn.setFont(new Font("Century Gothic", Font.PLAIN, 18));
         backBtn.setFocusable(false);//remove broader around text
         backBtn.setForeground(new Color(62, 62, 62));
         backBtn.setBackground(new Color(166, 166, 166));
@@ -118,9 +135,36 @@ public class SearchRaceFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == backBtn){
+        if (e.getSource() == backBtn) {
             menuFrame.dispose();//close current frame
             MenuFrame menu = new MenuFrame(championship);
+        } else if (e.getSource() == searchBtn) {
+            driverName = driverField.getText();//stores name of driver
+            System.out.println(driverName);
+
+//            if (driverAvailable(driverName)) {
+                for (Formula1Driver driver : driverList) {
+                    if (driverName.equalsIgnoreCase(driver.getName())) {
+                        ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
+                        for (int raceId : raceIds) {
+                            System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
+                            System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
+                        }
+                    }
+                }
+//            }
+//            else {
+//                System.out.println("Driver not found!");
+//            }
         }
+    }
+
+    public boolean driverAvailable(String name) {
+        for (Formula1Driver driver : driverList) {
+            if (driver.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Race { //implements Comparable<Race>
+    private int raceId;
     static int noOfRaces = 0;
     private LocalDateTime dateTime;
     private int noOfDrivers;
@@ -30,6 +31,10 @@ public class Race { //implements Comparable<Race>
         return noOfDrivers;
     }
 
+    public int getRaceId(){
+        return raceId;
+    }
+
 
     //setters
     public void setDateTime(LocalDateTime dateTime) {
@@ -38,6 +43,10 @@ public class Race { //implements Comparable<Race>
 
     public void setNoOfDrivers(int noOfDrivers) {
         this.noOfDrivers = noOfDrivers;
+    }
+
+    public void setRaceId(int raceId) {
+        this.raceId = raceId;
     }
 
 

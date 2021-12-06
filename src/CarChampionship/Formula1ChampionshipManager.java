@@ -173,7 +173,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         String choice;
         String team;
         int position;
-        int driverCount = 0;
+        ArrayList<Formula1Driver> participants = new ArrayList<>();//this array contains the drivers who will be participating in race
 
         //Collect driver statistics
         while (true) {
@@ -190,8 +190,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                     position = input.nextInt();
                     drivers.get(getDriverIndex(team)).setCurrentPosition(position);
                     drivers.get(getDriverIndex(team)).assigningPoints(position);
-                    //drivers.get(get)
-                    ++ driverCount;
+                    participants.add(drivers.get(getDriverIndex(team)));//add the driver to participants array
                 } else {
                     System.out.println("Sorry, team not found!");//inform user that team was not found
                 }
@@ -200,12 +199,17 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
 
-        if (driverCount > 0){
-            races.add(new Race(now, driverCount, drivers));
+        if (participants.size() > 0){
+            races.add(new Race(now, participants.size(), participants));//adding race to races list
+            races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
             System.out.println("\nRace inserted successfully!");
             System.out.println("Date and time: " + formatter);
-            System.out.println("Number of drivers participated: " + driverCount);
-            System.out.println("Race number: " + Race.noOfRaces);
+            System.out.println("Number of drivers participated: " + participants.size());
+            System.out.println("Race ID: " + (races.get(races.size()-1).getRaceId()));//get the race id
+
+            for (Formula1Driver driver: participants){
+                driver.setRacesParticipated(races.get(races.size()-1).getRaceId());//mark the race id for every driver participated
+            }
         }
         else {
             System.out.println("No drivers have participated. Race was not inserted!");
@@ -229,6 +233,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println(totalDrivers + " Drivers participated in race.");
 
         races.add(new Race(now, drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
+        races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+
+        for (Formula1Driver driver: drivers){
+            driver.setRacesParticipated(races.get(races.size()-1).getRaceId());//mark the race id for every driver participated
+        }
     }
 
     @Override
