@@ -24,7 +24,7 @@ public class MenuFrame implements ActionListener {
     JButton option4 = new JButton("Generate race");
     JButton option5 = new JButton("Generate race with race statistics");
     JButton option6 = new JButton("Completed races");
-    JButton option7 = new JButton("Option seven");
+    JButton option7 = new JButton("Search race");
 
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
 
@@ -160,9 +160,12 @@ public class MenuFrame implements ActionListener {
         } else if (e.getSource() == option6) {
             menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear current start positions
-
-            System.out.println("RAces Frame");
             RacesFrame competedRaces = new RacesFrame(championship);
+        }
+        else if (e.getSource() == option7){
+            menuFrame.dispose();//dispose current frame
+            championship.clearDriverPos();//clear current start positions
+            SearchRaceFrame searchRaceFrame = new SearchRaceFrame(championship);
         }
     }
 }
