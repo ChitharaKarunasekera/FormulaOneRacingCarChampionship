@@ -122,7 +122,7 @@ public class MenuFrame implements ActionListener {
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);//open new driver table frame
 
         }
-        if (e.getSource() == option2) {
+        else if (e.getSource() == option2) {
             menuFrame.dispose();
             Collections.reverse(driverList);//sort drivers in descending order of points
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
