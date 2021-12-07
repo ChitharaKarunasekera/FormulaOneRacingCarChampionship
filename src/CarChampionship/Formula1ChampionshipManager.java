@@ -1,9 +1,6 @@
 package CarChampionship;
 
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.io.File;
@@ -371,6 +368,19 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 //            driver.setStartingPosition();
 //        }
 //    }
+
+    Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
+        @Override
+        public int compare(Formula1Driver o1, Formula1Driver o2) {
+            if (o1.getFirstPositionCount() > o2.getFirstPositionCount()) {
+                return -1;
+            } else if (o1.getFirstPositionCount() < o2.getFirstPositionCount()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    };
 
     public boolean isTeamExisting(String team) {
         for (Formula1Driver driver : drivers) {

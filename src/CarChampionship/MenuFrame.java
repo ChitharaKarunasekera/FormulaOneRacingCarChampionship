@@ -128,7 +128,11 @@ public class MenuFrame implements ActionListener {
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
             Collections.sort(driverList);//arrange array back in ascending order of points
         }
-//        //****************************** option 3 to be added *****************************
+        else if (e.getSource() == option3){
+            menuFrame.dispose();
+            Collections.sort(driverList, championship.comparator);
+            DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
+        }
         else if (e.getSource() == option4) {
             menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear driver start positions if given
