@@ -1,10 +1,13 @@
 package CarChampionship;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Race { //implements Comparable<Race>
+public class Race implements Serializable { //implements Comparable<Race>
+    public static final long serialVersionID = 1L;
+
     static int noOfRaces = 0;
     private LocalDateTime dateTime;
     private int noOfDrivers;

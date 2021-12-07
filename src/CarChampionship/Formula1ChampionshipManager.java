@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Formula1ChampionshipManager implements ChampionshipManager {
     private Scanner input = new Scanner(System.in);
     private boolean loadStatus = false;
+    private final String fileName = "Data";
 
     private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
     private ArrayList<Race> races = new ArrayList<>();//All races held in championship
@@ -233,21 +234,24 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         saveData.drivers = this.drivers;
         saveData.races = this.races;
 
+        //saveData.number = 4;
+
         try {
-            ResourceManager.save(saveData, "data\\1.save");
+            ResourceManager.save(saveData, fileName);
         } catch (Exception e) {
-            System.out.println("Could not save data!");
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public void readFromFile() {
         try {
-            SaveData saveData = (SaveData) ResourceManager.load("data\\1.save");
-            this.drivers = saveData.drivers;
-            this.races = saveData.races;
+            SaveData saveData = (SaveData) ResourceManager.load(fileName);
+//            this.drivers = saveData.drivers;
+//            this.races = saveData.races;
+//            System.out.println(saveData.number);
         } catch (Exception e) {
-            System.out.println("Could not load data!");
+            System.out.println(e.getMessage());
         }
     }
 
