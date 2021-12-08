@@ -13,6 +13,8 @@ public class SearchRaceFrame implements ActionListener {
     JButton backBtn = new JButton("Back to Main Menu");
     JTextField driverField = new JTextField();//adding text field
     JButton searchBtn = new JButton("Search");
+    JPanel racePanel = new JPanel();
+    JLabel raceInfo;
 
     Formula1ChampionshipManager championship;
     ArrayList<Race> racesList;
@@ -65,7 +67,7 @@ public class SearchRaceFrame implements ActionListener {
         centerSouth.setBackground(new Color(62, 62, 62));
         centerWest.setBackground(new Color(62, 62, 62));
         centerEast.setBackground(new Color(62, 62, 62));
-        centerCenter.setBackground(new Color(62, 62, 62));
+        centerCenter.setBackground(new Color(3, 252, 3 ));
 
         centerPanel.setLayout(new BorderLayout());
 
@@ -75,12 +77,36 @@ public class SearchRaceFrame implements ActionListener {
         centerEast.setPreferredSize(new Dimension(35, 25));
         centerCenter.setPreferredSize(new Dimension(25, 25));
 
+
+
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
         JPanel centerSubNorth = new JPanel();
-        centerSubNorth.setBackground(new Color(62, 62, 62));
-        centerSubNorth.setPreferredSize(new Dimension(100, 100));
-        centerCenter.add(centerSubNorth, BorderLayout.NORTH);
+        JPanel centerSubSouth = new JPanel();
+        JPanel centerSubWest = new JPanel();
+        JPanel centerSubEast = new JPanel();
+        JPanel centerSubCenter = new JPanel();
 
+        centerSubNorth.setBackground(new Color(252, 3, 3));
+        centerSubSouth.setBackground(new Color(3, 73, 252 ));
+        centerSubWest.setBackground(new Color(3, 73, 252 ));
+        centerSubEast.setBackground(new Color(3, 73, 252 ));
+        centerSubCenter.setBackground(new Color(252, 3, 248));
+
+
+        centerSubNorth.setPreferredSize(new Dimension(100, 80));
+        centerSubSouth.setPreferredSize(new Dimension(100, 50));
+        centerSubWest.setPreferredSize(new Dimension(50, 100));
+        centerSubEast.setPreferredSize(new Dimension(50, 100));
+        centerSubCenter.setPreferredSize(new Dimension(100, 100));
+
+        centerCenter.setLayout(new BorderLayout());
+
+
+        centerCenter.add(centerSubNorth, BorderLayout.NORTH);
+        centerCenter.add(centerSubSouth, BorderLayout.SOUTH);
+        centerCenter.add(centerSubWest, BorderLayout.WEST);
+        centerCenter.add(centerSubEast, BorderLayout.EAST);
+        centerCenter.add(centerSubCenter, BorderLayout.CENTER);
 
         centerSubNorth.add(driverField);
 
@@ -92,7 +118,17 @@ public class SearchRaceFrame implements ActionListener {
         searchBtn.addActionListener(this);
         centerSubNorth.add(searchBtn);
 
+        //----------------------------------------------display race info-----------------------------------------------
+        racePanel.setBackground(new Color(62, 62, 62));
+        racePanel.setPreferredSize(new Dimension(410, 370));
+        //----------------------------------------------display race info-----------------------------------------------
+
+
+        JScrollPane scrollPane = new JScrollPane(racePanel);//interest table into scroll pane
+        centerSubCenter.add(scrollPane);//table is inside scroll pane
+
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
+
 
         centerPanel.add(centerNorth, BorderLayout.NORTH);
         centerPanel.add(centerSouth, BorderLayout.SOUTH);
@@ -112,7 +148,6 @@ public class SearchRaceFrame implements ActionListener {
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
-        centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         driverField.setPreferredSize(new Dimension(200, 40));
         driverField.setFont(new Font("Century Gothic", Font.PLAIN, 18));
@@ -148,6 +183,10 @@ public class SearchRaceFrame implements ActionListener {
                         ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                         for (int raceId : raceIds) {
                             System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
+                            JLabel label = new JLabel("Race ID: " + racesList.get(raceId - 1).getRaceId());
+                            label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+                            label.setForeground(new Color(166, 166, 166));
+                            racePanel.add(label);
                             System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
                         }
                     }

@@ -1,7 +1,6 @@
 package CarChampionship;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Formula1Driver extends Driver implements Comparable<Formula1Driver>, Serializable {
@@ -15,6 +14,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     private int racesCount;
     private int currentPosition;
     private int startingPosition;
+    private boolean win;
     private ArrayList<Integer> racesParticipated = new ArrayList<>();
 
     Random rand = new Random();//to generate a random number
@@ -22,7 +22,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     //default constructor
     public Formula1Driver(String name, String location, String team) {
         super(name, location, team);//call constructor of Driver class and assign basic information
-        this.firstPositionCount = 0; //rand.nextInt(5);;
+        this.firstPositionCount = 0; //rand.nextInt(5);
         this.secondPositionCount = 0;
         this.thirdPositionCount = 0;
         this.points = 0; //rand.nextInt(3);//generates a random number between 0 - 10
@@ -64,6 +64,10 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         return currentPosition;
     }
 
+    public boolean isWin() {
+        return win;
+    }
+
     //returns races participated
     public ArrayList<Integer> getRacesParticipated() { return racesParticipated; }
 
@@ -89,6 +93,10 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = count;
     }
 
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
     public void setRacesParticipated(int raceId) {
         racesParticipated.add(raceId);//add the race id to races list
     }
@@ -97,10 +105,6 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     public void setCurrentPosition(int currentPosition){
         this.currentPosition = currentPosition;
     }
-
-//    public void setStartingPosition(int startingPosition) {
-//        this.startingPosition = startingPosition;
-//    }
 
     //set a starting position for the driver
     public void setStartingPosition(int startingPosition){

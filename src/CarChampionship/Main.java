@@ -11,10 +11,10 @@ public class Main {
         String choice;
         String confirm;
 
-        //championship.readFromFile();
+        championship.readFromFile();
         System.out.println("Loaded previous data!");
 
-        //GUI
+        //start GUI
         MenuFrame frame = new MenuFrame(championship);
 
         while (true) {
