@@ -46,11 +46,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println("\nDriver was added to the championship competition!\n");
     }
 
-    //Overloaded driver method to restore drivers from saved data
-    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount, int currentPositions) {
-        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions));//create new Formula1Driver object and add to array list
-        ++totalDrivers;//increase driver count by one
-    }
+//    //Overloaded driver method to restore drivers from saved data
+//    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount, int currentPositions) {
+//        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions));//create new Formula1Driver object and add to array list
+//        ++totalDrivers;//increase driver count by one
+//    }
 
     @Override
     public void deleteDriver() {
@@ -235,6 +235,50 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         for (Formula1Driver driver: drivers){
             driver.setRacesParticipated(races.get(races.size()-1).getRaceId());//mark the race id for every driver participated
+        }
+    }
+
+    public void positionBasedWinning(){
+        Random rand = new Random();
+        double prob;
+
+        for (Formula1Driver driver: drivers){
+            prob = rand.nextDouble();
+
+            switch (driver.getStartingPosition()){
+                case 1:
+                    if (prob < 0.4){
+                        driver.setWin(true);
+                    }
+                    break;
+                case 2:
+                    if (prob < 0.3){
+                        driver.setWin(true);
+                    }
+                    break;
+                case 3:
+                case 4:
+                    if (prob < 0.1){
+                        driver.setWin(true);
+                    }
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    if (prob < 0.02){
+                        driver.setWin(true);
+                    }
+                    break;
+                default:
+                    driver.setWin(false);
+            }
+            if (driver.getStartingPosition() == 1){
+                if (prob < 0.4){
+                    driver.setWin(true);
+                }
+            }
         }
     }
 
