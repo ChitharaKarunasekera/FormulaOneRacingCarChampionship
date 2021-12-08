@@ -188,12 +188,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                     position = input.nextInt();
                     drivers.get(getDriverIndex(team)).setCurrentPosition(position);
                     drivers.get(getDriverIndex(team)).assigningPoints(position);
-<<<<<<< HEAD
                     participants.add(drivers.get(getDriverIndex(team)));//add the driver to participants array
-=======
-                    //drivers.get(get)
-                    ++driverCount;
->>>>>>> Section3-Serialization
                 } else {
                     System.out.println("Sorry, team not found!");//inform user that team was not found
                 }
@@ -202,7 +197,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
 
-<<<<<<< HEAD
         if (participants.size() > 0){
             races.add(new Race(now, participants.size(), participants));//adding race to races list
             races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
@@ -216,15 +210,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
         else {
-=======
-        if (driverCount > 0) {
-            races.add(new Race(now, driverCount, drivers));
-            System.out.println("\nRace inserted successfully!");
-            System.out.println("Date and time: " + formatter);
-            System.out.println("Number of drivers participated: " + driverCount);
-            System.out.println("Race number: " + Race.noOfRaces);
-        } else {
->>>>>>> Section3-Serialization
             System.out.println("No drivers have participated. Race was not inserted!");
         }
     }
@@ -280,7 +265,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     }
 
-<<<<<<< HEAD
+
 //    //set a starting position for the driver
 //    public void setStartingPositions(ArrayList<Formula1Driver> drivers){
 //        for (Formula1Driver driver: drivers){
@@ -301,8 +286,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     };
 
-=======
->>>>>>> Section3-Serialization
     public boolean isTeamExisting(String team) {
         for (Formula1Driver driver : drivers) {
             if (team.equalsIgnoreCase(driver.getTeam())) {

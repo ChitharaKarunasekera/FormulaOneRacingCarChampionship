@@ -5,14 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-public class Race{ //implements Comparable<Race>
-    private int raceId;
-=======
 public class Race implements Serializable { //implements Comparable<Race>
     public static final long serialVersionID = 1L;
 
->>>>>>> Section3-Serialization
+    private int raceId;
     static int noOfRaces = 0;
     private LocalDateTime dateTime;
     private int noOfDrivers;
