@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
-
-
 public class Race implements Serializable { //implements Comparable<Race>
     public static final long serialVersionID = 1L;
 

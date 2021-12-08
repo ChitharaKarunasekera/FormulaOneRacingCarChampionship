@@ -120,7 +120,6 @@ public class MenuFrame implements ActionListener {
             menuFrame.dispose();//dispose current frame
             Collections.sort(driverList);//sort drivers in ascending order of points
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);//open new driver table frame
-
         }
         else if (e.getSource() == option2) {
             menuFrame.dispose();
@@ -139,7 +138,6 @@ public class MenuFrame implements ActionListener {
             championship.generateRace();//auto generate a race and assign random positions for drivers
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
-            //********************* can be no 1st position, or can be a 6th pos without a 5th ********************
         } else if (e.getSource() == option5) {
             menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear current start positions
@@ -152,11 +150,17 @@ public class MenuFrame implements ActionListener {
                     //driver.setStartingPosition(driverList.size());//if the position was already assigned, then set a new position
                     position = rand.nextInt(driverList.size()) + 1;
                 }
-                driver.setStartingPosition(position);
+                driver.setStartingPosition(position);//assign unique start position for all drivers
+
                 System.out.println("Driver Pos: " + driver.getStartingPosition());
             }
 
+            //make driver win based on a probability according to given start positions
+            championship.positionBasedWinning();
+
+            //Generate a rae
             championship.generateRace();
+
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
         } else if (e.getSource() == option6) {

@@ -3,9 +3,7 @@ package CarChampionship;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
 
 public class Formula1ChampionshipManager implements ChampionshipManager {
     private Scanner input = new Scanner(System.in);
@@ -46,11 +44,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println("\nDriver was added to the championship competition!\n");
     }
 
-//    //Overloaded driver method to restore drivers from saved data
-//    public void addNewDriver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount, int currentPositions) {
-//        drivers.add(new Formula1Driver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions));//create new Formula1Driver object and add to array list
-//        ++totalDrivers;//increase driver count by one
-//    }
 
     @Override
     public void deleteDriver() {
@@ -145,8 +138,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     @Override
     public void displayAllDrivers() {
 
-        //System.out.println("|  Driver Name  |  Team Name  |  1st positions  |  2nd positions  |  3rd positions  |  Total points  |  Completed Races  |\n");
-
         //Sort the drivers in Descending order of their points
         Collections.sort(drivers);
 
@@ -220,9 +211,15 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         Random rand = new Random();
 
         for (Formula1Driver driver : drivers) {
-            //************************************* may have 6th pos without a 5th *************************************
-            int position = rand.nextInt(drivers.size()) + 1;
-            driver.setCurrentPosition(position);//each driver gets a random position based on number of drivers registered to championship.
+            //if a driver gets win, then driver gets 1st position
+            //driver's points will be updated according to position
+            if (driver.isWin()){
+                driver.setCurrentPosition(1);
+            }
+            else {
+                int position = rand.nextInt(drivers.size()) + 1;
+                driver.setCurrentPosition(position);//each driver gets a random position based on number of drivers registered to championship.
+            }
             driver.assigningPoints(driver.getCurrentPositions());//driver's points will be updated according to position
         }
 
@@ -308,13 +305,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             System.out.println(e.getMessage());
         }
     }
-
-//    //set a starting position for the driver
-//    public void setStartingPositions(ArrayList<Formula1Driver> drivers){
-//        for (Formula1Driver driver: drivers){
-//            driver.setStartingPosition();
-//        }
-//    }
 
     Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
         @Override
