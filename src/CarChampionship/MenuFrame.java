@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import javax.swing.border.Border;
+import javax.swing.border.SoftBevelBorder;
 
 public class MenuFrame implements ActionListener {
     Random rand = new Random();//to generate a random number
@@ -39,6 +41,7 @@ public class MenuFrame implements ActionListener {
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
         menuFrame.setLocationRelativeTo(null);//open frame in center of screen
+        menuFrame.setResizable(false);
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
 
 
@@ -95,7 +98,7 @@ public class MenuFrame implements ActionListener {
         menuFrame.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
@@ -105,7 +108,7 @@ public class MenuFrame implements ActionListener {
             option.setFocusable(false);//remove broader around text
             option.setFont(new Font("Century Gothic", Font.PLAIN, 20));
             option.setForeground(new Color(62, 62, 62));
-            option.setBackground(new Color(166, 166, 166));
+            option.setBackground(new Color(245, 220, 0));
             centerCenter.add(option);
             option.addActionListener(this);
         }
