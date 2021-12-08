@@ -255,14 +255,14 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     @Override
     public void readFromFile() {
-        try {
-            SaveData saveData = (SaveData) ResourceManager.load(fileName);
-            this.drivers = saveData.drivers;
-            this.races = saveData.races;
-//            System.out.println(saveData.number);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            SaveData saveData = (SaveData) ResourceManager.load(fileName);
+//            this.drivers = saveData.drivers;
+//            this.races = saveData.races;
+////            System.out.println(saveData.number);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
 //    //set a starting position for the driver
