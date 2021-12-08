@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Formula1ChampionshipManager implements ChampionshipManager {
     private Scanner input = new Scanner(System.in);
     private boolean loadStatus = false;
+    private final String fileName = "Data";
 
     private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
     private ArrayList<Race> races = new ArrayList<>();//All races held in championship
@@ -187,7 +188,12 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                     position = input.nextInt();
                     drivers.get(getDriverIndex(team)).setCurrentPosition(position);
                     drivers.get(getDriverIndex(team)).assigningPoints(position);
+<<<<<<< HEAD
                     participants.add(drivers.get(getDriverIndex(team)));//add the driver to participants array
+=======
+                    //drivers.get(get)
+                    ++driverCount;
+>>>>>>> Section3-Serialization
                 } else {
                     System.out.println("Sorry, team not found!");//inform user that team was not found
                 }
@@ -196,6 +202,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
 
+<<<<<<< HEAD
         if (participants.size() > 0){
             races.add(new Race(now, participants.size(), participants));//adding race to races list
             races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
@@ -209,6 +216,15 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
         else {
+=======
+        if (driverCount > 0) {
+            races.add(new Race(now, driverCount, drivers));
+            System.out.println("\nRace inserted successfully!");
+            System.out.println("Date and time: " + formatter);
+            System.out.println("Number of drivers participated: " + driverCount);
+            System.out.println("Race number: " + Race.noOfRaces);
+        } else {
+>>>>>>> Section3-Serialization
             System.out.println("No drivers have participated. Race was not inserted!");
         }
     }
@@ -218,7 +234,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
 
-        for(Formula1Driver driver: drivers){
+        for (Formula1Driver driver : drivers) {
             //************************************* may have 6th pos without a 5th *************************************
             int position = rand.nextInt(drivers.size()) + 1;
             driver.setCurrentPosition(position);//each driver gets a random position based on number of drivers registered to championship.
@@ -239,129 +255,32 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
     @Override
     public void saveToFile() {
-        //Creating file if not existing
-        try{
-            File dataFileDrivers = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-            File dataFileRaces = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
+        SaveData saveData = new SaveData();
+        saveData.drivers = this.drivers;
+        saveData.races = this.races;
 
-            if (dataFileDrivers.createNewFile()) {
-                System.out.println("File created: " + dataFileDrivers.getName());
-            }
-            if (dataFileRaces.createNewFile()) {
-                System.out.println("File created: " + dataFileRaces.getName());
-            }
-        }catch(IOException e){
-            System.out.println("An error occurred. Could not create files!");
-            e.printStackTrace();
-        }
+        //saveData.number = 4;
 
-        //Writing data to file.
-        try{
-            FileWriter writerDriver = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-            FileWriter writerRace = new FileWriter("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
-
-            //Store Driver Data
-            for (Formula1Driver driver : drivers) {
-                writerDriver.write(driver.getName() +
-                        " "  + driver.getLocation() +
-                        " "  + driver.getTeam() +
-                        " "  + driver.getFirstPositionCount() +
-                        " " + driver.getSecondPositionCount()  +
-                        " " + driver.getThirdPositionCount() +
-                        " " + driver.getPoints() +
-                        " " + driver.getRacesCount() +
-                        " " + driver.getCurrentPositions()
-                );
-                writerDriver.write("\n");
-            }
-            writerDriver.close();
-            System.out.println("\nSuccessfully uploaded data to file.");
-
-            //Store Race Data
-            for (Race race : races) {
-                writerRace.write(race.getDateTime() +
-                        " "  + race.getNoOfDrivers()
-                );
-
-                writerRace.write("\n");
-            }
-            writerRace.write(Race.noOfRaces);
-            writerDriver.close();
-            System.out.println("\nSuccessfully uploaded data to file.");
-
-        }catch(IOException e){
-            System.out.println("An error occurred. Could not upload data to file!");
-            e.printStackTrace();
+        try {
+            ResourceManager.save(saveData, fileName);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public void readFromFile() {
-        if (!loadStatus) {
-            //Load data from file
-            try {
-                File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\ProgramData.txt");//File location
-                Scanner reader = new Scanner(data);
-                while (reader.hasNextLine()) {
-                    String line = reader.nextLine();
-                    String[] driverData = line.trim().split("\\s+");//split each set of characters till a space is found
-
-                    String name = driverData[0];
-                    String location = driverData[1];
-                    String team = driverData[2];
-                    int firstPositionCount = Integer.parseInt(driverData[3]);
-                    int secondPositionCount = Integer.parseInt(driverData[4]);
-                    int thirdPositionCount = Integer.parseInt(driverData[5]);
-                    int points = Integer.parseInt(driverData[6]);
-                    int racesCount = Integer.parseInt(driverData[7]);
-                    int currentPositions = Integer.parseInt(driverData[8]);
-
-                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions);//pass all the info saved in each line to overloaded constructor
-
-                }
-                reader.close();
-                loadStatus = true;
-                System.out.println("Successfully loaded data!");
-            } catch (IOException e) {
-                System.out.println("An error occurred. Could not load precious data!");
-                e.printStackTrace();
-            }
-
-//            try {
-//                File data = new File("D:\\IIT\\2021-2022 Level 5\\OOP\\Course Work\\FormulaOneRacingCarChampionship\\RaceData.txt");//File location
-//                Scanner reader = new Scanner(data);
-//                while (reader.hasNextLine()) {
-//                    String line = reader.nextLine();
-//                    String[] raceData = line.trim().split("\\s+");//split each set of characters till a space is found
-//
-//                    String dateTime = raceData[0];
-//                    String location = driverData[1];
-//                    String team = driverData[2];
-//                    int firstPositionCount = Integer.parseInt(driverData[3]);
-//                    int secondPositionCount = Integer.parseInt(driverData[4]);
-//                    int thirdPositionCount = Integer.parseInt(driverData[5]);
-//                    int points = Integer.parseInt(driverData[6]);
-//                    int racesCount = Integer.parseInt(driverData[7]);
-//                    int currentPositions = Integer.parseInt(driverData[8]);
-//
-//
-//                    races.add(new Race())
-//                    addNewDriver(name, location, team, firstPositionCount, secondPositionCount, thirdPositionCount, points, racesCount, currentPositions);//pass all the info saved in each line to overloaded constructor
-//
-//                }
-//                reader.close();
-//                loadStatus = true;
-//                System.out.println("Successfully loaded data!");
-//            } catch (IOException e) {
-//                System.out.println("An error occurred. Could not load precious data!");
-//                e.printStackTrace();
-//            }
-        }
-        else {
-            System.out.println("Data already loaded!");
+        try {
+            SaveData saveData = (SaveData) ResourceManager.load(fileName);
+            this.drivers = saveData.drivers;
+            this.races = saveData.races;
+//            System.out.println(saveData.number);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
+<<<<<<< HEAD
 //    //set a starting position for the driver
 //    public void setStartingPositions(ArrayList<Formula1Driver> drivers){
 //        for (Formula1Driver driver: drivers){
@@ -382,6 +301,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     };
 
+=======
+>>>>>>> Section3-Serialization
     public boolean isTeamExisting(String team) {
         for (Formula1Driver driver : drivers) {
             if (team.equalsIgnoreCase(driver.getTeam())) {
@@ -400,8 +321,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         return false;//position was not given
     }
 
-    public void clearDriverPos(){
-        for (Formula1Driver driver: drivers){
+    public void clearDriverPos() {
+        for (Formula1Driver driver : drivers) {
             driver.setStartingPosition(0);
         }
     }
