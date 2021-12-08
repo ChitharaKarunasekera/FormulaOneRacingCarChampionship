@@ -1,8 +1,9 @@
 package CarChampionship;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Formula1Driver extends Driver implements Comparable<Formula1Driver>{
+public class Formula1Driver extends Driver implements Comparable<Formula1Driver>, Serializable {
     //Driver's statistics
     private int firstPositionCount;
     private int secondPositionCount;

@@ -1,6 +1,8 @@
 package CarChampionship;
 
-public abstract class Driver {
+import java.io.Serializable;
+
+public abstract class Driver implements Serializable {
     //Basic Information
     private String name;
     private String location;
