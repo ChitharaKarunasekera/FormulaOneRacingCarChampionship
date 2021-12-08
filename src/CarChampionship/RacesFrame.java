@@ -1,7 +1,6 @@
 package CarChampionship;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 public class RacesFrame implements ActionListener {
     int number = 1;
-    JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
+    JFrame race = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Completed Races");
     JButton backBtn = new JButton("Back to Main Menu");
 
@@ -22,13 +21,13 @@ public class RacesFrame implements ActionListener {
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
 
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(500, 700);
-        menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
+        race.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        race.setSize(500, 700);
+        race.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
-        menuFrame.setIconImage(image.getImage());//change icon of frame
+        race.setIconImage(image.getImage());//change icon of frame
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
-        menuFrame.setLocationRelativeTo(null);//open frame in center of screen
+        race.setLocationRelativeTo(null);//open frame in center of screen
 
 
         JPanel northPanel = new JPanel();
@@ -77,14 +76,14 @@ public class RacesFrame implements ActionListener {
         centerPanel.add(centerCenter, BorderLayout.CENTER);
         //------------------------------------------SUB PANELS----------------------------------------------------
 
-        menuFrame.add(northPanel, BorderLayout.NORTH);
-        menuFrame.add(westPanel, BorderLayout.WEST);
-        menuFrame.add(eastPanel, BorderLayout.EAST);
-        menuFrame.add(southPanel, BorderLayout.SOUTH);
-        menuFrame.add(centerPanel, BorderLayout.CENTER);
+        race.add(northPanel, BorderLayout.NORTH);
+        race.add(westPanel, BorderLayout.WEST);
+        race.add(eastPanel, BorderLayout.EAST);
+        race.add(southPanel, BorderLayout.SOUTH);
+        race.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
@@ -110,13 +109,13 @@ public class RacesFrame implements ActionListener {
         backBtn.addActionListener(this);
         southPanel.add(backBtn, BorderLayout.CENTER);
 
-        menuFrame.setVisible(true);
+        race.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn){
-            menuFrame.dispose();//close current frame
+            race.dispose();//close current frame
             MenuFrame menu = new MenuFrame(championship);
         }
     }

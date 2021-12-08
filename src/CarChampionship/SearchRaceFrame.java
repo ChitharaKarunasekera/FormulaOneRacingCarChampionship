@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SearchRaceFrame implements ActionListener {
     int number = 1;
-    JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
+    JFrame search = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Completed Races");
     JButton backBtn = new JButton("Back to Main Menu");
     JTextField driverField = new JTextField();//adding text field
@@ -29,13 +29,13 @@ public class SearchRaceFrame implements ActionListener {
         this.racesList = championship.getRaces();//races list from championship class
         this.driverList = championship.getDrivers();//drivers list from championship
 
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuFrame.setSize(700, 700);
-        menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
+        search.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        search.setSize(700, 700);
+        search.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
-        menuFrame.setIconImage(image.getImage());//change icon of frame
+        search.setIconImage(image.getImage());//change icon of frame
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
-        menuFrame.setLocationRelativeTo(null);//open frame in center of screen
+        search.setLocationRelativeTo(null);//open frame in center of screen
 
 
         JPanel northPanel = new JPanel();
@@ -128,8 +128,6 @@ public class SearchRaceFrame implements ActionListener {
         centerSubCenter.add(scrollPane);//table is inside scroll pane
 
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
-
-
         centerPanel.add(centerNorth, BorderLayout.NORTH);
         centerPanel.add(centerSouth, BorderLayout.SOUTH);
         centerPanel.add(centerWest, BorderLayout.WEST);
@@ -137,14 +135,14 @@ public class SearchRaceFrame implements ActionListener {
         centerPanel.add(centerCenter, BorderLayout.CENTER);
         //------------------------------------------SUB PANELS----------------------------------------------------
 
-        menuFrame.add(northPanel, BorderLayout.NORTH);
-        menuFrame.add(westPanel, BorderLayout.WEST);
-        menuFrame.add(eastPanel, BorderLayout.EAST);
-        menuFrame.add(southPanel, BorderLayout.SOUTH);
-        menuFrame.add(centerPanel, BorderLayout.CENTER);
+        search.add(northPanel, BorderLayout.NORTH);
+        search.add(westPanel, BorderLayout.WEST);
+        search.add(eastPanel, BorderLayout.EAST);
+        search.add(southPanel, BorderLayout.SOUTH);
+        search.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
@@ -165,13 +163,13 @@ public class SearchRaceFrame implements ActionListener {
         backBtn.addActionListener(this);
         southPanel.add(backBtn, BorderLayout.CENTER);
 
-        menuFrame.setVisible(true);
+        search.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {
-            menuFrame.dispose();//close current frame
+            search.dispose();//close current frame
             MenuFrame menu = new MenuFrame(championship);
         } else if (e.getSource() == searchBtn) {
             driverName = driverField.getText();//stores name of driver

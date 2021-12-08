@@ -1,6 +1,8 @@
 package CarChampionship;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +24,12 @@ public class DriverStatsFrame implements ActionListener {
         this.races = championship.getRaces();
 
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        tableFrame.setSize(900, 700);
+        tableFrame.setSize(1000, 500);
         tableFrame.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         tableFrame.setIconImage(image.getImage());//change icon of frame
         tableFrame.setLocationRelativeTo(null);//open frame in center of screen
+        tableFrame.setResizable(false);
 
         JPanel northPanel = new JPanel();
         JPanel westPanel = new JPanel();
@@ -41,8 +44,8 @@ public class DriverStatsFrame implements ActionListener {
         centerPanel.setBackground(new Color(62, 62, 62));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
-        westPanel.setPreferredSize(new Dimension(50, 100));
-        eastPanel.setPreferredSize(new Dimension(50, 100));
+        westPanel.setPreferredSize(new Dimension(25, 100));
+        eastPanel.setPreferredSize(new Dimension(25, 100));
         southPanel.setPreferredSize(new Dimension(100, 100));
         centerPanel.setPreferredSize(new Dimension(100, 100));
 
@@ -54,7 +57,7 @@ public class DriverStatsFrame implements ActionListener {
 
         //adding label as topic in top panel
         tblTitle.setBounds(0,0,800,50);
-        tblTitle.setFont(new Font("Century Gothic",Font.PLAIN, 25));
+        tblTitle.setFont(new Font("Century Gothic",Font.PLAIN, 30));
         tblTitle.setForeground(new Color(166, 166, 166));
         northPanel.add(tblTitle);
 
@@ -68,7 +71,7 @@ public class DriverStatsFrame implements ActionListener {
         southPanel.add(backBtn, BorderLayout.CENTER);
 
         //Table
-        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Starting Position", "Current Position"};
+        String[] columnNames = {"Driver Name", "Team Name", "1st Positions", "2nd Positions", "3rd Positions", "Points", "Completed", "Start Position", "Position Won"};
 
         Object[][] data = new Object[championship.getDrivers().size()][9];
 
@@ -90,12 +93,30 @@ public class DriverStatsFrame implements ActionListener {
             data[i][8] = driverList.get(i).getCurrentPositions();
         }
 
-        table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(770, 400));//width and height of table
-        table.isEditing();
+        table = new JTable(data, columnNames){
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                return false;//block cell editing
+            }
+        };
+        table.setPreferredScrollableViewportSize(new Dimension(900, 280));//width and height of table
+        table.setBackground(new Color(166, 166, 166));
+        table.setFont(new Font("Century Gothic",Font.PLAIN, 14));
+        table.setForeground(new Color(62, 62, 62));
+        table.setShowVerticalLines(false);
+        table.setGridColor(new Color(62, 62, 62));
+        table.setRowHeight(20);
+        table.setGridColor(new Color(62, 62, 62));
+        //table.setBackground();
+
+        JTableHeader header = table.getTableHeader();
+        header.setFont(new Font("Century Gothic",Font.PLAIN, 14));
+        header.setBackground(new Color(72, 72, 73));
+        header.setForeground(new Color(166, 166, 166));
+        header.setResizingAllowed(false);
 
         //scroll pane
         JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
+        scrollPane.setBackground(new Color(62, 62, 62));
         centerPanel.add(scrollPane);//table is inside scroll pane
 
 //        //adding label as topic in top panel
