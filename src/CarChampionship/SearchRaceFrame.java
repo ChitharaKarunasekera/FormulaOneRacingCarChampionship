@@ -183,9 +183,10 @@ public class SearchRaceFrame implements ActionListener {
                         ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                         for (int raceId : raceIds) {
                             System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
-                            raceInfo = new JLabel();
-                            raceInfo.setText("Race ID: " + racesList.get(raceId - 1).getRaceId());
-                            racePanel.add(raceInfo);
+                            JLabel label = new JLabel("Race ID: " + racesList.get(raceId - 1).getRaceId());
+                            label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+                            label.setForeground(new Color(166, 166, 166));
+                            racePanel.add(label);
                             System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
                         }
                     }
