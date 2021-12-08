@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-<<<<<<< HEAD
-public class Formula1Driver extends Driver implements Comparable<Formula1Driver> {
-=======
 public class Formula1Driver extends Driver implements Comparable<Formula1Driver>, Serializable {
->>>>>>> Section3-Serialization
     public static final long serialVersionID = 1L;
 
     //Driver's statistics
