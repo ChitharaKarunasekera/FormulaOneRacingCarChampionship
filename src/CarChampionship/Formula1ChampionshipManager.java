@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Formula1ChampionshipManager implements ChampionshipManager {
     private Scanner input = new Scanner(System.in);
     private boolean loadStatus = false;
+    private final String fileName = "Data";//File that saves program data
 
     private ArrayList<Formula1Driver> drivers = new ArrayList<Formula1Driver>();//All divers participating in championship
     private ArrayList<Race> races = new ArrayList<>();//All races held in championship

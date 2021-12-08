@@ -11,7 +11,7 @@ public class Main {
         String choice;
         String confirm;
 
-        championship.readFromFile();
+        //championship.readFromFile();
         System.out.println("Loaded previous data!");
 
         //GUI
@@ -58,7 +58,6 @@ public class Main {
                 championship.saveToFile();
             }
             else if (choice.equalsIgnoreCase("L")){
-                System.out.println("Load");
                 championship.readFromFile();
             }
             else if (choice.equalsIgnoreCase("Q")){
