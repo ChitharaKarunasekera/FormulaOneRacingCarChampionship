@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Race implements Serializable { //implements Comparable<Race>
+public class Race{ //implements Comparable<Race>
     private int raceId;
     static int noOfRaces = 0;
     private LocalDateTime dateTime;

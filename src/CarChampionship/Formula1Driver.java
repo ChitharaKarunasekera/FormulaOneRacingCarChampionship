@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Formula1Driver extends Driver implements Comparable<Formula1Driver>, Serializable {
+public class Formula1Driver extends Driver implements Comparable<Formula1Driver> {
     public static final long serialVersionID = 1L;
 
     //Driver's statistics
