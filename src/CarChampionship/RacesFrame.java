@@ -22,7 +22,7 @@ public class RacesFrame implements ActionListener {
         this.racesList = championship.getRaces();//races list from championship class
 
         race.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        race.setSize(500, 700);
+        race.setSize(600, 700);
         race.setLayout(new BorderLayout(0, 0));//add margin between components
         ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
         race.setIconImage(image.getImage());//change icon of frame
@@ -87,7 +87,8 @@ public class RacesFrame implements ActionListener {
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
-        centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
+        //centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
+
 
         for (Race thisRace: racesList){
             JLabel label = new JLabel(" Race " + thisRace.getRaceId() + " on " + thisRace.getDateTime());

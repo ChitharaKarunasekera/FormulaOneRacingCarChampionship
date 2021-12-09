@@ -236,7 +236,7 @@ public class SearchRaceFrame implements ActionListener {
                         String dateTime = racesList.get(raceId - 1).getDateTime();
                         String date = dateTime.substring(0,10);
                         String time = dateTime.substring(10);
-                        data[i][0] = i+1;
+                        data[i][0] = (i+1) + ".";
                         data[i][1] = racesList.get(raceId - 1).getRaceId();
                         data[i][2] = date;
                         data[i][3] = time;
@@ -263,11 +263,11 @@ public class SearchRaceFrame implements ActionListener {
             };
             table.setPreferredScrollableViewportSize(new Dimension(495, 420));//width and height of table
             table.setBackground(new Color(166, 166, 166));
-            table.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+            table.setFont(new Font("Century Gothic", Font.PLAIN, 16));
             table.setForeground(new Color(62, 62, 62));
             table.setShowHorizontalLines(false);
             table.setGridColor(new Color(62, 62, 62));
-            table.setRowHeight(20);
+            table.setRowHeight(30);
             table.setGridColor(new Color(62, 62, 62));
 
             cellRenderer = new DefaultTableCellRenderer();
