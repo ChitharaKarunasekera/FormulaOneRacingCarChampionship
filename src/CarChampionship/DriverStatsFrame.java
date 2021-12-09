@@ -27,7 +27,7 @@ public class DriverStatsFrame implements ActionListener {
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tableFrame.setSize(1000, 500);
         tableFrame.setLayout(new BorderLayout(0, 0));//add margin between components
-        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
+        ImageIcon image = new ImageIcon("images/F1-logo.png");//create an image icon for frame icon
         tableFrame.setIconImage(image.getImage());//change icon of frame
         tableFrame.setLocationRelativeTo(null);//open frame in center of screen
         tableFrame.setResizable(false);
