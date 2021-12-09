@@ -37,7 +37,7 @@ public class SearchRaceFrame implements ActionListener {
         search.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         search.setSize(700, 700);
         search.setLayout(new BorderLayout(0, 0));//add margin between components
-        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
+        ImageIcon image = new ImageIcon("images/F1-logo.png");//create an image icon for frame icon
         search.setIconImage(image.getImage());//change icon of frame
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
         search.setLocationRelativeTo(null);//open frame in center of screen

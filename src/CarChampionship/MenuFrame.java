@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import javax.swing.border.Border;
-import javax.swing.border.SoftBevelBorder;
 
 public class MenuFrame implements ActionListener {
     Random rand = new Random();//to generate a random number
@@ -17,8 +17,12 @@ public class MenuFrame implements ActionListener {
     ArrayList<Formula1Driver> driverList;
     ArrayList<Race> racesList;
 
+
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
+    Font normalTitle = new Font("Century Gothic", Font.PLAIN, 30);
+    Font nfsTitle;
+
 
     JButton option1 = new JButton("Driver statistics in descending order of points");
     JButton option2 = new JButton("Driver statistics in ascending order of points");
@@ -31,6 +35,15 @@ public class MenuFrame implements ActionListener {
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
 
     public MenuFrame(Formula1ChampionshipManager championship) {
+        try {
+            nfsTitle = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
         this.championship = championship;
         this.driverList = championship.getDrivers();
         this.racesList = championship.getRaces();
@@ -38,7 +51,7 @@ public class MenuFrame implements ActionListener {
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setSize(900, 600);
         menuFrame.setLayout(new BorderLayout(0, 0));//add margin between components
-        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
+        ImageIcon image = new ImageIcon("images/F1-logo.png");//create an image icon for frame icon
         menuFrame.setIconImage(image.getImage());//change icon of frame
         menuFrame.setLocationRelativeTo(null);//open frame in center of screen
         menuFrame.setResizable(false);
@@ -51,11 +64,11 @@ public class MenuFrame implements ActionListener {
         JPanel southPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        northPanel.setBackground(new Color(72, 72, 73));
-        westPanel.setBackground(new Color(72, 72, 73));
-        eastPanel.setBackground(new Color(72, 72, 73));
-        southPanel.setBackground(new Color(72, 72, 73));
-        centerPanel.setBackground(new Color(72, 72, 73));
+        northPanel.setBackground(new Color(4, 0, 94));
+        westPanel.setBackground(new Color(4, 0, 94));
+        eastPanel.setBackground(new Color(4, 0, 94));
+        southPanel.setBackground(new Color(4, 0, 94));
+        centerPanel.setBackground(new Color(4, 0, 94));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(100, 100));
@@ -70,11 +83,11 @@ public class MenuFrame implements ActionListener {
         JPanel centerSouth = new JPanel();
         JPanel centerCenter = new JPanel();
 
-        centerNorth.setBackground(new Color(62, 62, 62));
-        centerSouth.setBackground(new Color(62, 62, 62));
-        centerWest.setBackground(new Color(62, 62, 62));
-        centerEast.setBackground(new Color(62, 62, 62));
-        centerCenter.setBackground(new Color(62, 62, 62));
+        centerNorth.setBackground(new Color(3, 0, 69));
+        centerSouth.setBackground(new Color(3, 0, 69));
+        centerWest.setBackground(new Color(3, 0, 69));
+        centerEast.setBackground(new Color(3, 0, 69));
+        centerCenter.setBackground(new Color(3, 0, 69));
 
         centerPanel.setLayout(new BorderLayout());
 
@@ -98,17 +111,17 @@ public class MenuFrame implements ActionListener {
         menuFrame.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
-        menuLabel.setForeground(new Color(166, 166, 166));
+        menuLabel.setFont(nfsTitle);
+        menuLabel.setForeground(new Color(252, 196, 0));
         northPanel.add(menuLabel);
 
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         for (JButton option : options) {
             option.setFocusable(false);//remove broader around text
-            option.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-            option.setForeground(new Color(62, 62, 62));
-            option.setBackground(new Color(245, 220, 0));
+            option.setFont(new Font("Century Gothic", Font.BOLD, 25));
+            option.setForeground(new Color(255, 255, 255));
+            option.setBackground(new Color(213, 0, 9 ));
             centerCenter.add(option);
             option.addActionListener(this);
         }
@@ -177,5 +190,16 @@ public class MenuFrame implements ActionListener {
             SearchRaceFrame searchRaceFrame = new SearchRaceFrame(championship);
         }
     }
+
+//    public void nfsTitleFont(){
+//        try {
+//            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf"));
+//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+//        }
+//        catch (IOException | FontFormatException e){
+//
+//        }
+//    }
 }
 
