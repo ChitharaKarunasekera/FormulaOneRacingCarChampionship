@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import javax.swing.border.Border;
-import javax.swing.border.SoftBevelBorder;
 
 public class MenuFrame implements ActionListener {
     Random rand = new Random();//to generate a random number
@@ -19,10 +17,12 @@ public class MenuFrame implements ActionListener {
     ArrayList<Formula1Driver> driverList;
     ArrayList<Race> racesList;
 
+
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
     Font normalTitle = new Font("Century Gothic", Font.PLAIN, 30);
     Font nfs;
+
 
     JButton option1 = new JButton("Driver statistics in descending order of points");
     JButton option2 = new JButton("Driver statistics in ascending order of points");
@@ -35,6 +35,15 @@ public class MenuFrame implements ActionListener {
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
 
     public MenuFrame(Formula1ChampionshipManager championship) {
+        try {
+            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
         this.championship = championship;
         this.driverList = championship.getDrivers();
         this.racesList = championship.getRaces();
@@ -102,7 +111,7 @@ public class MenuFrame implements ActionListener {
         menuFrame.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(normalTitle);
+        menuLabel.setFont(nfs);
         menuLabel.setForeground(new Color(166, 166, 166));
         northPanel.add(menuLabel);
 
@@ -182,14 +191,15 @@ public class MenuFrame implements ActionListener {
         }
     }
 
-    public void nfsTitleFont(){
-        try {
-            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf"));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        }
-        catch (IOException | FontFormatException e){
-
-        }
-    }
+//    public void nfsTitleFont(){
+//        try {
+//            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf"));
+//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+//        }
+//        catch (IOException | FontFormatException e){
+//
+//        }
+//    }
 }
 
