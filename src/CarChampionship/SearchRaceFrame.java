@@ -1,6 +1,8 @@
 package CarChampionship;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,11 +16,14 @@ public class SearchRaceFrame implements ActionListener {
     JTextField driverField = new JTextField();//adding text field
     JButton searchBtn = new JButton("Search");
     JPanel racePanel = new JPanel();
-    JLabel raceInfo;
+    JLabel inform = new JLabel();
+    JPanel centerSubCenter;
 
     Formula1ChampionshipManager championship;
     ArrayList<Race> racesList;
     ArrayList<Formula1Driver> driverList;
+
+    JTable table;
 
     String driverName;
 
@@ -67,7 +72,7 @@ public class SearchRaceFrame implements ActionListener {
         centerSouth.setBackground(new Color(62, 62, 62));
         centerWest.setBackground(new Color(62, 62, 62));
         centerEast.setBackground(new Color(62, 62, 62));
-        centerCenter.setBackground(new Color(3, 252, 3 ));
+        centerCenter.setBackground(new Color(166, 166, 166));
 
         centerPanel.setLayout(new BorderLayout());
 
@@ -78,25 +83,24 @@ public class SearchRaceFrame implements ActionListener {
         centerCenter.setPreferredSize(new Dimension(25, 25));
 
 
-
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
         JPanel centerSubNorth = new JPanel();
         JPanel centerSubSouth = new JPanel();
         JPanel centerSubWest = new JPanel();
         JPanel centerSubEast = new JPanel();
-        JPanel centerSubCenter = new JPanel();
+        centerSubCenter = new JPanel();
 
-        centerSubNorth.setBackground(new Color(252, 3, 3));
-        centerSubSouth.setBackground(new Color(3, 73, 252 ));
-        centerSubWest.setBackground(new Color(3, 73, 252 ));
-        centerSubEast.setBackground(new Color(3, 73, 252 ));
-        centerSubCenter.setBackground(new Color(252, 3, 248));
+        centerSubNorth.setBackground(new Color(62, 62, 62));
+        centerSubSouth.setBackground(new Color(62, 62, 62));
+        centerSubWest.setBackground(new Color(62, 62, 62));
+        centerSubEast.setBackground(new Color(62, 62, 62));
+        centerSubCenter.setBackground(new Color(62, 62, 62));
 
 
-        centerSubNorth.setPreferredSize(new Dimension(100, 80));
-        centerSubSouth.setPreferredSize(new Dimension(100, 50));
-        centerSubWest.setPreferredSize(new Dimension(50, 100));
-        centerSubEast.setPreferredSize(new Dimension(50, 100));
+        centerSubNorth.setPreferredSize(new Dimension(100, 60));
+        centerSubSouth.setPreferredSize(new Dimension(0, 0));
+        centerSubWest.setPreferredSize(new Dimension(0, 0));
+        centerSubEast.setPreferredSize(new Dimension(0, 0));
         centerSubCenter.setPreferredSize(new Dimension(100, 100));
 
         centerCenter.setLayout(new BorderLayout());
@@ -119,13 +123,48 @@ public class SearchRaceFrame implements ActionListener {
         centerSubNorth.add(searchBtn);
 
         //----------------------------------------------display race info-----------------------------------------------
-        racePanel.setBackground(new Color(62, 62, 62));
-        racePanel.setPreferredSize(new Dimension(410, 370));
+//        racePanel.setBackground(new Color(62, 62, 62));
+//        racePanel.setPreferredSize(new Dimension(410, 370));
         //----------------------------------------------display race info-----------------------------------------------
 
-
-        JScrollPane scrollPane = new JScrollPane(racePanel);//interest table into scroll pane
-        centerSubCenter.add(scrollPane);//table is inside scroll pane
+//        String[] columnNames = {"Race ID", "Date", "Driver Count"};
+//        Object[][] data;
+//
+//
+////        for (int i = 0; i < 5; i++) {
+////            data[i][0] = "Hello";//driverList.get(i).getName();
+////            data[i][1] = "Hello";//driverList.get(i).getTeam();
+////            data[i][2] = "Hello";//driverList.get(i).getFirstPositionCount();
+////        }
+//
+//        data = findRaces();//receive data array with relevant data;
+//
+//        table = new JTable(data, columnNames) {
+//            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+//                return false;//block cell editing
+//            }
+//        };
+//        table.setPreferredScrollableViewportSize(new Dimension(450, 370));//width and height of table
+//        table.setBackground(new Color(166, 166, 166));
+//        table.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+//        table.setForeground(new Color(62, 62, 62));
+//        table.setShowVerticalLines(false);
+//        table.setGridColor(new Color(62, 62, 62));
+//        table.setRowHeight(20);
+//        table.setGridColor(new Color(62, 62, 62));
+//        //table.setBackground();
+//
+//        JTableHeader header = table.getTableHeader();
+//        header.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+//        header.setBackground(new Color(72, 72, 73));
+//        header.setForeground(new Color(166, 166, 166));
+//        header.setResizingAllowed(false);
+//
+//        //scroll pane
+//        JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
+//        scrollPane.setBackground(new Color(62, 62, 62));
+//        centerSubCenter.add(scrollPane);//table is inside scroll pane
+        centerSubCenter.setVisible(false);
 
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
         centerPanel.add(centerNorth, BorderLayout.NORTH);
@@ -172,29 +211,91 @@ public class SearchRaceFrame implements ActionListener {
             search.dispose();//close current frame
             MenuFrame menu = new MenuFrame(championship);
         } else if (e.getSource() == searchBtn) {
+            DefaultTableCellRenderer cellRenderer;
+
             driverName = driverField.getText();//stores name of driver
             System.out.println(driverName);
 
+            String[] columnNames = {"No", "Race ID", "Date", "Time", "Driver Count"};
+            Object[][] data = new Object[championship.getDrivers().size()][5];
+
+            int i=0;
+
 //            if (driverAvailable(driverName)) {
-                for (Formula1Driver driver : driverList) {
-                    if (driverName.equalsIgnoreCase(driver.getName())) {
-                        ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
-                        for (int raceId : raceIds) {
-                            System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
-                            JLabel label = new JLabel("Race ID: " + racesList.get(raceId - 1).getRaceId());
-                            label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-                            label.setForeground(new Color(166, 166, 166));
-                            racePanel.add(label);
-                            System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
-                        }
+            for (Formula1Driver driver : driverList) {
+                if (driverName.equalsIgnoreCase(driver.getName())) {
+                    ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
+                    for (int raceId : raceIds) {
+                        System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
+                        JLabel label = new JLabel("Race ID: " + racesList.get(raceId - 1).getRaceId());
+                        label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+                        label.setForeground(new Color(166, 166, 166));
+                        racePanel.add(label);
+                        System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
+
+                        String dateTime = racesList.get(raceId - 1).getDateTime();
+                        String date = dateTime.substring(0,10);
+                        String time = dateTime.substring(10);
+                        data[i][0] = i+1;
+                        data[i][1] = racesList.get(raceId - 1).getRaceId();
+                        data[i][2] = date;
+                        data[i][3] = time;
+                        data[i][4] = racesList.get(raceId - 1).getNoOfDrivers();
+                        ++i;
                     }
                 }
+            }
 //            }
 //            else {
 //                System.out.println("Driver not found!");
 //            }
+
+//            for (int i = 0; i < 5; i++) {
+//                data[i][0] = "Hello";//driverList.get(i).getName();
+//                data[i][1] = "Hello";//driverList.get(i).getTeam();
+//                data[i][2] = "Hello";//driverList.get(i).getFirstPositionCount();
+//            }
+
+            table = new JTable(data, columnNames) {
+                public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                    return false;//block cell editing
+                }
+            };
+            table.setPreferredScrollableViewportSize(new Dimension(495, 420));//width and height of table
+            table.setBackground(new Color(166, 166, 166));
+            table.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+            table.setForeground(new Color(62, 62, 62));
+            table.setShowHorizontalLines(false);
+            table.setGridColor(new Color(62, 62, 62));
+            table.setRowHeight(20);
+            table.setGridColor(new Color(62, 62, 62));
+
+            cellRenderer = new DefaultTableCellRenderer();
+            cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+            //Center align all column data
+            for (int j=0; j<5; j++) {
+                table.getColumnModel().getColumn(j).setCellRenderer(cellRenderer);
+            }
+
+            //make first column smaller
+            table.getColumnModel().getColumn(0).setPreferredWidth(4);
+
+            JTableHeader header = table.getTableHeader();
+            header.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+            header.setBackground(new Color(72, 72, 73));
+            header.setForeground(new Color(166, 166, 166));
+            header.setResizingAllowed(false);
+
+            //scroll pane
+            JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
+            scrollPane.setBackground(new Color(62, 62, 62));
+            centerSubCenter.add(scrollPane);//table is inside scroll pane
+
+            centerSubCenter.setVisible(true);
         }
     }
+
 
     public boolean driverAvailable(String name) {
         for (Formula1Driver driver : driverList) {

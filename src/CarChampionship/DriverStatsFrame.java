@@ -9,14 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DriverStatsFrame implements ActionListener {
-    JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
-    JLabel tblTitle = new JLabel("Statistics of Drivers");
-    JButton backBtn = new JButton("Back to Main Menu");
-    JTable table;
+    private JFrame tableFrame = new JFrame("Formula 1 Car Racing Championship");
+    private JLabel tblTitle = new JLabel("Statistics of Drivers");
+    private JButton backBtn = new JButton("Back to Main Menu");
+    private JTable table;
+    private DefaultTableCellRenderer cellRenderer;
 
-    Formula1ChampionshipManager championship;
-    ArrayList<Formula1Driver> driverList;
-    ArrayList<Race> races;
+    private Formula1ChampionshipManager championship;
+    private ArrayList<Formula1Driver> driverList;
+    private ArrayList<Race> races;
 
     public DriverStatsFrame(Formula1ChampionshipManager championship){
         this.championship = championship;
@@ -46,7 +47,7 @@ public class DriverStatsFrame implements ActionListener {
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(25, 100));
         eastPanel.setPreferredSize(new Dimension(25, 100));
-        southPanel.setPreferredSize(new Dimension(100, 100));
+        southPanel.setPreferredSize(new Dimension(100, 50));
         centerPanel.setPreferredSize(new Dimension(100, 100));
 
         tableFrame.add(northPanel, BorderLayout.NORTH);
@@ -98,7 +99,7 @@ public class DriverStatsFrame implements ActionListener {
                 return false;//block cell editing
             }
         };
-        table.setPreferredScrollableViewportSize(new Dimension(900, 280));//width and height of table
+        table.setPreferredScrollableViewportSize(new Dimension(910, 328));//width and height of table
         table.setBackground(new Color(166, 166, 166));
         table.setFont(new Font("Century Gothic",Font.PLAIN, 14));
         table.setForeground(new Color(62, 62, 62));
@@ -106,7 +107,17 @@ public class DriverStatsFrame implements ActionListener {
         table.setGridColor(new Color(62, 62, 62));
         table.setRowHeight(20);
         table.setGridColor(new Color(62, 62, 62));
-        //table.setBackground();
+
+        cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        //Center align all column data
+        for (int j=0; j<9; j++) {
+            table.getColumnModel().getColumn(j).setCellRenderer(cellRenderer);
+        }
+
+        //make first column smaller
+        table.getColumnModel().getColumn(5).setPreferredWidth(25);
 
         JTableHeader header = table.getTableHeader();
         header.setFont(new Font("Century Gothic",Font.PLAIN, 14));
