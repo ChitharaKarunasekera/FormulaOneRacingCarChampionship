@@ -21,7 +21,7 @@ public class MenuFrame implements ActionListener {
     JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
     JLabel menuLabel = new JLabel("Main Menu");
     Font normalTitle = new Font("Century Gothic", Font.PLAIN, 30);
-    Font nfs;
+    Font nfsTitle;
 
 
     JButton option1 = new JButton("Driver statistics in descending order of points");
@@ -36,7 +36,7 @@ public class MenuFrame implements ActionListener {
 
     public MenuFrame(Formula1ChampionshipManager championship) {
         try {
-            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(30f);
+            nfsTitle = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
         }
@@ -111,17 +111,17 @@ public class MenuFrame implements ActionListener {
         menuFrame.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(nfs);
-        menuLabel.setForeground(new Color(166, 166, 166));
+        menuLabel.setFont(nfsTitle);
+        menuLabel.setForeground(new Color(252, 196, 0));
         northPanel.add(menuLabel);
 
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         for (JButton option : options) {
             option.setFocusable(false);//remove broader around text
-            option.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+            option.setFont(new Font("Century Gothic", Font.BOLD, 25));
             option.setForeground(new Color(255, 255, 255));
-            option.setBackground(new Color(255, 2, 2));
+            option.setBackground(new Color(213, 0, 9 ));
             centerCenter.add(option);
             option.addActionListener(this);
         }
