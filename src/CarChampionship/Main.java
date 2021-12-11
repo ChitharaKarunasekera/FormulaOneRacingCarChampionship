@@ -25,7 +25,7 @@ public class Main {
                     "V - View drive's statistics\n" +
                     "T - Display the Formula 1 Driver CarChampionship.Table\n" +
                     "R - Complete Race and Show Statistics\n" +
-                    "U - Upload data to file\n" +
+                    "S - Upload data to file\n" +
                     "L - Load data from file\n" +
                     "Q - Quit");
 
@@ -54,7 +54,7 @@ public class Main {
             else if (choice.equalsIgnoreCase("R")){
                 championship.insertRace();
             }
-            else if (choice.equalsIgnoreCase("U")){
+            else if (choice.equalsIgnoreCase("S")){
                 championship.saveToFile();
             }
             else if (choice.equalsIgnoreCase("L")){

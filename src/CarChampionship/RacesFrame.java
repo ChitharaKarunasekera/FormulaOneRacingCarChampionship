@@ -1,23 +1,50 @@
 package CarChampionship;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class RacesFrame implements ActionListener {
-    int number = 1;
-    JFrame race = new JFrame("Formula 1 Car Racing Championship");
-    JLabel menuLabel = new JLabel("Completed Races");
-    JButton backBtn = new JButton("Back to Main Menu");
+    private int number = 1;
+    private JFrame race = new JFrame("Formula 1 Car Racing Championship");
+    private JLabel titleLabel = new JLabel("Completed Races");
+    private JButton backBtn = new JButton("Back to Main Menu");
 
-    Formula1ChampionshipManager championship;
-    ArrayList<Race> racesList;
+    private Formula1ChampionshipManager championship;
+    private ArrayList<Race> racesList;
 
-    //Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
+    private Font nfsTitle;
+    private Font russoNormal;
+
+    private Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
 
     public RacesFrame(Formula1ChampionshipManager championship){
+        //try read NFS title text
+        try {
+            nfsTitle = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
+        //try read Russo_one title text
+        try {
+            russoNormal = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
+
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
 
@@ -36,11 +63,11 @@ public class RacesFrame implements ActionListener {
         JPanel southPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        northPanel.setBackground(new Color(72, 72, 73));
-        westPanel.setBackground(new Color(72, 72, 73));
-        eastPanel.setBackground(new Color(72, 72, 73));
-        southPanel.setBackground(new Color(72, 72, 73));
-        centerPanel.setBackground(new Color(72, 72, 73));
+        northPanel.setBackground(new Color(4, 0, 94));
+        westPanel.setBackground(new Color(4, 0, 94));
+        eastPanel.setBackground(new Color(4, 0, 94));
+        southPanel.setBackground(new Color(4, 0, 94));
+        centerPanel.setBackground(new Color(4, 0, 94));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(50, 100));
@@ -55,11 +82,11 @@ public class RacesFrame implements ActionListener {
         JPanel centerSouth = new JPanel();
         JPanel centerCenter = new JPanel();
 
-        centerNorth.setBackground(new Color(62, 62, 62));
-        centerSouth.setBackground(new Color(62, 62, 62));
-        centerWest.setBackground(new Color(62, 62, 62));
-        centerEast.setBackground(new Color(62, 62, 62));
-        centerCenter.setBackground(new Color(62, 62, 62));
+        centerNorth.setBackground(new Color(3, 0, 69));
+        centerSouth.setBackground(new Color(3, 0, 69));
+        centerWest.setBackground(new Color(3, 0, 69));
+        centerEast.setBackground(new Color(3, 0, 69));
+        centerCenter.setBackground(new Color(3, 0, 69));
 
         centerPanel.setLayout(new BorderLayout());
 
@@ -82,31 +109,30 @@ public class RacesFrame implements ActionListener {
         race.add(southPanel, BorderLayout.SOUTH);
         race.add(centerPanel, BorderLayout.CENTER);
 
-        menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
-        menuLabel.setForeground(new Color(166, 166, 166));
-        northPanel.add(menuLabel);
+        titleLabel.setBounds(0, 0, 300, 50);
+        titleLabel.setFont(nfsTitle);
+        titleLabel.setForeground(new Color(255, 255, 255));
+        northPanel.add(titleLabel);
 
-        //centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
+        centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
-
+        //Display race number, date and time of every race a diver has participated in a label
         for (Race thisRace: racesList){
             JLabel label = new JLabel(" Race " + thisRace.getRaceId() + " on " + thisRace.getDateTime());
 
             label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-            label.setForeground(new Color(166, 166, 166));
+            label.setForeground(new Color(158, 184, 228));
             centerCenter.add(label);
-            //label.setBorder(border);// set the border of this component
             ++number;
         }
 
 
         //adding back button in button panel
         backBtn.setBounds(0,25,400,50);
-        backBtn.setFont(new Font("Century Gothic",Font.PLAIN, 18));
+        backBtn.setFont(russoNormal);
         backBtn.setFocusable(false);//remove broader around text
-        backBtn.setForeground(new Color(62, 62, 62));
-        backBtn.setBackground(new Color(166, 166, 166));
+        backBtn.setForeground(new Color(255, 255, 255));
+        backBtn.setBackground(new Color(213, 0, 9));
         backBtn.addActionListener(this);
         southPanel.add(backBtn, BorderLayout.CENTER);
 

@@ -1,35 +1,59 @@
 package CarChampionship;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SearchRaceFrame implements ActionListener {
-    int number = 1;
-    JFrame search = new JFrame("Formula 1 Car Racing Championship");
-    JLabel menuLabel = new JLabel("Completed Races");
-    JButton backBtn = new JButton("Back to Main Menu");
-    JTextField driverField = new JTextField();//adding text field
-    JButton searchBtn = new JButton("Search");
-    JPanel racePanel = new JPanel();
-    JLabel inform = new JLabel();
-    JPanel centerSubCenter;
 
-    Formula1ChampionshipManager championship;
-    ArrayList<Race> racesList;
-    ArrayList<Formula1Driver> driverList;
+    private JFrame search = new JFrame("Formula 1 Car Racing Championship");
+    private JLabel menuLabel = new JLabel("Completed Races");
+    private JButton backBtn = new JButton("Back to Main Menu");
+    private JTextField driverField = new JTextField();//adding text field
+    private JButton searchBtn = new JButton("Search");
+    private JPanel racePanel = new JPanel();
+    private JPanel centerSubCenter;
 
-    JTable table;
+    private Formula1ChampionshipManager championship;
+    private ArrayList<Race> racesList;
+    private ArrayList<Formula1Driver> driverList;
 
-    String driverName;
+    private JTable table;
 
-    //Border border = BorderFactory.createLineBorder(Color.BLUE, 1);
+    private String driverName;
+
+    private Font nfsTitle;
+    private Font russoNormal;
+
 
     public SearchRaceFrame(Formula1ChampionshipManager championship) {
+        //try read NFS title text
+        try {
+            nfsTitle = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
+        //try read Russo_one title text
+        try {
+            russoNormal = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
         this.driverList = championship.getDrivers();//drivers list from championship
@@ -49,11 +73,11 @@ public class SearchRaceFrame implements ActionListener {
         JPanel southPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        northPanel.setBackground(new Color(72, 72, 73));
-        westPanel.setBackground(new Color(72, 72, 73));
-        eastPanel.setBackground(new Color(72, 72, 73));
-        southPanel.setBackground(new Color(72, 72, 73));
-        centerPanel.setBackground(new Color(72, 72, 73));
+        northPanel.setBackground(new Color(4, 0, 94));
+        westPanel.setBackground(new Color(4, 0, 94));
+        eastPanel.setBackground(new Color(4, 0, 94));
+        southPanel.setBackground(new Color(4, 0, 94));
+        centerPanel.setBackground(new Color(4, 0, 94));
 
         northPanel.setPreferredSize(new Dimension(100, 50));
         westPanel.setPreferredSize(new Dimension(50, 100));
@@ -68,11 +92,11 @@ public class SearchRaceFrame implements ActionListener {
         JPanel centerSouth = new JPanel();
         JPanel centerCenter = new JPanel();
 
-        centerNorth.setBackground(new Color(62, 62, 62));
-        centerSouth.setBackground(new Color(62, 62, 62));
-        centerWest.setBackground(new Color(62, 62, 62));
-        centerEast.setBackground(new Color(62, 62, 62));
-        centerCenter.setBackground(new Color(166, 166, 166));
+        centerNorth.setBackground(new Color(3, 0, 69));
+        centerSouth.setBackground(new Color(3, 0, 69));
+        centerWest.setBackground(new Color(3, 0, 69));
+        centerEast.setBackground(new Color(3, 0, 69));
+        centerCenter.setBackground(new Color(158, 184, 228));
 
         centerPanel.setLayout(new BorderLayout());
 
@@ -90,11 +114,11 @@ public class SearchRaceFrame implements ActionListener {
         JPanel centerSubEast = new JPanel();
         centerSubCenter = new JPanel();
 
-        centerSubNorth.setBackground(new Color(62, 62, 62));
-        centerSubSouth.setBackground(new Color(62, 62, 62));
-        centerSubWest.setBackground(new Color(62, 62, 62));
-        centerSubEast.setBackground(new Color(62, 62, 62));
-        centerSubCenter.setBackground(new Color(62, 62, 62));
+        centerSubNorth.setBackground(new Color(3, 0, 69));
+        centerSubSouth.setBackground(new Color(3, 0, 69));
+        centerSubWest.setBackground(new Color(3, 0, 69));
+        centerSubEast.setBackground(new Color(3, 0, 69));
+        centerSubCenter.setBackground(new Color(3, 0, 69));
 
 
         centerSubNorth.setPreferredSize(new Dimension(100, 60));
@@ -115,55 +139,13 @@ public class SearchRaceFrame implements ActionListener {
         centerSubNorth.add(driverField);
 
         searchBtn.setBounds(0, 25, 100, 20);
-        searchBtn.setFont(new Font("Century Gothic", Font.PLAIN, 18));
+        searchBtn.setFont(russoNormal);
         searchBtn.setFocusable(false);//remove broader around text
-        searchBtn.setForeground(new Color(62, 62, 62));
-        searchBtn.setBackground(new Color(166, 166, 166));
+        searchBtn.setForeground(new Color(255, 255, 255));
+        searchBtn.setBackground(new Color(213, 0, 9));
         searchBtn.addActionListener(this);
         centerSubNorth.add(searchBtn);
 
-        //----------------------------------------------display race info-----------------------------------------------
-//        racePanel.setBackground(new Color(62, 62, 62));
-//        racePanel.setPreferredSize(new Dimension(410, 370));
-        //----------------------------------------------display race info-----------------------------------------------
-
-//        String[] columnNames = {"Race ID", "Date", "Driver Count"};
-//        Object[][] data;
-//
-//
-////        for (int i = 0; i < 5; i++) {
-////            data[i][0] = "Hello";//driverList.get(i).getName();
-////            data[i][1] = "Hello";//driverList.get(i).getTeam();
-////            data[i][2] = "Hello";//driverList.get(i).getFirstPositionCount();
-////        }
-//
-//        data = findRaces();//receive data array with relevant data;
-//
-//        table = new JTable(data, columnNames) {
-//            public boolean editCellAt(int row, int column, java.util.EventObject e) {
-//                return false;//block cell editing
-//            }
-//        };
-//        table.setPreferredScrollableViewportSize(new Dimension(450, 370));//width and height of table
-//        table.setBackground(new Color(166, 166, 166));
-//        table.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-//        table.setForeground(new Color(62, 62, 62));
-//        table.setShowVerticalLines(false);
-//        table.setGridColor(new Color(62, 62, 62));
-//        table.setRowHeight(20);
-//        table.setGridColor(new Color(62, 62, 62));
-//        //table.setBackground();
-//
-//        JTableHeader header = table.getTableHeader();
-//        header.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-//        header.setBackground(new Color(72, 72, 73));
-//        header.setForeground(new Color(166, 166, 166));
-//        header.setResizingAllowed(false);
-//
-//        //scroll pane
-//        JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
-//        scrollPane.setBackground(new Color(62, 62, 62));
-//        centerSubCenter.add(scrollPane);//table is inside scroll pane
         centerSubCenter.setVisible(false);
 
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------
@@ -181,24 +163,24 @@ public class SearchRaceFrame implements ActionListener {
         search.add(centerPanel, BorderLayout.CENTER);
 
         menuLabel.setBounds(0, 0, 300, 50);
-        menuLabel.setFont(new Font("Century Gothic", Font.PLAIN, 30));
-        menuLabel.setForeground(new Color(166, 166, 166));
+        menuLabel.setFont(nfsTitle);
+        menuLabel.setForeground(new Color(255, 255, 255));
         northPanel.add(menuLabel);
 
 
         driverField.setPreferredSize(new Dimension(200, 40));
         driverField.setFont(new Font("Century Gothic", Font.PLAIN, 18));
-        driverField.setForeground(new Color(166, 166, 166));
-        driverField.setBackground(new Color(62, 62, 62));
-        driverField.setCaretColor(new Color(166, 166, 166));
+        driverField.setForeground(new Color(158, 184, 228));
+        driverField.setBackground(new Color(3, 0, 69));
+        driverField.setCaretColor(new Color(158, 184, 228));
         centerSubNorth.add(driverField);
 
         //adding back button in button panel
         backBtn.setBounds(0, 25, 400, 50);
-        backBtn.setFont(new Font("Century Gothic", Font.PLAIN, 18));
+        backBtn.setFont(russoNormal);
         backBtn.setFocusable(false);//remove broader around text
-        backBtn.setForeground(new Color(62, 62, 62));
-        backBtn.setBackground(new Color(166, 166, 166));
+        backBtn.setForeground(new Color(255, 255, 255));
+        backBtn.setBackground(new Color(213, 0, 9));
         backBtn.addActionListener(this);
         southPanel.add(backBtn, BorderLayout.CENTER);
 
@@ -221,18 +203,10 @@ public class SearchRaceFrame implements ActionListener {
 
             int i=0;
 
-//            if (driverAvailable(driverName)) {
             for (Formula1Driver driver : driverList) {
                 if (driverName.equalsIgnoreCase(driver.getName())) {
                     ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                     for (int raceId : raceIds) {
-                        System.out.println("Race ID: " + racesList.get(raceId - 1).getRaceId());//access the race object relevant to race Id
-                        JLabel label = new JLabel("Race ID: " + racesList.get(raceId - 1).getRaceId());
-                        label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-                        label.setForeground(new Color(166, 166, 166));
-                        racePanel.add(label);
-                        System.out.println("Date & Time: " + racesList.get(raceId - 1).getDateTime());
-
                         String dateTime = racesList.get(raceId - 1).getDateTime();
                         String date = dateTime.substring(0,10);
                         String time = dateTime.substring(10);
@@ -245,16 +219,6 @@ public class SearchRaceFrame implements ActionListener {
                     }
                 }
             }
-//            }
-//            else {
-//                System.out.println("Driver not found!");
-//            }
-
-//            for (int i = 0; i < 5; i++) {
-//                data[i][0] = "Hello";//driverList.get(i).getName();
-//                data[i][1] = "Hello";//driverList.get(i).getTeam();
-//                data[i][2] = "Hello";//driverList.get(i).getFirstPositionCount();
-//            }
 
             table = new JTable(data, columnNames) {
                 public boolean editCellAt(int row, int column, java.util.EventObject e) {
@@ -262,13 +226,13 @@ public class SearchRaceFrame implements ActionListener {
                 }
             };
             table.setPreferredScrollableViewportSize(new Dimension(495, 420));//width and height of table
-            table.setBackground(new Color(166, 166, 166));
+            table.setBackground(new Color(158, 184, 228));
             table.setFont(new Font("Century Gothic", Font.PLAIN, 16));
-            table.setForeground(new Color(62, 62, 62));
+            table.setForeground(new Color(3, 0, 69));
             table.setShowHorizontalLines(false);
-            table.setGridColor(new Color(62, 62, 62));
+            table.setGridColor(new Color(3, 0, 69));
             table.setRowHeight(30);
-            table.setGridColor(new Color(62, 62, 62));
+            table.setGridColor(new Color(3, 0, 69));
 
             cellRenderer = new DefaultTableCellRenderer();
             cellRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -283,26 +247,22 @@ public class SearchRaceFrame implements ActionListener {
 
             JTableHeader header = table.getTableHeader();
             header.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-            header.setBackground(new Color(72, 72, 73));
-            header.setForeground(new Color(166, 166, 166));
+            header.setBackground(new Color(3, 0, 69));
+            header.setForeground(new Color(158, 184, 228));
             header.setResizingAllowed(false);
 
             //scroll pane
             JScrollPane scrollPane = new JScrollPane(table);//interest table into scroll pane
-            scrollPane.setBackground(new Color(62, 62, 62));
+            scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+                @Override
+                protected void configureScrollBarColors() {
+                    this.thumbColor = new Color(3, 0, 69);
+                }
+            });
+            scrollPane.setBackground(new Color(3, 0, 69));
             centerSubCenter.add(scrollPane);//table is inside scroll pane
 
             centerSubCenter.setVisible(true);
         }
-    }
-
-
-    public boolean driverAvailable(String name) {
-        for (Formula1Driver driver : driverList) {
-            if (driver.getName().equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
