@@ -108,7 +108,7 @@ public class SearchRaceFrame implements ActionListener {
         centerEast.setPreferredSize(new Dimension(35, 25));
         centerCenter.setPreferredSize(new Dimension(25, 25));
 
-        JLabel guidance = new JLabel("Enter driver's name to search races");
+        JLabel guidance = new JLabel("Enter driver's name to search participated races");
         guidance.setBounds(0, 0, 300, 50);
         guidance.setFont(russoNormal.deriveFont(16f));
         guidance.setForeground(new Color(255, 255, 255));
