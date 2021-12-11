@@ -178,8 +178,6 @@ public class MenuFrame implements ActionListener {
                     position = rand.nextInt(driverList.size()) + 1;
                 }
                 driver.setStartingPosition(position);//assign unique start position for all drivers
-
-                System.out.println("Driver Pos: " + driver.getStartingPosition());
             }
 
             //make driver win based on a probability according to given start positions
