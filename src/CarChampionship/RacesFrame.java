@@ -114,7 +114,7 @@ public class RacesFrame implements ActionListener {
         titleLabel.setForeground(new Color(255, 255, 255));
         northPanel.add(titleLabel);
 
-        centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
+        //centerCenter.setLayout(new GridLayout(10, 1, 10, 10));
 
         //Display race number, date and time of every race a diver has participated in a label
         for (Race thisRace: racesList){

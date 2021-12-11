@@ -60,6 +60,9 @@ public class Main {
             else if (choice.equalsIgnoreCase("L")){
                 championship.readFromFile();
             }
+            else if (choice.equalsIgnoreCase("Z")){
+                championship.deleteRaces();
+            }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
                 System.out.print("Are you sure you want to terminate the system (Y/N)?");
