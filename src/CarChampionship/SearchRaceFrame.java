@@ -54,6 +54,7 @@ public class SearchRaceFrame implements ActionListener {
 
         }
 
+
         this.championship = championship;
         this.racesList = championship.getRaces();//races list from championship class
         this.driverList = championship.getDrivers();//drivers list from championship
@@ -98,6 +99,7 @@ public class SearchRaceFrame implements ActionListener {
         centerEast.setBackground(new Color(3, 0, 69));
         centerCenter.setBackground(new Color(158, 184, 228));
 
+        centerNorth.setLayout(new FlowLayout());
         centerPanel.setLayout(new BorderLayout());
 
         centerNorth.setPreferredSize(new Dimension(25, 25));
@@ -105,6 +107,12 @@ public class SearchRaceFrame implements ActionListener {
         centerWest.setPreferredSize(new Dimension(35, 25));
         centerEast.setPreferredSize(new Dimension(35, 25));
         centerCenter.setPreferredSize(new Dimension(25, 25));
+
+        JLabel guidance = new JLabel("Enter driver's name to search races");
+        guidance.setBounds(0, 0, 300, 50);
+        guidance.setFont(russoNormal.deriveFont(16f));
+        guidance.setForeground(new Color(255, 255, 255));
+        centerNorth.add(guidance);
 
 
         //------------------------------------------SUB PANEL1 in SUB PANEL---------------------------------------------

@@ -29,7 +29,7 @@ public class MenuFrame implements ActionListener {
     private JButton option2 = new JButton("Driver statistics in ascending order of points");
     private JButton option3 = new JButton("Drivers based on largest number of 1st positions");
     private JButton option4 = new JButton("Generate race");
-    private JButton option5 = new JButton("Generate race with race statistics");
+    private JButton option5 = new JButton("Generate race with start positions");
     private JButton option6 = new JButton("Completed races");
     private JButton option7 = new JButton("Search race");
 

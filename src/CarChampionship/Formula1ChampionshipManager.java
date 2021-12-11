@@ -320,6 +320,10 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     }
 
+    public void deleteRaces(){
+        races.remove(races.size()-1);
+    }
+
     //sort the drivers array based om the 1st positions won in descending order
     Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
         @Override
