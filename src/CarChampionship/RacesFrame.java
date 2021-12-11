@@ -24,7 +24,7 @@ public class RacesFrame implements ActionListener {
         race.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         race.setSize(600, 700);
         race.setLayout(new BorderLayout(0, 0));//add margin between components
-        ImageIcon image = new ImageIcon("images/CompanyName.png");//create an image icon for frame icon
+        ImageIcon image = new ImageIcon("images/F1-logo.png");//create an image icon for frame icon
         race.setIconImage(image.getImage());//change icon of frame
         //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
         race.setLocationRelativeTo(null);//open frame in center of screen
