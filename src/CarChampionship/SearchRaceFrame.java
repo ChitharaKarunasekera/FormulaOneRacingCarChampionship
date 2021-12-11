@@ -205,6 +205,7 @@ public class SearchRaceFrame implements ActionListener {
 
             for (Formula1Driver driver : driverList) {
                 if (driverName.equalsIgnoreCase(driver.getName())) {
+                    System.out.println("Driver found!");
                     ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                     for (int raceId : raceIds) {
                         String dateTime = racesList.get(raceId - 1).getDateTime();
@@ -215,6 +216,13 @@ public class SearchRaceFrame implements ActionListener {
                         data[i][2] = date;
                         data[i][3] = time;
                         data[i][4] = racesList.get(raceId - 1).getNoOfDrivers();
+
+                        System.out.println("ID: " + racesList.get(raceId - 1).getRaceId());
+                        System.out.println("Date: " + date);
+                        System.out.println("Time: " + time);
+                        System.out.println("Drivers: " + racesList.get(raceId - 1).getNoOfDrivers());
+                        System.out.println("\n");
+
                         ++i;
                     }
                 }
