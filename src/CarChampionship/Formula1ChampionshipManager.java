@@ -56,14 +56,17 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         for (Formula1Driver driver : drivers) {
             //check if team name if occurred in array
             if (isTeamExisting(team)) {
-                System.out.print("Driver was found. Are you sure you want to delete driver " + driver.getName() + "(Y/N)? ");
-                confirm = input.next();
-                if (confirm.equalsIgnoreCase("Y")) {
-                    drivers.remove(driver);//access the index of particular driver and set it to null;
-                    System.out.println("Driver was successfully deleted!");
-                    break;
-                } else {
-                    System.out.println("Process cancelled! Driver was not removed.");
+                if (driver.getTeam().equalsIgnoreCase(team)) {
+                    System.out.print("Driver was found. Are you sure you want to delete driver " + driver.getName() + "(Y/N)? ");
+                    confirm = input.next();
+                    if (confirm.equalsIgnoreCase("Y")) {
+                        String name = driver.getName();
+                        drivers.remove(driver);//access the index of particular driver and set it to null;
+                        System.out.println("Driver " + name + " was successfully deleted!");
+                        break;
+                    } else {
+                        System.out.println("Process cancelled! Driver was not removed.");
+                    }
                 }
 
             } else {
