@@ -192,7 +192,10 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             races.add(new Race(now, participants.size(), participants));//adding race to races list
             races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
             System.out.println("\nRace inserted successfully!");
-            System.out.println("Date and time: " + formatter);
+            String dateTime = races.get(races.size()-1).getDateTime();
+            String date = dateTime.substring(0,10);
+            String time = dateTime.substring(10);
+            System.out.println("Date and time: " + races.get(races.size()-1).getDateTime());
             System.out.println("Number of drivers participated: " + participants.size());
             System.out.println("Race ID: " + (races.get(races.size()-1).getRaceId()));//get the race id
 
@@ -242,23 +245,28 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         for (Formula1Driver driver: drivers){
             prob = rand.nextDouble();
 
+            //Based on each driver's start position, driver winning the race is decided on a probability according to position
             switch (driver.getStartingPosition()){
+                //if start position is 1 the driver has 40% probability to win race
                 case 1:
                     if (prob < 0.4){
                         driver.setWin(true);
                     }
                     break;
+                //if start position is 2 the driver has 30% probability to win race
                 case 2:
                     if (prob < 0.3){
                         driver.setWin(true);
                     }
                     break;
+                //if start position is 3 or 4 the driver has 10% probability to win race
                 case 3:
                 case 4:
                     if (prob < 0.1){
                         driver.setWin(true);
                     }
                     break;
+                //if start position is between 5 - 9 the driver has 2% probability to win race
                 case 5:
                 case 6:
                 case 7:
@@ -268,6 +276,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                         driver.setWin(true);
                     }
                     break;
+                //Other drivers have no probability to win
                 default:
                     driver.setWin(false);
             }
@@ -282,15 +291,15 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     @Override
     public void saveToFile() {
         SaveData saveData = new SaveData();
-        saveData.drivers = this.drivers;
-        saveData.races = this.races;
-
-        //saveData.number = 4;
+        saveData.drivers = this.drivers; //assign the drivers array to the SaveData class array
+        saveData.races = this.races; //assign the races array to the SaveData class array
 
         try {
             ResourceManager.save(saveData, fileName);
+            System.out.println("Successfully stored data to file");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Sorry, Could not store to file");
         }
     }
 
@@ -298,14 +307,17 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     public void readFromFile() {
         try {
             SaveData saveData = (SaveData) ResourceManager.load(fileName);
+            //get the arrays of SaveData class
             this.drivers = saveData.drivers;
             this.races = saveData.races;
-//            System.out.println(saveData.number);
+            System.out.println("Successfully loaded data to program");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Sorry, Could not load data to program");
         }
     }
 
+    //sort the drivers array based om the 1st positions won in descending order
     Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
         @Override
         public int compare(Formula1Driver o1, Formula1Driver o2) {

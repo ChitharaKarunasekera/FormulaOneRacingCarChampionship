@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Formula1Driver extends Driver implements Comparable<Formula1Driver>, Serializable {
-    public static final long serialVersionID = 1L;
+    public static final long serialVersionID = 1L;//for serializable saving and loading data
 
     //Driver's statistics
     private int firstPositionCount;
@@ -17,7 +17,7 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
     private boolean win;
     private ArrayList<Integer> racesParticipated = new ArrayList<>();
 
-    Random rand = new Random();//to generate a random number
+    private Random rand = new Random();//to generate a random number
 
     //default constructor
     public Formula1Driver(String name, String location, String team) {

@@ -11,34 +11,46 @@ import java.util.Collections;
 import java.util.Random;
 
 public class MenuFrame implements ActionListener {
-    Random rand = new Random();//to generate a random number
+    private Random rand = new Random();//to generate a random number
 
-    Formula1ChampionshipManager championship;
-    ArrayList<Formula1Driver> driverList;
-    ArrayList<Race> racesList;
-
-
-    JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
-    JLabel menuLabel = new JLabel("Main Menu");
-    Font normalTitle = new Font("Century Gothic", Font.PLAIN, 30);
-    Font nfsTitle;
+    private Formula1ChampionshipManager championship;
+    private ArrayList<Formula1Driver> driverList;
+    private ArrayList<Race> racesList;
 
 
-    JButton option1 = new JButton("Driver statistics in descending order of points");
-    JButton option2 = new JButton("Driver statistics in ascending order of points");
-    JButton option3 = new JButton("Drivers based on largest number of 1st positions");
-    JButton option4 = new JButton("Generate race");
-    JButton option5 = new JButton("Generate race with race statistics");
-    JButton option6 = new JButton("Completed races");
-    JButton option7 = new JButton("Search race");
+    private JFrame menuFrame = new JFrame("Formula 1 Car Racing Championship");
+    private JLabel menuLabel = new JLabel("Main Menu");
+    private Font normalTitle = new Font("Century Gothic", Font.PLAIN, 30);
+    private Font nfsTitle;
+    private Font russoNormal;
+
+
+    private JButton option1 = new JButton("Driver statistics in descending order of points");
+    private JButton option2 = new JButton("Driver statistics in ascending order of points");
+    private JButton option3 = new JButton("Drivers based on largest number of 1st positions");
+    private JButton option4 = new JButton("Generate race");
+    private JButton option5 = new JButton("Generate race with race statistics");
+    private JButton option6 = new JButton("Completed races");
+    private JButton option7 = new JButton("Search race");
 
     JButton[] options = {option1, option2, option3, option4, option5, option6, option7};
 
     public MenuFrame(Formula1ChampionshipManager championship) {
+        //try read NFS title text
         try {
             nfsTitle = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")).deriveFont(40f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
+        }
+        catch (IOException | FontFormatException e){
+
+        }
+
+        //try read Russo_one title text
+        try {
+            russoNormal = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/Russo_One.ttf")));
         }
         catch (IOException | FontFormatException e){
 
@@ -55,7 +67,6 @@ public class MenuFrame implements ActionListener {
         menuFrame.setIconImage(image.getImage());//change icon of frame
         menuFrame.setLocationRelativeTo(null);//open frame in center of screen
         menuFrame.setResizable(false);
-        //menuFrame.getContentPane().setBackground(new Color(79, 79, 79));//background color of frame
 
 
         JPanel northPanel = new JPanel();
@@ -110,16 +121,16 @@ public class MenuFrame implements ActionListener {
         menuFrame.add(southPanel, BorderLayout.SOUTH);
         menuFrame.add(centerPanel, BorderLayout.CENTER);
 
-        menuLabel.setBounds(0, 0, 300, 50);
+        menuLabel.setBounds(0, 0, 500, 50);
         menuLabel.setFont(nfsTitle);
-        menuLabel.setForeground(new Color(252, 196, 0));
+        menuLabel.setForeground(new Color(255, 255, 255));
         northPanel.add(menuLabel);
 
         centerCenter.setLayout(new GridLayout(7, 1, 10, 10));
 
         for (JButton option : options) {
             option.setFocusable(false);//remove broader around text
-            option.setFont(new Font("Century Gothic", Font.BOLD, 25));
+            option.setFont(russoNormal);
             option.setForeground(new Color(255, 255, 255));
             option.setBackground(new Color(213, 0, 9 ));
             centerCenter.add(option);
@@ -190,16 +201,5 @@ public class MenuFrame implements ActionListener {
             SearchRaceFrame searchRaceFrame = new SearchRaceFrame(championship);
         }
     }
-
-//    public void nfsTitleFont(){
-//        try {
-//            nfs = Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf"));
-//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("CustomFonts/NFS_by_JLTV.ttf")));
-//        }
-//        catch (IOException | FontFormatException e){
-//
-//        }
-//    }
 }
 
