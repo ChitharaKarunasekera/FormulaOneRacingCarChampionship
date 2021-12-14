@@ -293,7 +293,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         System.out.println("\nRace Completed!\n");
         System.out.println("Date and time of Completion : " + formatter.format(now));
-        System.out.println(totalDrivers + " Drivers participated in race.");
+        System.out.println(drivers.size() + " Drivers participated in race.");
 
         //Auto generate date ane convert it to Date type to pass it to Race constructor
         races.add(new Race(new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(formatter.format(now))), drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
