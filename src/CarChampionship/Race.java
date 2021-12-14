@@ -1,22 +1,25 @@
 package CarChampionship;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Race implements Serializable { //implements Comparable<Race>
     public static final long serialVersionID = 1L;
 
     private int raceId;
     static int noOfRaces = 0;
-    private LocalDateTime dateTime;
+    private Date date;
     private int noOfDrivers;
+    private boolean automatic;
     private ArrayList<Formula1Driver> driverList;
 
-    public Race(LocalDateTime dateTime, int noOfDrivers, ArrayList<Formula1Driver> driverList){
+    public Race(Date date, int noOfDrivers, ArrayList<Formula1Driver> driverList){
         ++noOfRaces;
-        this.dateTime = dateTime;
+        this.date = date;
         this.noOfDrivers = noOfDrivers;
     }
 
@@ -25,9 +28,9 @@ public class Race implements Serializable { //implements Comparable<Race>
         return noOfRaces;
     }
 
-    public String getDateTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        return formatter.format(dateTime);
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        return formatter.format(date);
     }
 
     public int getNoOfDrivers() {
@@ -38,10 +41,14 @@ public class Race implements Serializable { //implements Comparable<Race>
         return raceId;
     }
 
+    public boolean isAutomatic(){
+        return automatic;
+    }
+
 
     //setters
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void setNoOfDrivers(int noOfDrivers) {
@@ -52,18 +59,7 @@ public class Race implements Serializable { //implements Comparable<Race>
         this.raceId = raceId;
     }
 
-
-
-//    @Override
-//    public int compareTo(Race o) {
-//        if (this.dateTime > o.dateTime){
-//            return -1;
-//        }
-//        //if this drivers points are less than the other drivers points return 1
-//        else if (this.dateTime < o.dateTime){
-//            return 1;
-//        }
-//        //if this drivers points and the other drivers points are equal check,
-//        else{
-//    }
+    public void setAutomatic(Boolean automatic){
+        this.automatic = automatic;
+    }
 }

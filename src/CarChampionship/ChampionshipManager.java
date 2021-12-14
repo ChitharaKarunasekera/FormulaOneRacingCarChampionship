@@ -1,5 +1,7 @@
 package CarChampionship;
 
+import java.text.ParseException;
+
 public interface ChampionshipManager {
 
     void addNewDriver();
@@ -7,7 +9,7 @@ public interface ChampionshipManager {
     void changeTeam();
     void displayStatistics();
     void displayAllDrivers();
-    void insertRace();
+    void insertRace() throws ParseException;
     void saveToFile();
     void readFromFile();
 
