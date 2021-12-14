@@ -315,8 +315,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         try {
             SaveData saveData = (SaveData) ResourceManager.load(fileName);
             //get the arrays of SaveData class
-            this.drivers = saveData.drivers;
-            this.races = saveData.races;
+            this.drivers.addAll(saveData.drivers);//add all drivers in save data array to existing driver array
+            this.races.addAll(saveData.races);//add all races in save data array to existing races array
+
+//            this.drivers = saveData.drivers;
+//            this.races = saveData.races;
             System.out.println("Successfully loaded data to program");
         } catch (Exception e) {
             System.out.println(e.getMessage());
