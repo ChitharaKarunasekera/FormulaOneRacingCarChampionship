@@ -1,3 +1,12 @@
+/*
+References
+Horstmann, C., 2021. INPUT/OUTPUT AND EXCEPTION HANDLING.
+Horstmann, C., 2021. INTERFACES.
+tables?, A., Valenty, M. and Kongslund, J., 2021. Any Java libraries for drawing ASCII tables?. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/5608588/any-java-libraries-for-drawing-ascii-tables> [Accessed 10 November 2021].
+Youtube.com. 2021. [online] Available at: <https://www.youtube.com/watch?v=-xW0pBZqpjU> [Accessed 15 November 2021].
+Youtube.com. 2021. [online] Available at: <https://www.youtube.com/watch?v=Kmgo00avvEw> [Accessed 17 November 2021].
+*/
+
 package CarChampionship;
 import java.util.Scanner;
 
