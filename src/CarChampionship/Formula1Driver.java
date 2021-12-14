@@ -29,6 +29,8 @@ public class Formula1Driver extends Driver implements Comparable<Formula1Driver>
         this.racesCount = 0;
     }
 
+    //overloaded constructor
+    //to be used if an existing driver is being re added
     public Formula1Driver(String name, String location, String team, int firstPositionCount, int secondPositionCount, int thirdPositionCount, int points, int racesCount, int currentPosition) {
         super(name, location, team);//call constructor of Driver class and assign basic information
         this.firstPositionCount = firstPositionCount;
