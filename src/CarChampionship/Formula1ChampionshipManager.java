@@ -179,10 +179,16 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                 //Get and assign points to driver if team exists, and assign points accordingly
                 if (isTeamExisting(team)) {
                     System.out.print("Enter position won: ");
-                    position = input.nextInt();
-                    drivers.get(getDriverIndex(team)).setCurrentPosition(position);
-                    drivers.get(getDriverIndex(team)).assigningPoints(position);
-                    participants.add(drivers.get(getDriverIndex(team)));//add the driver to participants array
+                    if (input.hasNextInt()) {
+                        position = input.nextInt();
+                        drivers.get(getDriverIndex(team)).setCurrentPosition(position);
+                        drivers.get(getDriverIndex(team)).assigningPoints(position);
+                        participants.add(drivers.get(getDriverIndex(team)));//add the driver to participants array
+                    } else {
+                        System.out.println("\nDriver was not added! Please enter an Integer!");
+                        input.next();//Remove the existing data of Scanner to get another input to it
+                    }
+
                 } else {
                     System.out.println("Sorry, team not found!");//inform user that team was not found
                 }
@@ -191,22 +197,21 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
             }
         }
 
-        if (participants.size() > 0){
+        if (participants.size() > 0) {
             races.add(new Race(now, participants.size(), participants));//adding race to races list
-            races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+            races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
             System.out.println("\nRace inserted successfully!");
-            String dateTime = races.get(races.size()-1).getDateTime();
-            String date = dateTime.substring(0,10);
+            String dateTime = races.get(races.size() - 1).getDateTime();
+            String date = dateTime.substring(0, 10);
             String time = dateTime.substring(10);
-            System.out.println("Date and time: " + races.get(races.size()-1).getDateTime());
+            System.out.println("Date and time: " + races.get(races.size() - 1).getDateTime());
             System.out.println("Number of drivers participated: " + participants.size());
-            System.out.println("Race ID: " + (races.get(races.size()-1).getRaceId()));//get the race id
+            System.out.println("Race ID: " + (races.get(races.size() - 1).getRaceId()));//get the race id
 
-            for (Formula1Driver driver: participants){
-                driver.setRacesParticipated(races.get(races.size()-1).getRaceId());//mark the race id for every driver participated
+            for (Formula1Driver driver : participants) {
+                driver.setRacesParticipated(races.get(races.size() - 1).getRaceId());//mark the race id for every driver participated
             }
-        }
-        else {
+        } else {
             System.out.println("No drivers have participated. Race was not inserted!");
         }
     }
@@ -219,10 +224,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         for (Formula1Driver driver : drivers) {
             //if a driver gets win, then driver gets 1st position
             //driver's points will be updated according to position
-            if (driver.isWin()){
+            if (driver.isWin()) {
                 driver.setCurrentPosition(1);
-            }
-            else {
+            } else {
                 int position = rand.nextInt(drivers.size()) + 1;
                 driver.setCurrentPosition(position);//each driver gets a random position based on number of drivers registered to championship.
             }
@@ -234,38 +238,38 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println(totalDrivers + " Drivers participated in race.");
 
         races.add(new Race(now, drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
-        races.get(races.size()-1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+        races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
 
-        for (Formula1Driver driver: drivers){
-            driver.setRacesParticipated(races.get(races.size()-1).getRaceId());//mark the race id for every driver participated
+        for (Formula1Driver driver : drivers) {
+            driver.setRacesParticipated(races.get(races.size() - 1).getRaceId());//mark the race id for every driver participated
         }
     }
 
-    public void positionBasedWinning(){
+    public void positionBasedWinning() {
         Random rand = new Random();
         double prob;
 
-        for (Formula1Driver driver: drivers){
+        for (Formula1Driver driver : drivers) {
             prob = rand.nextDouble();
 
             //Based on each driver's start position, driver winning the race is decided on a probability according to position
-            switch (driver.getStartingPosition()){
+            switch (driver.getStartingPosition()) {
                 //if start position is 1 the driver has 40% probability to win race
                 case 1:
-                    if (prob < 0.4){
+                    if (prob < 0.4) {
                         driver.setWin(true);
                     }
                     break;
                 //if start position is 2 the driver has 30% probability to win race
                 case 2:
-                    if (prob < 0.3){
+                    if (prob < 0.3) {
                         driver.setWin(true);
                     }
                     break;
                 //if start position is 3 or 4 the driver has 10% probability to win race
                 case 3:
                 case 4:
-                    if (prob < 0.1){
+                    if (prob < 0.1) {
                         driver.setWin(true);
                     }
                     break;
@@ -275,7 +279,7 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                 case 7:
                 case 8:
                 case 9:
-                    if (prob < 0.02){
+                    if (prob < 0.02) {
                         driver.setWin(true);
                     }
                     break;
@@ -283,8 +287,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
                 default:
                     driver.setWin(false);
             }
-            if (driver.getStartingPosition() == 1){
-                if (prob < 0.4){
+            if (driver.getStartingPosition() == 1) {
+                if (prob < 0.4) {
                     driver.setWin(true);
                 }
             }
@@ -320,9 +324,6 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     }
 
-    public void deleteRaces(){
-        races.remove(races.size()-1);
-    }
 
     //sort the drivers array based om the 1st positions won in descending order
     Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
