@@ -206,7 +206,7 @@ public class SearchRaceFrame implements ActionListener {
             driverName = driverField.getText();//stores name of driver
             System.out.println(driverName);
 
-            String[] columnNames = {"No", "Race ID", "Date", "Time", "Driver Count"};
+            String[] columnNames = {"No", "Race ID", "Date", "Type", "Driver Count"};
             Object[][] data = new Object[championship.getDrivers().size()][5];
 
             int i=0;
@@ -216,13 +216,18 @@ public class SearchRaceFrame implements ActionListener {
                     System.out.println("Driver found!");
                     ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                     for (int raceId : raceIds) {
-                        String dateTime = racesList.get(raceId - 1).getDateTime();
+                        String dateTime = racesList.get(raceId - 1).getDate();
                         String date = dateTime.substring(0,10);
                         String time = dateTime.substring(10);
                         data[i][0] = (i+1) + ".";
                         data[i][1] = racesList.get(raceId - 1).getRaceId();
                         data[i][2] = date;
-                        data[i][3] = time;
+                        if (racesList.get(raceId-1).isAutomatic()) {
+                            data[i][3] = "Auto";
+                        }
+                        else {
+                            data[i][3] = "Manual";
+                        }
                         data[i][4] = racesList.get(raceId - 1).getNoOfDrivers();
 
                         System.out.println("ID: " + racesList.get(raceId - 1).getRaceId());

@@ -8,11 +8,12 @@ Youtube.com. 2021. [online] Available at: <https://www.youtube.com/watch?v=Kmgo0
 */
 
 package CarChampionship;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Scanner input = new Scanner(System.in);
 
         Formula1ChampionshipManager championship = new Formula1ChampionshipManager();//New formula 1 championship race

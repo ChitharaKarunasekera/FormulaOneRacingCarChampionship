@@ -114,12 +114,17 @@ public class RacesFrame implements ActionListener {
         titleLabel.setForeground(new Color(255, 255, 255));
         northPanel.add(titleLabel);
 
-        //centerCenter.setLayout(new GridLayout(10, 1, 10, 10));
-
         //Display race number, date and time of every race a diver has participated in a label
         for (Race thisRace: racesList){
             ImageIcon carIcon = new ImageIcon("car_icon.png");
-            JLabel label = new JLabel(" Race " + thisRace.getRaceId() + " on " + thisRace.getDateTime());
+            String type;
+            if (thisRace.isAutomatic()){
+                type = "Auto";
+            }
+            else {
+                type = "Manual";
+            }
+            JLabel label = new JLabel(" Race " + thisRace.getRaceId() + " on " + thisRace.getDate() + " (" + type + ")");
 
             label.setFont(new Font("Century Gothic", Font.PLAIN, 20));
             label.setForeground(new Color(158, 184, 228));

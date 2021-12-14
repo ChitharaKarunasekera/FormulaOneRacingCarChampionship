@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -162,7 +163,12 @@ public class MenuFrame implements ActionListener {
         else if (e.getSource() == option4) {
             menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear driver start positions if given
-            championship.generateRace();//auto generate a race and assign random positions for drivers
+            try {
+                championship.generateRace();//auto generate a race and assign random positions for drivers
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+                System.out.println("Could not generate race!");
+            }
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
         } else if (e.getSource() == option5) {
@@ -184,13 +190,19 @@ public class MenuFrame implements ActionListener {
             championship.positionBasedWinning();
 
             //Generate a rae
-            championship.generateRace();
+            try {
+                championship.generateRace();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+                System.out.println("Could not generate race!");
+            }
 
             Collections.sort(driverList);
             DriverStatsFrame tableWindow = new DriverStatsFrame(championship);
         } else if (e.getSource() == option6) {
             menuFrame.dispose();//dispose current frame
             championship.clearDriverPos();//clear current start positions
+            racesList.sort(championship.comparatorDate);//sort the races in accenting order of dates
             RacesFrame competedRaces = new RacesFrame(championship);
         }
         else if (e.getSource() == option7){

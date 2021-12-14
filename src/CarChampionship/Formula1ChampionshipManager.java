@@ -1,5 +1,7 @@
 package CarChampionship;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -157,8 +159,63 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.format("+-------------+--------------+---------------+---------------+---------------+--------------+-----------+%n");
     }
 
+    //Method to validate user inserted date
+    public Date validateDate() throws ParseException {
+        boolean valid;
+
+        String date;
+        int year;
+        int month;
+        int day;
+
+        while (true) {
+            while (true) {
+                valid = true;
+
+                //input date from user
+                System.out.print("Enter date (Format: yyyy/mm/dd): ");
+                date = input.next();
+
+                //check if the inserted date has year, month, day correctly
+                if (date.length() == 10) {
+                    year = Integer.parseInt(date.substring(0, 4));
+                    month = Integer.parseInt(date.substring(5, 7));
+                    day = Integer.parseInt(date.substring(8));
+
+                    //Check if the date has not passed current year
+                    if (year > 2023) {
+                        System.out.println("Invalid year");
+                        valid = false;
+                    }
+                    //Check if month is valid
+                    if (month < 1 || month > 12) {
+                        System.out.println("Invalid month");
+                        valid = false;
+                    }
+                    //Check if the day is valid
+                    if (day < 1 || day > 31) {
+                        System.out.println("Invalid day");
+                        valid = false;
+                    }
+
+                    //If inserted date is valid, convert it as one String in required format
+                    if (valid) {
+                        String dateTime = year + "/" + month + "/" + day;
+                        Date validDate = new SimpleDateFormat("yyyy/MM/dd").parse(dateTime);//convert String value to Date type and return
+                        return validDate;
+                    } else {
+                        System.out.println("\nInvalid date, Please re-enter Date!");//inserted date is not valid.
+                    }
+                    break;
+                } else {
+                    System.out.println("\nInserted Date too short!");//inserted date is too short
+                }
+            }
+        }
+    }
+
     @Override
-    public void insertRace() {
+    public void insertRace() throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
 
@@ -198,16 +255,14 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
 
         if (participants.size() > 0) {
-            System.out.println("Enter Date (format:");
-            races.add(new Race(now, participants.size(), participants));//adding race to races list
-            races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+            races.add(new Race(validateDate(), participants.size(), participants));//adding race to races list
+            Race race = races.get(races.size() - 1);//Access last added race, which is this race
+            race.setRaceId(races.size());//set the ID of that race as the count of races
+            race.setAutomatic(false);//mark race type as Manually generated race
             System.out.println("\nRace inserted successfully!");
-            String dateTime = races.get(races.size() - 1).getDateTime();
+            String dateTime = races.get(races.size() - 1).getDate();
             String date = dateTime.substring(0, 10);
-            String time = dateTime.substring(10);
-            //System.out.println("Date and time: " + races.get(races.size() - 1).getDateTime());
             System.out.println("Date : " + date);
-            System.out.println("Time: " + time);
             System.out.println("Number of drivers participated: " + participants.size());
             System.out.println("Race ID: " + (races.get(races.size() - 1).getRaceId()));//get the race id
 
@@ -219,22 +274,8 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
     }
 
-    public void validateDateTime(String date, String time){
-        String year;
-        String month;
-        String day;
-        String hours;
-        String minutes;
-        String secs;
-
-        System.out.print("Enter date (Format: yyyy/mm/dd): ");
-        date = input.next();
-
-        year = date.substring(0,4);
-    }
-
-    public void generateRace() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    public void generateRace() throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
 
@@ -254,8 +295,11 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         System.out.println("Date and time of Completion : " + formatter.format(now));
         System.out.println(totalDrivers + " Drivers participated in race.");
 
-        races.add(new Race(now, drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
-        races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+        //Auto generate date ane convert it to Date type to pass it to Race constructor
+        races.add(new Race(new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(formatter.format(now))), drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
+        Race race = races.get(races.size() - 1);
+        race.setRaceId(races.size());//set the ID of that race as the count of races
+        race.setAutomatic(true);//mark race type as Automatically generated race
 
         for (Formula1Driver driver : drivers) {
             driver.setRacesParticipated(races.get(races.size() - 1).getRaceId());//mark the race id for every driver participated
@@ -342,13 +386,28 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
     }
 
 
-    //sort the drivers array based om the 1st positions won in descending order
+    //sort the drivers array based on the 1st positions won in descending order
     Comparator<Formula1Driver> comparator = new Comparator<Formula1Driver>() {
         @Override
         public int compare(Formula1Driver o1, Formula1Driver o2) {
             if (o1.getFirstPositionCount() > o2.getFirstPositionCount()) {
                 return -1;
             } else if (o1.getFirstPositionCount() < o2.getFirstPositionCount()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    };
+
+    //sort the races array based on the 1st dates in acceding order
+    Comparator<Race> comparatorDate = new Comparator<Race>() {
+
+        @Override
+        public int compare(Race o1, Race o2) {
+            if (o1.getDate().compareTo(o2.getDate()) < 0) {
+                return -1;
+            } else if (o1.getDate().compareTo(o2.getDate()) > 0) {
                 return 1;
             } else {
                 return 0;
