@@ -216,7 +216,7 @@ public class SearchRaceFrame implements ActionListener {
                     System.out.println("Driver found!");
                     ArrayList<Integer> raceIds = driver.getRacesParticipated();//get the races IDs the driver has participated
                     for (int raceId : raceIds) {
-                        String dateTime = racesList.get(raceId - 1).getDateTime();
+                        String dateTime = racesList.get(raceId - 1).getDate();
                         String date = dateTime.substring(0,10);
                         String time = dateTime.substring(10);
                         data[i][0] = (i+1) + ".";
