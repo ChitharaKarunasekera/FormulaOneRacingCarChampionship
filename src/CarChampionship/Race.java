@@ -14,6 +14,7 @@ public class Race implements Serializable { //implements Comparable<Race>
     static int noOfRaces = 0;
     private Date date;
     private int noOfDrivers;
+    private boolean automatic;
     private ArrayList<Formula1Driver> driverList;
 
     public Race(Date date, int noOfDrivers, ArrayList<Formula1Driver> driverList){
@@ -40,6 +41,10 @@ public class Race implements Serializable { //implements Comparable<Race>
         return raceId;
     }
 
+    public boolean isAutomatic(){
+        return automatic;
+    }
+
 
     //setters
     public void setDate(Date date) {
@@ -54,18 +59,7 @@ public class Race implements Serializable { //implements Comparable<Race>
         this.raceId = raceId;
     }
 
-
-
-//    @Override
-//    public int compareTo(Race o) {
-//        if (this.dateTime > o.dateTime){
-//            return -1;
-//        }
-//        //if this drivers points are less than the other drivers points return 1
-//        else if (this.dateTime < o.dateTime){
-//            return 1;
-//        }
-//        //if this drivers points and the other drivers points are equal check,
-//        else{
-//    }
+    public void setAutomatic(Boolean automatic){
+        this.automatic = automatic;
+    }
 }

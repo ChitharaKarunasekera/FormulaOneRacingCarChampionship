@@ -256,7 +256,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         if (participants.size() > 0) {
             races.add(new Race(validateDate(), participants.size(), participants));//adding race to races list
-            races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+            Race race = races.get(races.size() - 1);//Access last added race, which is this race
+            race.setRaceId(races.size());//set the ID of that race as the count of races
+            race.setAutomatic(false);//mark race type as Manually generated race
             System.out.println("\nRace inserted successfully!");
             String dateTime = races.get(races.size() - 1).getDate();
             String date = dateTime.substring(0, 10);
@@ -295,7 +297,9 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
 
         //Auto generate date ane convert it to Date type to pass it to Race constructor
         races.add(new Race(new SimpleDateFormat("yyyy/MM/dd").parse(String.valueOf(formatter.format(now))), drivers.size(), drivers));//add a race to array and pass current time and total drivers participated
-        races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
+        Race race = races.get(races.size() - 1);
+        race.setRaceId(races.size());//set the ID of that race as the count of races
+        race.setAutomatic(true);//mark race type as Automatically generated race
 
         for (Formula1Driver driver : drivers) {
             driver.setRacesParticipated(races.get(races.size() - 1).getRaceId());//mark the race id for every driver participated
