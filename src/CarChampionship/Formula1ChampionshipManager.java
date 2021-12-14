@@ -198,13 +198,16 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         }
 
         if (participants.size() > 0) {
+            System.out.println("Enter Date (format:");
             races.add(new Race(now, participants.size(), participants));//adding race to races list
             races.get(races.size() - 1).setRaceId(races.size());//access the last race added to list and set the ID of that race as the count of races
             System.out.println("\nRace inserted successfully!");
             String dateTime = races.get(races.size() - 1).getDateTime();
             String date = dateTime.substring(0, 10);
             String time = dateTime.substring(10);
-            System.out.println("Date and time: " + races.get(races.size() - 1).getDateTime());
+            //System.out.println("Date and time: " + races.get(races.size() - 1).getDateTime());
+            System.out.println("Date : " + date);
+            System.out.println("Time: " + time);
             System.out.println("Number of drivers participated: " + participants.size());
             System.out.println("Race ID: " + (races.get(races.size() - 1).getRaceId()));//get the race id
 
@@ -214,6 +217,20 @@ public class Formula1ChampionshipManager implements ChampionshipManager {
         } else {
             System.out.println("No drivers have participated. Race was not inserted!");
         }
+    }
+
+    public void validateDateTime(String date, String time){
+        String year;
+        String month;
+        String day;
+        String hours;
+        String minutes;
+        String secs;
+
+        System.out.print("Enter date (Format: yyyy/mm/dd): ");
+        date = input.next();
+
+        year = date.substring(0,4);
     }
 
     public void generateRace() {
