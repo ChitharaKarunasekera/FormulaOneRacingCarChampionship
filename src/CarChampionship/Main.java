@@ -69,7 +69,7 @@ public class Main {
             }
             else if (choice.equalsIgnoreCase("Q")){
                 //Confirm users input
-                System.out.print("Are you sure you want to terminate the system (Y/N)?");
+                System.out.print("Are you sure you want to terminate the system (Y/)?");
                 confirm = input.next();
                 //quit program if user is sure
                 if (confirm.equalsIgnoreCase("Y")){
