@@ -79,7 +79,7 @@ public class Main {
                 }
             }
             else {
-                System.out.println("Option not found!");
+                System.out.println("Option not found!");//no option 
             }
         }
 
